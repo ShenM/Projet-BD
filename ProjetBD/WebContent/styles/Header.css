@@ -1,0 +1,92 @@
+@CHARSET "ISO-8859-1";
+
+.header{
+background-color:red;
+width:100%;
+height:100px;
+display: inline-block;
+}
+.title{
+float:left;
+}
+.user{
+float:right;
+}
+
+.title-logo{
+float:left;
+margin:auto;
+height:80%;
+width:10%;
+}
+.title-text{
+float:right;
+font-size:12pt;
+width: 50%;
+text-align:left;
+color: #DE6B21;
+font-family: "Arial";
+}
+
+.user-avatar{
+float:left;
+height:80px;
+}
+.user-name{
+float:left;
+font-size:12pt;
+text-align:left;
+color: #DE6B21;
+font-family: "Arial";
+}
+
+.user-logout{
+float:right;
+}
+
+.menu{
+float: left;
+display:inline-block;
+margin-top:2%;
+}
+
+
+.case{
+width:200px;
+height:125px;
+background-color:green;
+}
+
+
+.infos{
+float:right;
+display:inline-block;
+margin-top:2%;
+}
+
+.infos-case-1{
+height:250px;
+width:200px;
+background-color:grey;
+}
+.infos-case-2{
+height:350px;
+width:200px;
+background-color:grey;
+}
+
+.contenu{
+margin-top:30px;
+display:inline-block;
+background-color:brown;
+width:1000px;
+height:600px;
+}
+
+.container{
+width:90%
+}
+
+#menu{
+float:left;
+}
