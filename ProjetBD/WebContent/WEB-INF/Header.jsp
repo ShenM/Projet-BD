@@ -32,8 +32,16 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-2" id="menu">MENU</div>
-		<div class="col-lg-8">CONTENU</div>
+		<div class="col-lg-2" id="menu">
+			<button class="btn  menu-button"><span class="glyphicon glyphicon-euro"></span><br>Mes remboursements</button>
+			<button class="btn menu-button"><span class="glyphicon glyphicon-comment"></span><br>Commentaires</button>
+			<button class="btn menu-button"><span class="glyphicon glyphicon-comment"></span><br>Commentaires</button>
+			<button class="btn menu-button"><span class="glyphicon glyphicon-comment"></span><br>Commentaires</button>
+			<button class="btn menu-button"><span class="glyphicon glyphicon-comment"></span><br>Commentaires</button>
+		</div>
+		<div class="col-lg-8"></div>
+			<div class="col-lg-8 pie-chart">PIE CHART</div>
+			<div class="col-lg-8 remboursements">Remboursements</div>
 		<div class="col-lg-2">INFOS</div>
 	</div>
 </div>

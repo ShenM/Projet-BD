@@ -14,22 +14,21 @@ float:right;
 }
 
 .title-logo{
-float:left;
+
 margin:auto;
 height:80%;
 width:10%;
 }
 .title-text{
-float:right;
 font-size:12pt;
 width: 50%;
-text-align:left;
+
 color: #DE6B21;
 font-family: "Arial";
 }
 
 .user-avatar{
-float:left;
+
 height:80px;
 }
 .user-name{
@@ -89,4 +88,23 @@ width:90%
 
 #menu{
 float:left;
+}
+
+.menu-button{
+	height:125px;
+	width:200px;
+	border-width: 2px;
+	border-color: black;
+	margin:4px;
+}
+
+.pie-chart{
+	height:200px;
+	background-color:blue;
+}
+
+.remboursements{
+	height:200px;
+	background-color:green;
+	
 }
