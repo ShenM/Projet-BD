@@ -15,17 +15,18 @@
 <body>
 
 <div class="header">
-	<div class="title"> 
-		<img class="title-logo" src=""> 
-		<h1 class="title-text">Titre du site</h1>
+	
+	<div class="col-lg-4 title">
+		<div class="col-lg-3 title-logo"><img class=" " src=""> </div>
+		<div class="col-lg-9 title-text"><h1 class=" title-text">Titre du site</h1></div>
 	</div>
-	<div class="user">
-		<img class="user-avatar" src="res/avatar.jpg">
-		<h2 class="user-name">Prénom Nom</h2>
-		<div class="user-logout">
+	<div class="col-lg-4 user">
+		<div class="user-avatar col-lg-4"><img src="res/avatar.jpg"></div>
+		<div class="user-name col-lg-4">Prénom Nom</div>
+		<div class="logout col-lg-4">
 			<img class="user-logout-button" src="">
-			<h3 class="user-logout-text">Deconnexion</h3>
 		</div>
+	
 	</div>
 </div>
 
@@ -42,7 +43,11 @@
 		<div class="col-lg-8"></div>
 			<div class="col-lg-8 pie-chart">PIE CHART</div>
 			<div class="col-lg-8 remboursements">Remboursements</div>
-		<div class="col-lg-2">INFOS</div>
+		<div class="col-lg-2">
+			<div class="info1 ">INFO1</div>
+			<div class="info2 ">INFO2</div>
+		</div>
+		
 	</div>
 </div>
 
