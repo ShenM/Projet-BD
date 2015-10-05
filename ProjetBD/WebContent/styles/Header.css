@@ -3,25 +3,27 @@
 .header{
 background-color:red;
 width:100%;
-height:100px;
-display: inline-block;
+height:50px;
 }
 .title{
-float:left;
+height : 100%;
+
+
 }
 .user{
 float:right;
+height:100%;
 }
 
 .title-logo{
-
 margin:auto;
-height:80%;
-width:10%;
+height:100%;
+
 }
 .title-text{
 font-size:12pt;
 width: 50%;
+height : 100%;
 
 color: #DE6B21;
 font-family: "Arial";
@@ -29,25 +31,21 @@ font-family: "Arial";
 
 .user-avatar{
 
-height:80px;
+height:100%;
 }
 .user-name{
-float:left;
+height: 100%;
 font-size:12pt;
 text-align:left;
 color: #DE6B21;
 font-family: "Arial";
 }
 
-.user-logout{
-float:right;
+.logout {
+margin: auto;
+height: 100%;
 }
 
-.menu{
-float: left;
-display:inline-block;
-margin-top:2%;
-}
 
 
 .case{
@@ -58,19 +56,18 @@ background-color:green;
 
 
 .infos{
-float:right;
-display:inline-block;
+
 margin-top:2%;
 }
 
 .infos-case-1{
 height:250px;
-width:200px;
+
 background-color:grey;
 }
 .infos-case-2{
 height:350px;
-width:200px;
+
 background-color:grey;
 }
 
@@ -83,11 +80,13 @@ height:600px;
 }
 
 .container{
-width:90%
+width:100%;
+margin-top:5px;
 }
 
 #menu{
 float:left;
+text-align:center;
 }
 
 .menu-button{
@@ -99,7 +98,8 @@ float:left;
 }
 
 .pie-chart{
-	height:200px;
+	height:405px;
+	
 	background-color:blue;
 }
 
@@ -107,4 +107,14 @@ float:left;
 	height:200px;
 	background-color:green;
 	
+}
+
+.info1{
+	background-color:yellow;
+	height:405px;
+}
+
+.info2{
+	background-color:grey;
+	height:200px;
 }
