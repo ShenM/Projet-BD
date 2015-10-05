@@ -29,13 +29,9 @@ public class TestBd extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		DAOFactory daoFactory = null;
-
 		Beneficiaire benef = new Beneficiaire();
-		
 		BeneficiaireDAOImpl benefDAOImpl = new BeneficiaireDAOImpl(DAOFactory.getInstance());
-		
 		benef = benefDAOImpl.trouver(2484);
-		
 		request.setAttribute(ATT_BENEFICIAIRE, benef);
 		
 		this.getServletContext().getRequestDispatcher( "/WEB-INF/TestBd.jsp" ).forward( request, response );

@@ -8,6 +8,9 @@
 <title>Page de test BDD</title>
 </head>
 <body>
-	<c:out value="${ beneficiaire.num }"/>
+	<c:out value="${ beneficiaire.num }"/></br>
+	<c:out value="${ beneficiaire.sexe }"/></br>
+	<c:out value="${ beneficiaire.regimeSocial }"/></br>
+	<c:out value="${ beneficiaire.dateNaissanceBenficiaire }"/></br>
 </body>
 </html>
