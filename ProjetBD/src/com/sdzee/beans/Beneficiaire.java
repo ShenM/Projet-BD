@@ -32,6 +32,10 @@ public class Beneficiaire {
 	public void setDateNaissanceBenficiaire(java.util.Date dateNaissanceBenficiaire) {
 		this.dateNaissanceBenficiaire = dateNaissanceBenficiaire;
 	}
+	
+	
+	
+	
 	public Beneficiaire(int num, String sexe, String regimeSocial,
 			Date dateNaissanceBenficiaire) {
 		super();
