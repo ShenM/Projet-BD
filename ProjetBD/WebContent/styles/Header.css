@@ -30,9 +30,13 @@ font-family: "Arial";
 }
 
 .user-avatar{
-
 height:100%;
 }
+.user-icon{
+	height:30px;
+	float : right;
+}
+
 .user-name{
 height: 100%;
 font-size:12pt;
@@ -99,13 +103,13 @@ text-align:center;
 
 .pie-chart{
 	height:405px;
-	
+	width:100%;
 	background-color:blue;
 }
 
 .remboursements{
-	height:200px;
-	background-color:green;
+	height:255px;
+	width:100%;
 	
 }
 
@@ -116,5 +120,5 @@ text-align:center;
 
 .info2{
 	background-color:grey;
-	height:200px;
+	height:255px;
 }
