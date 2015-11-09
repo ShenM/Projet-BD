@@ -26,7 +26,6 @@
 				<jsp:include page="Info1.jsp" />
 				<jsp:include page="Info2.jsp" />
 			</div>
-
 		</div>
 	</div>
 
