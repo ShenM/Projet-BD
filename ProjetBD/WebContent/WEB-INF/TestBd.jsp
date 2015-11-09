@@ -12,5 +12,29 @@
 	<c:out value="${ beneficiaire.sexe }"/></br>
 	<c:out value="${ beneficiaire.regimeSocial }"/></br>
 	<c:out value="${ beneficiaire.dateNaissanceBenficiaire }"/></br>
+	
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Transaction</th>
+				<th>Date</th>
+				<th>Remboursement</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<c:forEach items="${lpresta}" var="presta">
+			    <tr>
+			    	<td>Remboursement</td>
+			    </tr>
+	   		    <tr>
+			    	<td><c:out value="${presta.jourPaiement}"/>/<c:out value="${presta.moisPaiement}"/>/<c:out value="${presta.anneePaiement}"/></td>
+				</tr>
+	   		    <tr>
+			    	<td><c:out value="${presta.montantRembourse}"/></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>
