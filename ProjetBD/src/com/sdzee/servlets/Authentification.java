@@ -24,7 +24,7 @@ public class Authentification extends HttpServlet {
         this.getServletContext().getRequestDispatcher( "/WEB-INF/Authentification.jsp" ).forward( request, response );
     }
 
-    public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    public void doPost( HttpServletRequest''''''''''''''''''' request, HttpServletResponse response ) throws ServletException, IOException {
         Authentification form = new Authentification();
 
         Utilisateur utilisateur = form.authentifierUtilisateur( request );
