@@ -65,11 +65,11 @@ margin-top:2%;
 
 .infos-case-1{
 height:250px;
-border-style: solid;
+background-color:grey;
 }
 .infos-case-2{
 height:350px;
-border-style: solid;
+background-color:grey
 }
 
 .contenu{
@@ -111,11 +111,11 @@ width:100%;
 }
 
 .info1{
-background-color:yellow;
+border-style: solid;
 height:405px;
 }
 
 .info2{
-background-color:grey;
+border-style: solid;
 height:255px;
 }
