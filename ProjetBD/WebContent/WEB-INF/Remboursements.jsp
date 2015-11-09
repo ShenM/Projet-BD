@@ -1,7 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div class="col-lg-8 remboursements">
-	<p class="row titre-remboursement">Remboursements :</p>
+
+<div class="panel panel-default">
+<div class = "panel-heading"> Vos dernières transactions</div>
+
 	<table class="table">
 		<thead>
 			<tr>
@@ -21,4 +23,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+<div class = "panel-footer"><button type="button" class="btn btn-default pull-right">Voir plus...</button>
+<div class="clearfix"></div></div>
+
 </div>

@@ -11,7 +11,7 @@ $(function () {
             },
             stops: [
                 [0, color],
-                [1, Highcharts.Color(color).brighten(0.5).get('rgb')] // darken
+                [1, Highcharts.Color(color).brighten(0.2).get('rgb')] // darken
             ]
         };
     });
@@ -19,15 +19,18 @@ $(function () {
     // Build the chart
     $('#container').highcharts({
         chart: {
+            margin: [0, 0, 0, 0],
+            spacingTop: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            spacingRight: 0,
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: true,
-            height : 600,
-            width : 600,
             type: 'pie'
         },
         title: {
-            text: 'Browser market shares. January, 2015 to May, 2015'
+            text: ""
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -62,5 +65,8 @@ $(function () {
 });
 </script>
 <script src="js/highcharts.js"></script>
-<script src="js/modules/exporting.js"></script>
-<div id="container"></div>
+<!--script src="js/modules/exporting.js"></script-->
+<div class="panel panel-default"> 
+	<div class="panel-heading"> Votre solde et vos remboursements</div>
+	<div class="panel-body"> <div id="container"></div></div>
+</div>
