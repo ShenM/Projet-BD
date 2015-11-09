@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <div class="col-lg-8 remboursements">
 	<p class="row titre-remboursement">Remboursements :</p>
 	<table class="table">
@@ -10,21 +12,13 @@
 		</thead>
 
 		<tbody>
-			<tr>
-				<td>&</td>
-				<td>&</td>
-				<td>&</td>
-			</tr>
-			<tr>
-				<td>é</td>
-				<td>é</td>
-				<td>é</td>
-			</tr>
-			<tr>
-				<td>"</td>
-				<td>"</td>
-				<td>"</td>
-			</tr>
+			<c:forEach items="${lpresta}" var="presta">
+			    <tr>
+			    	<td>Remboursement</td>
+			    	<td><c:out value="${presta.jourPaiement}"/>/<c:out value="${presta.moisPaiement}"/>/<c:out value="${presta.anneePaiement}"/></td>
+			    	<td><c:out value="${presta.montantRembourse}"/></td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </div>

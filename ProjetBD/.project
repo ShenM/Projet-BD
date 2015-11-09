@@ -33,4 +33,26 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/WEB-INF/Charts.jsp</name>
+			<type>1</type>
+			<location>C:/Users/Epulapp/Documents/RepoGitHub/ProjetBD/WebContent/WEB-INF/Charts.jsp</location>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/Info1.jsp</name>
+			<type>1</type>
+			<location>C:/Users/Epulapp/Documents/RepoGitHub/ProjetBD/WebContent/WEB-INF/Info1.jsp</location>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/Info2.jsp</name>
+			<type>1</type>
+			<location>C:/Users/Epulapp/Documents/RepoGitHub/ProjetBD/WebContent/WEB-INF/Info2.jsp</location>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/Remboursements.jsp</name>
+			<type>1</type>
+			<location>C:/Users/Epulapp/Documents/RepoGitHub/ProjetBD/WebContent/WEB-INF/Remboursements.jsp</location>
+		</link>
+	</linkedResources>
 </projectDescription>
