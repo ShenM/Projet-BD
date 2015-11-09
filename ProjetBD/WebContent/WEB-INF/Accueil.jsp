@@ -16,7 +16,9 @@
 	<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="row">
-			<jsp:include page="Menu.jsp" />
+			<div class="col-lg-2">
+				<jsp:include page="Menu.jsp" />
+			</div>
 			<div class="col-lg-8">
 				<jsp:include page="Charts.jsp" />
 				<jsp:include page="Remboursements.jsp" />

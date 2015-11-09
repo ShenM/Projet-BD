@@ -1,55 +1,65 @@
 @CHARSET "ISO-8859-1";
 
-.header{
-background-image:linear-gradient(#66baf5, #007ed7);
-width:100%;
-height:50px;
-padding: 10px;
-}
-.title{
-height : 100%;
-}
-.user{
-float:right;
-height:100%;
-}
-
-.title-logo{
+.navbar{
+font-family: "Arial";
+background-color: #005078;
+padding:10px;
+color: #F5F5F5;
 margin:auto;
-height:100%;
-
 }
+
+.navbar p{
+	margin: 10px;
+}
+
 .title-text{
 font-size:18pt;
-width: 100%;
-height : 100%;
-
-color: #202020;
-font-family: "Arial";
 }
 
-.user-avatar{
-height:100%;
-}
 .user-icon{
-height:30px;
+height:40px;
 float : right;
 }
 
 .user-name{
-height: 100%;
 font-size:12pt;
-text-align:left;
-color: #202020;
-font-family: "Arial";
 }
 
-.logout {
-margin: auto;
-height: 100%;
+.navbar .glyphicon-off{
+	font-size: 2em;
+}
+
+.panel-heading .glyphicon{
+font-size: 3em;
 }
 
 
+#menu .panel-heading{
+padding:25px;
+height:90px;
+}
+#menu .panel{
+vertical-align:middle;
+}
+
+#menu .panel-content{
+padding:10px;
+background-color:#F5F5F5;
+height:50px;
+}
+
+#menu a:hover{
+text-decoration:none;
+}
+#menu a:active{
+text-decoration:none;
+}
+#menu a:visited{
+text-decoration:none;
+}
+#menu a:link{
+text-decoration:none;
+}
 
 .case{
 width:200px;
@@ -82,7 +92,7 @@ height:600px;
 
 .container{
 width:100%;
-margin-top:5px;
+margin-top:20px;
 }
 
 
@@ -110,6 +120,7 @@ height:255px;
 width:100%;
 	
 }
+
 
 .info1{
 border-style: solid;

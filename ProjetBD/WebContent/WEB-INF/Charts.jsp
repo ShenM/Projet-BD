@@ -5,9 +5,9 @@ $(function () {
     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
         return {
             radialGradient: {
-                cx: 0.8,
-                cy: 0.3,
-                r: 0.7
+                cx: 0,
+                cy: 0,
+                r: 0
             },
             stops: [
                 [0, color],
