@@ -9,6 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Accueil extends HttpServlet {
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-		this.getServletContext().getRequestDispatcher( "/WEB-INF/Header.jsp" ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( "/WEB-INF/Accueil.jsp" ).forward( request, response );
 	}
 }
