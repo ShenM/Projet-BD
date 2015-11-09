@@ -2,9 +2,9 @@
 	<div class="panel-heading">INFO1</div>
 	<div class="panel-content">
 		<ul class="list-group">
-		<li class="list-group-item">Login</li>
-		<li class="list-group-item">Nom</li>
-		<li class="list-group-item">Prénom</li>
+		<li class="list-group-item">${benef.num}</li>
+		<li class="list-group-item">${benef.nom}</li>
+		<li class="list-group-item">${benef.prenom}</li>
 		<li class="list-group-item">Téléphone</li>
 		<li class="list-group-item">Email</li>
 		</ul>

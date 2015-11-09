@@ -2,7 +2,7 @@
 
 
 <div class="panel panel-default">
-<div class = "panel-heading"> Vos dernières transactions</div>
+<div class = "panel-heading"> Vos derniÃ¨res transactions</div>
 
 	<table class="table">
 		<thead>
