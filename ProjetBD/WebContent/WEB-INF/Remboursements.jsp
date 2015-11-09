@@ -14,7 +14,7 @@
 		<tbody>
 			<c:forEach items="${lpresta}" var="presta">
 			    <tr>
-			    	<td>Remboursement</td>
+			    	<td><c:out value="${presta.designationActe}"/></td>
 			    	<td><c:out value="${presta.jourPaiement}"/>/<c:out value="${presta.moisPaiement}"/>/<c:out value="${presta.anneePaiement}"/></td>
 			    	<td><c:out value="${presta.montantRembourse}"/></td>
 				</tr>
