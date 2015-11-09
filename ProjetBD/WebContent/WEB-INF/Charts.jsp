@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+
 <script type="text/javascript">
 $(function () {
 
@@ -57,7 +61,7 @@ $(function () {
             colorByPoint: true,
             data: [
                 {name: "Solde", y: 3500},
-                {name: "Remboursement Sécu", y: 800},
+                {name: "Remboursement SÃ©cu", y: 800},
                 {name: "Remboursement Mutuelle", y: 1200},
             ]
         }]
