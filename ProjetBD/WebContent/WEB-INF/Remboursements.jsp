@@ -1,8 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 
 <div class="panel panel-default">
-<div class = "panel-heading"> Vos derni�res transactions</div>
+<div class = "panel-heading"> Vos dernières transactions</div>
 
 	<table class="table">
 		<thead>
@@ -18,7 +20,7 @@
 			    <tr>
 			    	<td><c:out value="${presta.designationActe}"/></td>
 			    	<td><c:out value="${presta.jourPaiement}"/>/<c:out value="${presta.moisPaiement}"/>/<c:out value="${presta.anneePaiement}"/></td>
-			    	<td><c:out value="${presta.montantRembourse}"/></td>
+			    	<td><c:out value="${presta.montantRembourse} €"/></td>
 				</tr>
 			</c:forEach>
 		</tbody>
