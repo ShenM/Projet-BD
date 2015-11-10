@@ -6,8 +6,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.sdzee.dao.DAOFactory;
+import com.sdzee.dao.BeneficiaireDAOImpl;
 import com.sdzee.dao.UtilisateurDAOImpl;
 import com.sdzee.utilitaires.Md5;
+
 
 public class AuthentificationBean {
 	private static final String CHAMP_ID  = "id";
@@ -30,6 +32,7 @@ public class AuthentificationBean {
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
         String motDePasseBD = null;
         
+        BeneficiaireDAOImpl beneDAO = new BeneficiaireDAOImpl(DAOFactory.getInstance());
         Beneficiaire beneficiaire = new Beneficiaire();
 
         try {
@@ -78,8 +81,8 @@ public class AuthentificationBean {
         } else {
             resultat = "Échec de la connexion.";
         }
-        
-        //TODO récupérer un benef/facultatif
+                
+        beneficiaire = beneDAO.trouver(Integer.parseInt(id));
         
         return beneficiaire;
     }

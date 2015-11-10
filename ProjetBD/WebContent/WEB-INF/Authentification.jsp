@@ -16,12 +16,12 @@
 			<label for="nom">Numero bénéficiaire <span class="requis">*</span></label>
 			<input type="number" id="id" name="id"
 				value="<c:out value="${id}"/>" size="20"
-				maxlength="60" /> <span class="erreur">${form.erreurs['id']}</span>
+				maxlength="60" /> <p class="erreur">${form.erreurs['id']}</p>
 
 
 			<label for="motdepasse">Mot de passe <span class="requis">*</span></label>
 			<input type="password" id="motdepasse" name="motdepasse" value=""
-				size="20" maxlength="20" /> <span class="erreur">${form.erreurs['motdepasse']}</span>
+				size="20" maxlength="20" /> <p class="erreur">${form.erreurs['motdepasse']}</p>
 
 
 			<input type="submit" value="Connexion" class="sansLabel" />
