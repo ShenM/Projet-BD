@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,8 +20,8 @@
 				<jsp:include page="Menu.jsp" />
 			</div>
 			<div class="col-lg-8">
-				<!--jsp:include page="Charts.jsp" /-->
-				<jsp:include page="TousRemboursements.jsp" />
+				<jsp:include page="Charts.jsp" />
+				<jsp:include page="Remboursements.jsp" />
 			</div>
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />

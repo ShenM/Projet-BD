@@ -11,7 +11,7 @@
 			<div class="user-avatar col-lg-4">
 				<img class="user-icon" src="res/avatar.jpg">
 			</div>
-			<div class="user-name col-lg-5"><p>Tommy CABRELLI</p></div>
+			<div class="user-name col-lg-5"><p>${benef.prenom} ${benef.nom}</p></div>
 			<div class="logout col-lg-3">
 				<p class="glyphicon glyphicon-off"></p>
 			</div>
