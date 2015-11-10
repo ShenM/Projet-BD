@@ -17,7 +17,6 @@ import com.sdzee.dao.PrestationsSanteDAOImpl;
 
 
 public class Authentification extends HttpServlet { 
-    public static final String ATT_BENEFICIAIRE = "beneficiaire";
     public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
     public static final String ATT_ID = "id";
@@ -37,15 +36,16 @@ public class Authentification extends HttpServlet {
 
         if ( auth.getErreurs().isEmpty() ) {
             session.setAttribute( ATT_SESSION_USER, benef );
+    		this.getServletContext().getRequestDispatcher( "/WEB-INF/Authentification.jsp" ).forward( request, response );
+
         } else {
             session.setAttribute( ATT_SESSION_USER, null );
+    		this.getServletContext().getRequestDispatcher( "/WEB-INF/Accueil.jsp" ).forward( request, response );
         }
 
         request.setAttribute( ATT_ID, request.getParameter( "id" ));
         request.setAttribute( ATT_FORM, auth );
-        request.setAttribute( ATT_BENEFICIAIRE, benef );
 
-		this.getServletContext().getRequestDispatcher( "/WEB-INF/Authentification.jsp" ).forward( request, response );
 	}
 
 }
