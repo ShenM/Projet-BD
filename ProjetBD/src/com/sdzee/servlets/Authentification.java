@@ -36,11 +36,12 @@ public class Authentification extends HttpServlet {
 
         if ( auth.getErreurs().isEmpty() ) {
             session.setAttribute( ATT_SESSION_USER, benef );
-    		this.getServletContext().getRequestDispatcher( "/WEB-INF/Authentification.jsp" ).forward( request, response );
+            response.sendRedirect("/ProjetBD/Accueil");
 
         } else {
             session.setAttribute( ATT_SESSION_USER, null );
-    		this.getServletContext().getRequestDispatcher( "/WEB-INF/Accueil.jsp" ).forward( request, response );
+    		this.getServletContext().getRequestDispatcher( "/WEB-INF/Authentification.jsp" ).forward( request, response );
+    		//this.getServletContext().getRequestDispatcher( "/WEB-INF/Accueil.jsp" ).forward( request, response );
         }
 
         request.setAttribute( ATT_ID, request.getParameter( "id" ));
