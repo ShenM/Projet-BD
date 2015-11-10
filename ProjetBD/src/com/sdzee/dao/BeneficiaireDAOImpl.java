@@ -56,7 +56,7 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
         benef.setNom(resultSet.getString("NOM"));
         benef.setPrenom(resultSet.getString("PRENOM"));
         benef.setEmail(resultSet.getString("EMAIL"));
-        benef.setNumTelephone(resultSet.getInt("NUM_TELEPHONE"));
+        benef.setNumTelephone(resultSet.getString("NUM_TELEPHONE"));
 
         return benef;
     }

@@ -9,8 +9,8 @@
 		<li class="list-group-item">${benef.num}</li>
 		<li class="list-group-item">${benef.nom}</li>
 		<li class="list-group-item">${benef.prenom}</li>
-		<li class="list-group-item">Téléphone</li>
-		<li class="list-group-item">Email</li>
+		<li class="list-group-item">${benef.numTelephone}</li>
+		<li class="list-group-item">${benef.email}</li>
 		</ul>
 	</div>
 	<div class="panel-footer">

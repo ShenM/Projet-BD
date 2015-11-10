@@ -10,7 +10,7 @@ public class Beneficiaire {
 	private String nom;
 	private String prenom;
 	private String email;
-	private int	numTelephone;
+	private String	numTelephone;
 	
 	public String getEmail() {
 		return email;
@@ -18,10 +18,10 @@ public class Beneficiaire {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getNumTelephone() {
+	public String getNumTelephone() {
 		return numTelephone;
 	}
-	public void setNumTelephone(int numTelephone) {
+	public void setNumTelephone(String numTelephone) {
 		this.numTelephone = numTelephone;
 	}
 	public String getNom() {
