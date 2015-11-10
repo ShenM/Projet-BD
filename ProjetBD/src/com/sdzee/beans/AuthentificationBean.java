@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.UtilisateurDAOImpl;
+import com.sdzee.utilitaires.Md5;
 
 public class AuthentificationBean {
 	private static final String CHAMP_ID  = "id";
@@ -84,7 +85,9 @@ public class AuthentificationBean {
     }
     
     private void validationPairMdp( String motDePasse, String motDePasseBD) throws Exception {
-    	if ( motDePasse.compareTo(motDePasseBD) != 0 ){
+    	Md5 hash = new Md5();
+    	String MdpHashed = hash.encode(motDePasse);
+    	if ( MdpHashed.compareTo(motDePasseBD) != 0 ){
     		throw new Exception( "Mot de passe incorrect !" );
     	}
     }
