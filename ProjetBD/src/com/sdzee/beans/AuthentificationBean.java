@@ -5,8 +5,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Authentification {
-	private static final String CHAMP_EMAIL  = "email";
+import com.sdzee.dao.DAOFactory;
+import com.sdzee.dao.UtilisateurDAOImpl;
+
+public class AuthentificationBean {
+	private static final String CHAMP_ID  = "id";
     private static final String CHAMP_PASS   = "motdepasse";
 
     private String              resultat;
@@ -20,33 +23,54 @@ public class Authentification {
         return erreurs;
     }
 
-    public Beneficiaire connecterBeneficiaire( HttpServletRequest request ) {
+    public Beneficiaire authentifierBeneficiaire( HttpServletRequest request ) {
         /* Récupération des champs du formulaire */
-        String email = getValeurChamp( request, CHAMP_EMAIL );
+        String id = getValeurChamp( request, CHAMP_ID );
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
-
+        String motDePasseBD = null;
+        
         Beneficiaire beneficiaire = new Beneficiaire();
 
-        /* Validation du champ email. */
         try {
-            validationEmail( email );
+        	validationIdentifiant( id );
         } catch ( Exception e ) {
-            setErreur( CHAMP_EMAIL, e.getMessage() );
+            setErreur( CHAMP_ID, e.getMessage() );
+            resultat = "Échec de la connexion.";
+            return beneficiaire;
         }
-
-        beneficiaire.setEmail( email );
-
-        /* Validation du champ mot de passe. */
+        
         try {
-
             validationMotDePasse( motDePasse );
-
         } catch ( Exception e ) {
             setErreur( CHAMP_PASS, e.getMessage() );
+            resultat = "Échec de la connexion.";
+            return beneficiaire;
         }
-
-        beneficiaire.setMotDePasse( motDePasse );
-
+        
+    	UtilisateurDAOImpl utilisateur = new UtilisateurDAOImpl(DAOFactory.getInstance());
+    	
+        try {
+        	motDePasseBD= utilisateur.recupererMotDePasse(Integer.parseInt(id));
+        } catch ( Exception e ){
+        	setErreur( CHAMP_ID, "Identifiant incorrect." );
+        	resultat = "Échec de la connexion.";
+            return beneficiaire;
+        }
+        
+        if(motDePasseBD=="" || motDePasseBD==null){
+        	setErreur( CHAMP_ID, "Identifiant incorrect." );
+        	resultat = "Échec de la connexion.";
+            return beneficiaire;
+        }
+        
+        try{
+        	validationPairMdp(motDePasse, motDePasseBD);
+        } catch (Exception e){
+        	setErreur( CHAMP_PASS, e.getMessage() );
+        	resultat = "Échec de la connexion.";
+            return beneficiaire;
+        }
+        
         /* Initialisation du résultat global de la validation. */
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de la connexion.";
@@ -54,20 +78,23 @@ public class Authentification {
             resultat = "Échec de la connexion.";
         }
         
+        //TODO récupérer un benef/facultatif
+        
         return beneficiaire;
     }
-
-
-    /**
-     * Valide l'adresse email saisie.
-     */
-    private void validationEmail( String email ) throws Exception {
-        if ( email != null && !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
-            throw new Exception( "Merci de saisir une adresse mail valide." );
-        }
+    
+    private void validationPairMdp( String motDePasse, String motDePasseBD) throws Exception {
+    	if ( motDePasse.compareTo(motDePasseBD) != 0 ){
+    		throw new Exception( "Mot de passe incorrect !" );
+    	}
     }
 
-
+    private void validationIdentifiant( String id ) throws Exception {
+        if ( id == null ) {
+            throw new Exception( "Merci de saisir votre identifiant." );
+        }
+    }
+    
     /**
      * Valide le mot de passe saisi.
      */
@@ -81,14 +108,12 @@ public class Authentification {
         }
     }
 
-
     /*
      * Ajoute un message correspondant au champ spécifié à la map des erreurs.
      */
     private void setErreur( String champ, String message ) {
         erreurs.put( champ, message );
     }
-
 
     /*
      * Méthode utilitaire qui retourne null si un champ est vide, et son contenu

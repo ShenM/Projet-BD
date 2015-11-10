@@ -12,7 +12,7 @@ import com.sdzee.beans.Beneficiaire;
 
 public class BeneficiaireDAOImpl implements BeneficiaireDAO {
 	private DAOFactory daoFactory;
-	private static final String SQL_SELECT_PAR_ID = "SELECT NUM, SEXE, REGIME_SOCIAL, DATE_NAISSANCE_BENEFICIAIRE, NOM, PRENOM FROM BENEFICIAIRE WHERE NUM = ?";
+	private static final String SQL_SELECT_PAR_ID = "SELECT NUM, SEXE, REGIME_SOCIAL, DATE_NAISSANCE_BENEFICIAIRE, NOM, PRENOM, EMAIL, NUM_TELEPHONE FROM BENEFICIAIRE WHERE NUM = ?";
 	
 	public BeneficiaireDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
@@ -55,6 +55,8 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
         benef.setDateNaissanceBenficiaire( resultSet.getDate( "DATE_NAISSANCE_BENEFICIAIRE" ) );
         benef.setNom(resultSet.getString("NOM"));
         benef.setPrenom(resultSet.getString("PRENOM"));
+        benef.setEmail(resultSet.getString("EMAIL"));
+        benef.setNumTelephone(resultSet.getInt("NUM_TELEPHONE"));
 
         return benef;
     }

@@ -9,15 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sdzee.beans.AuthentificationBean;
+import com.sdzee.beans.Beneficiaire;
 import com.sdzee.beans.PrestationsSante;
-import com.sdzee.beans.Utilisateur;
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.PrestationsSanteDAOImpl;
 
+
 public class Authentification extends HttpServlet { 
-    public static final String ATT_USER         = "utilisateur";
+    public static final String ATT_BENEFICIAIRE = "beneficiaire";
     public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
+    public static final String ATT_ID = "id";
+
 	
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
@@ -25,31 +29,23 @@ public class Authentification extends HttpServlet {
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        Authentification form = new Authentification();
+        AuthentificationBean auth = new AuthentificationBean();
 
-        Utilisateur utilisateur = form.authentifierUtilisateur( request );
+        Beneficiaire benef = auth.authentifierBeneficiaire( request );
 
         HttpSession session = request.getSession();
 
-        if ( form.getErreurs().isEmpty() ) {
-            session.setAttribute( ATT_SESSION_USER, utilisateur );
+        if ( auth.getErreurs().isEmpty() ) {
+            session.setAttribute( ATT_SESSION_USER, benef );
         } else {
             session.setAttribute( ATT_SESSION_USER, null );
         }
 
-        request.setAttribute( ATT_FORM, form );
-        request.setAttribute( ATT_USER, utilisateur );
+        request.setAttribute( ATT_ID, request.getParameter( "id" ));
+        request.setAttribute( ATT_FORM, auth );
+        request.setAttribute( ATT_BENEFICIAIRE, benef );
 
 		this.getServletContext().getRequestDispatcher( "/WEB-INF/Authentification.jsp" ).forward( request, response );
 	}
 
-	private String getErreurs() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private Utilisateur authentifierUtilisateur(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
