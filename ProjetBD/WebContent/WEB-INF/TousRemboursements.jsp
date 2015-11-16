@@ -62,7 +62,6 @@
 $(document).ready(function() {
     var table = $('#table_id').DataTable( {
         dom: 'Bfrtip',
-        colReorder: true,
         buttons: [
 	        {
 		        text : 'Choisir les champs visibles',
