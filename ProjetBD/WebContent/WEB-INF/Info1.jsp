@@ -3,7 +3,7 @@
 
 
 <div class="panel panel-primary">
-	<div class="panel-heading">INFO1</div>
+	<div class="panel-heading">Mes informations : </div>
 	<div class="panel-content">
 		<ul class="list-group">
 		<li class="list-group-item">${benef.num}</li>
