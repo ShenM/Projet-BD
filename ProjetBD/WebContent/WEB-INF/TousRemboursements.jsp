@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.3.0/css/colReorder.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.0/css/buttons.dataTables.min.css">
 
-   
 
 
 <table id="table_id" class="display">
@@ -62,7 +61,11 @@
 $(document).ready(function() {
     var table = $('#table_id').DataTable( {
         dom: 'Bfrtip',
-        colReorder: true,
+        "pagingType": "full_numbers",
+        stateSave: true,
+        "lengthMenu": "_MENU_ entriées",
+        "search": "Rechercher:",
+        "infoEmpty": "Voir 0 à 0 sur 0 entriées",
         buttons: [
 	        {
 		        text : 'Choisir les champs visibles',
