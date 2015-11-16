@@ -13,7 +13,7 @@
 			</div>
 			<div class="user-name col-lg-5"><p>${benef.prenom} ${benef.nom}</p></div>
 			<div class="logout col-lg-3">
-				<p class="glyphicon glyphicon-off"></p>
+				<a class="glyphicon glyphicon-off" href="Deconnexion" ></a>
 			</div>
 
 
