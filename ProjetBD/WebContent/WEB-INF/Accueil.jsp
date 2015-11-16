@@ -21,7 +21,7 @@
 			</div>
 			<div class="col-lg-8">
 				<jsp:include page="Charts.jsp" />
-				<jsp:include page="TousRemboursements.jsp" />
+				<jsp:include page="Remboursements.jsp" />
 			</div>
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />
