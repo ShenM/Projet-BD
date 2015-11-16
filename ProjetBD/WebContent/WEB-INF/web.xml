@@ -19,6 +19,16 @@
 		<servlet-class>com.sdzee.servlets.Authentification</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>TousRemboursements</servlet-name>
+		<servlet-class>com.sdzee.servlets.TousRemboursements</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>Deconnexion</servlet-name>
+		<servlet-class>com.sdzee.servlets.Deconnexion</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>Accueil</servlet-name>
 		<url-pattern>/Accueil</url-pattern>
@@ -34,5 +44,14 @@
 		<url-pattern>/Authentification</url-pattern>
 	</servlet-mapping>
 
+	<servlet-mapping>
+		<servlet-name>TousRemboursements</servlet-name>
+		<url-pattern>/TousRemboursements</url-pattern>
+	</servlet-mapping>
 
+
+	<servlet-mapping>
+		<servlet-name>Deconnexion</servlet-name>
+		<url-pattern>/Deconnexion</url-pattern>
+	</servlet-mapping>
 </web-app>
