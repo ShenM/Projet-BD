@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Accueil</title>
 <link rel="stylesheet" href="styles/Header.css">
+<link rel="stylesheet" href="styles/Menu.css">
 </head>
 
 
