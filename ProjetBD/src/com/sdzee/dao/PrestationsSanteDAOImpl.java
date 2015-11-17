@@ -16,6 +16,8 @@ import com.sdzee.beans.PrestationsSante;
 public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	private DAOFactory daoFactory;
 	private static final String SQL_SELECT_PAR_NUMBENEFSINISTRE = "SELECT NUM_SINISTRE, NUM_ADHESION, NUM_BENEFICIAIRE_SINISTRE, NUM_BENEFICIAIRE, ACTE, DESIGNATION_ACTE, LIBELLE_BAREME, JOUR_DEBUT_SOINS, MOIS_DEBUT_SOINS, ANNEE_DEBUT_SOINS, JOUR_PAIEMENT, MOIS_PAIEMENT, ANNEE_PAIEMENT, FRAIS_REEL_ASSURE, MONTANT_SECU, MONTANT_REMBOURSE FROM PRESTATIONS_SANTE WHERE NUM_BENEFICIAIRE_SINISTRE = ? ORDER BY NUM_SINISTRE DESC";
+	private static final String SQL_SELECT_PAR_NUM_ADHESION = "SELECT NOM, PRENOM, NUM_SINISTRE, NUM_ADHESION, NUM_BENEFICIAIRE_SINISTRE, NUM_BENEFICIAIRE, ACTE, DESIGNATION_ACTE, LIBELLE_BAREME, JOUR_DEBUT_SOINS, MOIS_DEBUT_SOINS, ANNEE_DEBUT_SOINS, JOUR_PAIEMENT, MOIS_PAIEMENT, ANNEE_PAIEMENT, FRAIS_REEL_ASSURE, MONTANT_SECU, MONTANT_REMBOURSE FROM PRESTATIONS_SANTE, BENEFICIAIRE WHERE NUM_ADHESION = (select distinct NUM_ADHESION from PRESTATIONS_SANTE where num_beneficiaire_sinistre = ?) and prestations_sante.num_beneficiaire_sinistre = beneficiaire.num ORDER BY NUM_ADHESION DESC";
+
 	
 	public PrestationsSanteDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
@@ -23,8 +25,6 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	
 	public ArrayList<PrestationsSante> trouverParNumBeneficiaire(int numBeneficiaire) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
-		
-		
 		
 		return prestaListe;
 	}
@@ -42,7 +42,36 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             
             resultSet = preparedStatement.executeQuery();
             
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de donnï¿½es retournï¿½e dans le ResultSet */
+            while ( resultSet.next() != false) {
+                PrestationsSante presta = new PrestationsSante();
+            	presta = map( resultSet );
+            	prestaListe.add(presta);
+            }
+            
+    		return prestaListe;
+        } catch ( SQLException e ) {
+            throw new DAOException( e + " TRUC :" + e.getMessage());
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }	
+	}
+	
+	public ArrayList<PrestationsSante> trouverParNumAdhesion(int numBeneficiaireSinistre) throws DAOException{
+		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
+		
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_PAR_NUM_ADHESION, false, numBeneficiaireSinistre );
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            /* Parcours de la ligne de donnï¿½es retournï¿½e dans le ResultSet */
             while ( resultSet.next() != false) {
                 PrestationsSante presta = new PrestationsSante();
             	presta = map( resultSet );
@@ -82,6 +111,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
     	presta.setFraisReelAssure(resultSet.getFloat("FRAIS_REEL_ASSURE"));
     	presta.setMontantSecu(resultSet.getFloat("MONTANT_SECU"));
     	presta.setMontantRembourse(resultSet.getFloat("MONTANT_REMBOURSE"));
+    	presta.setNomBenef(resultSet.getString("NOM"));
+    	presta.setPrenomBenef(resultSet.getString("PRENOM"));
     	
         return presta;
     }

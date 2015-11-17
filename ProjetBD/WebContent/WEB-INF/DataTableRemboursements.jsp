@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.1.0/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/fixedcolumns/3.2.0/js/dataTables.fixedColumns.min.js"></script>
@@ -11,7 +15,8 @@
 
 <table id="table_id" class="display">
 	<FORM>
-	    <SELECT name="nom" size="1">
+		<label for="listeShow">Afficher </label> 
+	    <SELECT name="listeShow" size="1">
 		    <OPTION id="all">All
 		    <OPTION id="_10">10
 		    <OPTION id="_20">20
@@ -32,236 +37,18 @@
         </tr>
     </thead>
     <tbody>	
-    <tr>
-		   <td>(timestamp)</td>
-		   <td>ip_address </td>
-		   <td>user_agent </td>
-		   <td>Country </td>
-		   <td>city </td>
-		   <td>email </td>
-		   <td>ererere  </td>
-		   <td>Non</td>
-	</tr>
-    <tr>
-		   <td>(timestamp)</td>
-		   <td>ip_address </td>
-		   <td>user_agent </td>
-		   <td>Country </td>
-		   <td>city </td>
-		   <td>email </td>
-		   <td>ererere  </td>
-		   <td>Non</td>
-	</tr>
-    <tr>
-		   <td>(timestamp)</td>
-		   <td>ip_address </td>
-		   <td>user_agent </td>
-		   <td>Country </td>
-		   <td>city </td>
-		   <td>email </td>
-		   <td>ererere  </td>
-		   <td>Non</td>
-	</tr>
-	<tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>66</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Cedric Kelly</td>
-                <td>Senior Javascript Developer</td>
-                <td>Edinburgh</td>
-                <td>22</td>
-                <td>2012/03/29</td>
-                <td>$433,060</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>33</td>
-                <td>2008/11/28</td>
-                <td>$162,700</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>66</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Cedric Kelly</td>
-                <td>Senior Javascript Developer</td>
-                <td>Edinburgh</td>
-                <td>22</td>
-                <td>2012/03/29</td>
-                <td>$433,060</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>33</td>
-                <td>2008/11/28</td>
-                <td>$162,700</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>66</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Cedric Kelly</td>
-                <td>Senior Javascript Developer</td>
-                <td>Edinburgh</td>
-                <td>22</td>
-                <td>2012/03/29</td>
-                <td>$433,060</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>33</td>
-                <td>2008/11/28</td>
-                <td>$162,700</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>66</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Cedric Kelly</td>
-                <td>Senior Javascript Developer</td>
-                <td>Edinburgh</td>
-                <td>22</td>
-                <td>2012/03/29</td>
-                <td>$433,060</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>33</td>
-                <td>2008/11/28</td>
-                <td>$162,700</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
+    	<c:forEach items="${lpresta}" var="presta">
+		    <tr>
+		    	<td><c:out value="${presta.nomBenef}"/>  <c:out value="${presta.prenomBenef}"/></td>
+		    	<td><c:out value="${presta.designationActe}"/></td>
+		    	<td><c:out value="${presta.libelleBareme}"/></td>
+		    	<td><c:out value="${presta.jourDebutSoins}"/>/<c:out value="${presta.moisDebutSoins}"/>/<c:out value="${presta.anneeDebutSoins}"/></td>
+		    	<td><c:out value="${presta.jourPaiement}"/>/<c:out value="${presta.moisPaiement}"/>/<c:out value="${presta.anneePaiement}"/></td>
+		    	<td><c:out value="${presta.fraisReelAssure}"/></td>
+		    	<td><c:out value="${presta.montantSecu}"/></td>
+		    	<td><c:out value="${presta.montantRembourse} €"/></td>
+			</tr>
+		</c:forEach>
 		   
     </tbody>
 </table>

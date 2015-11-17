@@ -30,7 +30,7 @@ public class Accueil extends HttpServlet {
 			BeneficiaireDAOImpl benefiDAOImpl = new BeneficiaireDAOImpl(DAOFactory.getInstance());
 			Beneficiaire benef = new Beneficiaire();		
 			benef = (Beneficiaire) session.getAttribute(ATT_SESSION_USER);
-			ArrayList<PrestationsSante> prestaListe = prestaDAOImpl.trouverParNumBeneficiaireSinistre(benef.getNum());
+			ArrayList<PrestationsSante> prestaListe = prestaDAOImpl.trouverParNumAdhesion(benef.getNum());
 			
 			request.setAttribute(LISTE_PRESTA, prestaListe);
 			request.setAttribute(BENEFICIAIRE, benef);

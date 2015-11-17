@@ -2,32 +2,37 @@ package com.sdzee.beans;
 
 public class PrestationsSante {
 	private int		numSinistre;
-	private	int		numAdhesion; //remplacé par un objet adhesion ?
-	private int		numBeneficiaireSinistre; //remplacé par un objet beneficiaire ?
-	private	int		numBeneficiaire; //remplacé par un objet beneficiaire ?
+	private	int		numAdhesion; //remplacï¿½ par un objet adhesion ?
+	private int		numBeneficiaireSinistre; //remplacï¿½ par un objet beneficiaire ?
+	private	int		numBeneficiaire; //remplacï¿½ par un objet beneficiaire ?
 	private String	acte;
 	private String	designationActe;
 	private String	libelleBareme;
-	private String	jourDebutSoins; //remplacé par une date (avec moisDebutSoins et anneeDebutSoin ?
+	private String	jourDebutSoins; //remplacï¿½ par une date (avec moisDebutSoins et anneeDebutSoin ?
 	private String	moisDebutSoins; 
 	private int		anneeDebutSoins; 
-	private String	jourPaiement; //même question
+	private String	jourPaiement; //mï¿½me question
 	private String	moisPaiement;
 	private int		anneePaiement;
 	private float	fraisReelAssure;
 	private float 	montantSecu;
 	private float	montantRembourse;
+	private String nomBenef;
+	private String prenomBenef;
 	
 	public PrestationsSante() {
 		super();
 	}
+
+
 
 	public PrestationsSante(int numSinistre, int numAdhesion,
 			int numBeneficiaireSinistre, int numBeneficiaire, String acte,
 			String designationActe, String libelleBareme,
 			String jourDebutSoins, String moisDebutSoins, int anneeDebutSoins,
 			String jourPaiement, String moisPaiement, int anneePaiement,
-			float fraisReelAssure, float montantSecu, float montantRembourse) {
+			float fraisReelAssure, float montantSecu, float montantRembourse,
+			String nomBenef, String prenomBenef) {
 		super();
 		this.numSinistre = numSinistre;
 		this.numAdhesion = numAdhesion;
@@ -45,7 +50,11 @@ public class PrestationsSante {
 		this.fraisReelAssure = fraisReelAssure;
 		this.montantSecu = montantSecu;
 		this.montantRembourse = montantRembourse;
+		this.nomBenef = nomBenef;
+		this.prenomBenef = prenomBenef;
 	}
+
+
 
 	public int getNumSinistre() {
 		return numSinistre;
@@ -173,6 +182,30 @@ public class PrestationsSante {
 
 	public void setMontantRembourse(float montantRembourse) {
 		this.montantRembourse = montantRembourse;
+	}
+
+
+
+	public String getNomBenef() {
+		return nomBenef;
+	}
+
+
+
+	public void setNomBenef(String nomBenef) {
+		this.nomBenef = nomBenef;
+	}
+
+
+
+	public String getPrenomBenef() {
+		return prenomBenef;
+	}
+
+
+
+	public void setPrenomBenef(String prenomBenef) {
+		this.prenomBenef = prenomBenef;
 	}
 	
 		
