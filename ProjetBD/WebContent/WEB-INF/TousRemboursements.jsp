@@ -20,7 +20,7 @@
 				<jsp:include page="Menu.jsp" />
 			</div>
 			<div class="col-lg-8">
-				<jsp:include page="DataTableRemboursements.jsp" />
+				<jsp:include page="DataTableRemboursements.jsp"/>
 			</div>
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />

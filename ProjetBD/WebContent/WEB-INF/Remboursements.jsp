@@ -26,7 +26,7 @@
 		</tbody>
 	</table>
 	
-<div class = "panel-footer"><button type="button" class="btn btn-default pull-right" href="TousRemboursements">Voir plus...</button>
+<div class = "panel-footer"><a href="TousRemboursements"><button type="button" class="btn btn-default pull-right">Voir plus...</button></a>
 <div class="clearfix"></div></div>
 
 </div>
