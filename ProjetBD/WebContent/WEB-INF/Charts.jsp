@@ -60,9 +60,9 @@ $(function () {
             name: "Montant",
             colorByPoint: true,
             data: [
-                {name: "Solde", y: 3500},
-                {name: "Remboursement Sécu", y: 800},
-                {name: "Remboursement Mutuelle", y: 1200},
+                {name: "Mes frais", y: ${chart.fraisPayer}},
+                {name: "Remboursement Sécu", y: ${chart.remboursementSecu}},
+                {name: "Remboursement Mutuelle", y: ${chart.remboursementMutuelle}},
             ]
         }]
     });
