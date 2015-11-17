@@ -6,30 +6,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Authentification</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/Header.css">
+<link rel="stylesheet" href="styles/LoginForm.css">
 </head>
 <body>
-	<form method="post" action="Authentification">
-		<fieldset>
-			<legend>Authentification</legend>
-			<p>Vous pouvez vous authentifier via ce formulaire.</p>
+	<jsp:include page="Header.jsp" />
+	
+		<div class="container">
+		<div class="row">
+			<div class="col-lg-2">
+			</div>
+			<div class="col-lg-8">
+	<jsp:include page="AuthentificationForm.jsp" />
+			</div>
+			<div class="col-lg-2">
+			</div>
 
-			<label for="nom">Numero bénéficiaire <span class="requis">*</span></label>
-			<input type="number" id="id" name="id"
-				value="<c:out value="${id}"/>" size="20"
-				maxlength="60" /> <p class="erreur">${form.erreurs['id']}</p>
-
-
-			<label for="motdepasse">Mot de passe <span class="requis">*</span></label>
-			<input type="password" id="motdepasse" name="motdepasse" value=""
-				size="20" maxlength="20" /> <p class="erreur">${form.erreurs['motdepasse']}</p>
-
-
-			<input type="submit" value="Connexion" class="sansLabel" />
-
-
-			<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
-
-		</fieldset>
-	</form>
+		</div>
+	</div>
 </body>
 </html>

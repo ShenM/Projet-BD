@@ -11,10 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sdzee.beans.Beneficiaire;
+import com.sdzee.beans.ChartFraisAnnee;
 import com.sdzee.beans.PrestationsSante;
 
 public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	private DAOFactory daoFactory;
+
 	private static final String SQL_SELECT_PAR_NUMBENEFSINISTRE = "SELECT NUM_SINISTRE, NUM_ADHESION, NUM_BENEFICIAIRE_SINISTRE, NUM_BENEFICIAIRE, ACTE, DESIGNATION_ACTE, LIBELLE_BAREME, JOUR_DEBUT_SOINS, MOIS_DEBUT_SOINS, ANNEE_DEBUT_SOINS, JOUR_PAIEMENT, MOIS_PAIEMENT, ANNEE_PAIEMENT, FRAIS_REEL_ASSURE, MONTANT_SECU, MONTANT_REMBOURSE FROM PRESTATIONS_SANTE WHERE NUM_BENEFICIAIRE_SINISTRE = ? ORDER BY NUM_SINISTRE DESC";
 	private static final String SQL_SELECT_PAR_NUM_ADHESION = "SELECT NOM, PRENOM, NUM_SINISTRE, NUM_ADHESION, NUM_BENEFICIAIRE_SINISTRE, NUM_BENEFICIAIRE, ACTE, DESIGNATION_ACTE, LIBELLE_BAREME, JOUR_DEBUT_SOINS, MOIS_DEBUT_SOINS, ANNEE_DEBUT_SOINS, JOUR_PAIEMENT, MOIS_PAIEMENT, ANNEE_PAIEMENT, FRAIS_REEL_ASSURE, MONTANT_SECU, MONTANT_REMBOURSE FROM PRESTATIONS_SANTE, BENEFICIAIRE WHERE NUM_ADHESION = (select distinct NUM_ADHESION from PRESTATIONS_SANTE where num_beneficiaire_sinistre = ?) and prestations_sante.num_beneficiaire_sinistre = beneficiaire.num ORDER BY NUM_ADHESION DESC";
 
@@ -116,4 +118,5 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
     	
         return presta;
     }
+    
 }

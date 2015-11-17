@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sdzee.beans.Beneficiaire;
+import com.sdzee.beans.ChartFraisAnnee;
 import com.sdzee.beans.PrestationsSante;
 import com.sdzee.dao.BeneficiaireDAOImpl;
 import com.sdzee.dao.DAOFactory;
@@ -19,7 +20,8 @@ public class Accueil extends HttpServlet {
     public static final String LISTE_PRESTA = "lpresta";
     public static final String BENEFICIAIRE = "benef";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
-    
+    public static final String CHART = "chart";
+
     
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_USER)!=null){
@@ -32,8 +34,13 @@ public class Accueil extends HttpServlet {
 			benef = (Beneficiaire) session.getAttribute(ATT_SESSION_USER);
 			ArrayList<PrestationsSante> prestaListe = prestaDAOImpl.trouverParNumAdhesion(benef.getNum());
 			
+			ChartFraisAnnee chart = new ChartFraisAnnee(prestaListe);
+			
 			request.setAttribute(LISTE_PRESTA, prestaListe);
 			request.setAttribute(BENEFICIAIRE, benef);
+			request.setAttribute(CHART, chart);
+			
+			
 			
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/Accueil.jsp" ).forward( request, response );
 			
