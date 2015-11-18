@@ -75,6 +75,9 @@ $(document).ready(function() {
     $('#_20').on( 'click', function () {
         table.page.len( 20 ).draw();
     } ); 
+    $('#_50').on( 'click', function () {
+        table.page.len( 50 ).draw();
+    } ); 
     
 } );
 
