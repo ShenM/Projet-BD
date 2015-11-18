@@ -1,0 +1,30 @@
+#menu .panel-heading{
+padding:25px;
+height:90px;
+}
+#menu .panel{
+vertical-align:middle;
+}
+
+#menu .panel-content{
+padding:10px;
+background-color:#F5F5F5;
+height:50px;
+}
+
+#menu a:hover{
+text-decoration:none;
+}
+#menu a:active{
+text-decoration:none;
+}
+#menu a:visited{
+text-decoration:none;
+}
+#menu a:link{
+text-decoration:none;
+}
+#menu{
+float:left;
+text-align:center;
+}
