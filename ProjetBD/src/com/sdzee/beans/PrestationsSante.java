@@ -17,8 +17,8 @@ public class PrestationsSante {
 	private float	fraisReelAssure;
 	private float 	montantSecu;
 	private float	montantRembourse;
-	private String nomBenef;
-	private String prenomBenef;
+	private String 	nomBenef;
+	private String 	prenomBenef;
 	
 	public PrestationsSante() {
 		super();
