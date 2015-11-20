@@ -14,7 +14,6 @@
 		</ul>
 	</div>
 	<div class="panel-footer">
-	<button type="button" class="btn btn-primary">Modifier</button>
-	<button type="button" class="btn btn-default">Voir plus...</button>
-	</div>
+	<a href="MesInformations"><button type="button" class="btn btn-default pull-right">Voir plus...</button></a>
+	<div class="clearfix"></div></div>
 </div>

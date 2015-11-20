@@ -1,57 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0">
-
-	<servlet>
-		<servlet-name>Accueil</servlet-name>
-		<servlet-class>com.sdzee.servlets.Accueil</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>TestBd</servlet-name>
-		<servlet-class>com.sdzee.servlets.TestBd</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>Authentification</servlet-name>
-		<servlet-class>com.sdzee.servlets.Authentification</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>TousRemboursements</servlet-name>
-		<servlet-class>com.sdzee.servlets.TousRemboursements</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>Deconnexion</servlet-name>
-		<servlet-class>com.sdzee.servlets.Deconnexion</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>Accueil</servlet-name>
-		<url-pattern>/Accueil</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>TestBd</servlet-name>
-		<url-pattern>/TestBd</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>Authentification</servlet-name>
-		<url-pattern>/Authentification</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>TousRemboursements</servlet-name>
-		<url-pattern>/TousRemboursements</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet-mapping>
-		<servlet-name>Deconnexion</servlet-name>
-		<url-pattern>/Deconnexion</url-pattern>
-	</servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <servlet>
+    <servlet-name>Accueil</servlet-name>
+    <servlet-class>com.sdzee.servlets.Accueil</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TestBd</servlet-name>
+    <servlet-class>com.sdzee.servlets.TestBd</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Authentification</servlet-name>
+    <servlet-class>com.sdzee.servlets.Authentification</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TousRemboursements</servlet-name>
+    <servlet-class>com.sdzee.servlets.TousRemboursements</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MesInformations</servlet-name>
+    <servlet-class>com.sdzee.servlets.MesInformations</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Deconnexion</servlet-name>
+    <servlet-class>com.sdzee.servlets.Deconnexion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Accueil</servlet-name>
+    <url-pattern>/Accueil</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestBd</servlet-name>
+    <url-pattern>/TestBd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Authentification</servlet-name>
+    <url-pattern>/Authentification</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TousRemboursements</servlet-name>
+    <url-pattern>/TousRemboursements</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MesInformations</servlet-name>
+    <url-pattern>/MesInformations</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/Deconnexion</url-pattern>
+  </servlet-mapping>
 </web-app>
