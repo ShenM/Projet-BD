@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import com.sdzee.beans.Beneficiaire;
 import com.sdzee.beans.ChartFraisAnnee;
 import com.sdzee.beans.PrestationsSante;
-import com.sdzee.dao.BeneficiaireDAOImpl;
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.PrestationsSanteDAOImpl;
 
@@ -29,7 +28,6 @@ public class Accueil extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			PrestationsSanteDAOImpl prestaDAOImpl = new PrestationsSanteDAOImpl(DAOFactory.getInstance());
-			BeneficiaireDAOImpl benefiDAOImpl = new BeneficiaireDAOImpl(DAOFactory.getInstance());
 			Beneficiaire benef = new Beneficiaire();		
 			benef = (Beneficiaire) session.getAttribute(ATT_SESSION_USER);
 			ArrayList<PrestationsSante> prestaListe = prestaDAOImpl.trouverParNumAdhesionLimite(benef.getNum());

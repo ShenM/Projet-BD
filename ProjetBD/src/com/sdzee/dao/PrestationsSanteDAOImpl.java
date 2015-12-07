@@ -8,10 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
-import com.sdzee.beans.Beneficiaire;
-import com.sdzee.beans.ChartFraisAnnee;
 import com.sdzee.beans.PrestationsSante;
 
 public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{

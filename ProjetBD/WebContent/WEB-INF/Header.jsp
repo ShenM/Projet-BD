@@ -4,7 +4,7 @@
 				<img src="res/logo.jpeg">
 			</div>
 			<div class="col-lg-9">
-				<div class="title-text"><p>Mutuelle Polytech</p></div>
+				<div class="title-text"><a href="Accueil"><p>Mutuelle Polytech</p></a></div>
 			</div>
 		</div>
 		<div class="col-lg-4 user pull-right">

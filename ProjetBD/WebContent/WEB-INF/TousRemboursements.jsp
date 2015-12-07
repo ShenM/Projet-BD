@@ -23,13 +23,14 @@
 			</div>
 			<div class="col-lg-8">
 				<jsp:include page="DataTableRemboursements.jsp"/>
+				<a href="Accueil"><button type="button" class="btn btn-default pull-right">Retour</button></a>
 			</div>
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />
 				<jsp:include page="Info2.jsp" />
 			</div>
-
 		</div>
+		
 	</div>
 
 </body>

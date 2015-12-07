@@ -3,10 +3,10 @@ package com.sdzee.beans;
 import java.util.ArrayList;
 
 public class ChartFraisAnnee {
-	double fraisTotal;
-	double fraisPayer;
-	float remboursementMutuelle;
-	float remboursementSecu;
+	int fraisTotal;
+	int fraisPayer;
+	int remboursementMutuelle;
+	int remboursementSecu;
 	
 	public ChartFraisAnnee(ArrayList<PrestationsSante> lpresta) {
 		this.fraisTotal = 0;
@@ -17,10 +17,10 @@ public class ChartFraisAnnee {
 		for(PrestationsSante presta : lpresta)
 		{
 			System.out.println(presta.getFraisReelAssure());
-			this.fraisTotal += (double)presta.getFraisReelAssure();
+			this.fraisTotal += (int)presta.getFraisReelAssure();
 			System.out.println(this.fraisTotal);
-			this.remboursementMutuelle += presta.getMontantRembourse();
-			this.remboursementSecu += presta.getMontantSecu();
+			this.remboursementMutuelle += (int)presta.getMontantRembourse();
+			this.remboursementSecu += (int)presta.getMontantSecu();
 		}
 		
 		
@@ -29,8 +29,8 @@ public class ChartFraisAnnee {
 	}
 
 
-	public ChartFraisAnnee(float fraisTotal, float fraisPayer,
-			float remboursementMutuelle, float remboursementSecu) {
+	public ChartFraisAnnee(int fraisTotal, int fraisPayer,
+			int remboursementMutuelle, int remboursementSecu) {
 		super();
 		this.fraisTotal = fraisTotal;
 		this.fraisPayer = fraisPayer;
@@ -52,32 +52,32 @@ public class ChartFraisAnnee {
 	}
 
 
-	public void setFraisPayer(double fraisPayer) {
+	public void setFraisPayer(int fraisPayer ) {
 		this.fraisPayer = fraisPayer;
 	}
 
 
-	public double getFraisTotal() {
+	public int getFraisTotal() {
 		return fraisTotal;
 	}
 
-	public void setFraisTotal(double frais) {
+	public void setFraisTotal(int frais) {
 		this.fraisTotal = frais;
 	}
 
-	public float getRemboursementMutuelle() {
+	public int getRemboursementMutuelle() {
 		return remboursementMutuelle;
 	}
 
-	public void setRemboursementMutuelle(float remboursementMutuelle) {
+	public void setRemboursementMutuelle(int remboursementMutuelle) {
 		this.remboursementMutuelle = remboursementMutuelle;
 	}
 
-	public float getRemboursementSecu() {
+	public int getRemboursementSecu() {
 		return remboursementSecu;
 	}
 
-	public void setRemboursementSecu(float remboursementSecu) {
+	public void setRemboursementSecu(int remboursementSecu) {
 		this.remboursementSecu = remboursementSecu;
 	}
 	
