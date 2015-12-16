@@ -9,7 +9,7 @@
 				<span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></div>
 		</div>
 	</a>
-	<a href="#">
+	<a href="Contrat">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-list-alt"></span>
