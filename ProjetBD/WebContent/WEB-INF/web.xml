@@ -29,16 +29,12 @@
     <servlet-class>com.sdzee.servlets.Deconnexion</servlet-class>
   </servlet>
   <servlet>
-<<<<<<< HEAD
     <servlet-name>EditerProfile</servlet-name>
     <servlet-class>com.sdzee.servlets.EditerProfile</servlet-class>
   </servlet>
-=======
   	<servlet-name>AuthAdmin</servlet-name>
   	<servlet-class>com.sdzee.servlets.AuthAdmin</servlet-class>
   </servlet>
-  
->>>>>>> 03e718564679795cf93c95d82de065ea43b56c6d
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
     <url-pattern>/Accueil</url-pattern>
@@ -67,12 +63,10 @@
     <servlet-name>Deconnexion</servlet-name>
     <url-pattern>/Deconnexion</url-pattern>
   </servlet-mapping>
-<<<<<<< HEAD
   <servlet-mapping>
     <servlet-name>EditerProfile</servlet-name>
     <url-pattern>/EditerProfile</url-pattern>
   </servlet-mapping>
-=======
     <servlet-mapping>
     <servlet-name>AuthAdmin</servlet-name>
     <url-pattern>/Administration</url-pattern>
@@ -81,5 +75,4 @@
   <welcome-file-list>
     <welcome-file>Accueil</welcome-file>
   </welcome-file-list>
->>>>>>> 03e718564679795cf93c95d82de065ea43b56c6d
 </web-app>
