@@ -16,6 +16,10 @@
     <servlet-name>TousRemboursements</servlet-name>
     <servlet-class>com.sdzee.servlets.TousRemboursements</servlet-class>
   </servlet>
+    <servlet>
+    <servlet-name>Contrat</servlet-name>
+    <servlet-class>com.sdzee.servlets.Contrat</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>MesInformations</servlet-name>
     <servlet-class>com.sdzee.servlets.MesInformations</servlet-class>
@@ -44,6 +48,10 @@
   <servlet-mapping>
     <servlet-name>TousRemboursements</servlet-name>
     <url-pattern>/TousRemboursements</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Contrat</servlet-name>
+    <url-pattern>/Contrat</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MesInformations</servlet-name>
