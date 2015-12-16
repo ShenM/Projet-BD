@@ -3,10 +3,13 @@ package com.sdzee.dao;
 import static com.sdzee.dao.DAOUtilitaire.fermeturesSilencieuses;
 import static com.sdzee.dao.DAOUtilitaire.initialisationRequetePreparee;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import com.sdzee.beans.Beneficiaire;
 
@@ -14,9 +17,21 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
 	private DAOFactory daoFactory;
 	private static final String SQL_SELECT_PAR_ID = "SELECT NUM, SEXE, REGIME_SOCIAL, DATE_NAISSANCE_BENEFICIAIRE, NOM, PRENOM, EMAIL, NUM_TELEPHONE FROM BENEFICIAIRE WHERE NUM = ?";
 	private static final String SQL_UPDATE_PAR_ID = "UPDATE BENEFICIARE SET SEXE=? AND REGIME_SOCIAL=? AND DATE_NAISSANCE_BENEFICIAIRE=? AND NOM=? AND PRENOM=? AND EMAIL=? AND NUM_TELEPHONE=? WHERE NUM=?";
+	private static final String SQL_SELECT_NUM_CONTRAT_PAR_ID = "SELECT DISTINCT num_adhesion_normalise FROM ADHESION_DETAIL WHERE num_beneficiaire_unique=? AND exercice_paiement=?";
+	
+	private  Properties exceptionProp;
+	
 	public BeneficiaireDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream fichierExceptions = classLoader.getResourceAsStream( DAOException.FICHIER_EXCEPTION );
+        try {
+			exceptionProp.load(fichierExceptions);
+		} catch (IOException e) {
+			 throw new DAOConfigurationException( "Impossible de charger le fichier properties ");
+		}
 	}
+	
 	
 	@Override
 	public Beneficiaire trouver(int id) throws DAOException{
@@ -33,7 +48,7 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
             
             resultSet = preparedStatement.executeQuery();
             
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de donnï¿½es retournï¿½e dans le ResultSet */
             if ( resultSet.next() ) {
             	benef = map( resultSet );
             }
@@ -44,6 +59,37 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
         }
         
 		return(benef);
+	}
+	
+	
+	
+	public int getNumContrat(int numBeneficiareUnique, int annee) throws Exception{
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int numContrat=0;
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_NUM_CONTRAT_PAR_ID, false, numBeneficiareUnique, annee);
+            resultSet = preparedStatement.executeQuery();
+            
+            if(resultSet.next()){
+            	numContrat = resultSet.getInt( "NUM_ADHESION_NORMALISE" );
+            }else {
+            	throw new Exception(exceptionProp.getProperty("contratNotFound"));
+            }
+            if(resultSet.next()){
+            	throw new Exception(exceptionProp.getProperty("mutlipleNumContrat"));
+            }
+       
+        return numContrat;
+        } catch ( SQLException e ) {
+            throw new DAOException( e + " TRUC :" + daoFactory.getUrl());
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }
 	}
 	
 	public void modifier(Beneficiaire benef){
@@ -74,6 +120,8 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
         }
         
 	}
+	
+	
 	
     private static Beneficiaire map( ResultSet resultSet ) throws SQLException {
         Beneficiaire benef = new Beneficiaire();
