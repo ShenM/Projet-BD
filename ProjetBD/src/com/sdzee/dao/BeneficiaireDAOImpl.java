@@ -13,7 +13,7 @@ import com.sdzee.beans.Beneficiaire;
 public class BeneficiaireDAOImpl implements BeneficiaireDAO {
 	private DAOFactory daoFactory;
 	private static final String SQL_SELECT_PAR_ID = "SELECT NUM, SEXE, REGIME_SOCIAL, DATE_NAISSANCE_BENEFICIAIRE, NOM, PRENOM, EMAIL, NUM_TELEPHONE FROM BENEFICIAIRE WHERE NUM = ?";
-	private static final String SQL_UPDATE_PAR_ID = "UPDATE BENEFICIARE SET SEXE=? AND REGIME_SOCIAL=? AND DATE_NAISSANCE_BENEFICIAIRE=? AND NOM=? AND PRENOM=? AND EMAIL=? AND NUM_TELEPHONE=? WHERE NUM=?";
+	private static final String SQL_UPDATE_PAR_ID = "UPDATE BENEFICIAIRE SET EMAIL=?, NUM_TELEPHONE=? WHERE NUM=?";
 	public BeneficiaireDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
 	}
@@ -33,7 +33,7 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
             
             resultSet = preparedStatement.executeQuery();
             
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de donnï¿½es retournï¿½e dans le ResultSet */
             if ( resultSet.next() ) {
             	benef = map( resultSet );
             }
@@ -53,19 +53,7 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
           
         try{
         	connexion = daoFactory.getConnection();
-        	preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE_PAR_ID, false, benef.getNum());
-        	
-        	
-        	java.sql.Date dateNaissSql = new java.sql.Date(benef.getDateNaissanceBenficiaire().getTime());
-        	
-        	preparedStatement.setString(1, benef.getSexe());
-        	preparedStatement.setString(2, benef.getRegimeSocial());
-        	preparedStatement.setDate(3, dateNaissSql);
-        	preparedStatement.setString(4, benef.getNom());
-        	preparedStatement.setString(5, benef.getPrenom());
-        	preparedStatement.setString(6, benef.getEmail());
-        	preparedStatement.setString(7, benef.getNumTelephone());
-        	
+        	preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE_PAR_ID, false, benef.getEmail(),benef.getNumTelephone(),benef.getNum());        	
         	preparedStatement.execute();
         } catch ( SQLException e ) {
             throw new DAOException( e + " TRUC :" + daoFactory.getUrl());

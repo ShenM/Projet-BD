@@ -24,6 +24,10 @@
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>com.sdzee.servlets.Deconnexion</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>EditerProfile</servlet-name>
+    <servlet-class>com.sdzee.servlets.EditerProfile</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
     <url-pattern>/Accueil</url-pattern>
@@ -47,5 +51,9 @@
   <servlet-mapping>
     <servlet-name>Deconnexion</servlet-name>
     <url-pattern>/Deconnexion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EditerProfile</servlet-name>
+    <url-pattern>/EditerProfile</url-pattern>
   </servlet-mapping>
 </web-app>
