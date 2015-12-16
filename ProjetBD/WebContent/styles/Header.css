@@ -16,6 +16,23 @@ margin:auto;
 font-size:18pt;
 }
 
+.title-text a:hover{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+.title-text a:active{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+.title-text a:link{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+.title-text a:visited{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+
 .user-icon{
 height:40px;
 float : right;
@@ -73,11 +90,6 @@ width:100%;
 background-color:blue;
 }
 
-.remboursements{
-height:255px;
-width:100%;
-	
-}
 
 
 .info1{
