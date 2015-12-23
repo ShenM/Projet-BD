@@ -32,6 +32,7 @@
     <servlet-name>EditerProfile</servlet-name>
     <servlet-class>com.sdzee.servlets.EditerProfile</servlet-class>
   </servlet>
+  <servlet>
   	<servlet-name>AuthAdmin</servlet-name>
   	<servlet-class>com.sdzee.servlets.AuthAdmin</servlet-class>
   </servlet>
