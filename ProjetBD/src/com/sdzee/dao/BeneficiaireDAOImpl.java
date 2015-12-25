@@ -26,6 +26,7 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
 
 	public BeneficiaireDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
+		exceptionProp = new Properties();
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream fichierExceptions = classLoader.getResourceAsStream( DAOException.FICHIER_EXCEPTION );
         try {
