@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="styles/LoginForm.css">
 </head>
 <body>
-	<jsp:include page="Header.jsp" />
+	<jsp:include page="HeaderOffline.jsp" />
 	
 		<div class="container">
 		<div class="row">
