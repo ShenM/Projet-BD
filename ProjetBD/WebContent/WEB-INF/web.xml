@@ -33,9 +33,19 @@
     <servlet-class>com.sdzee.servlets.EditerProfile</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>AuthAdmin</servlet-name>
+  	<servlet-name>AuthentificationAdmin</servlet-name>
   	<servlet-class>com.sdzee.servlets.AuthAdmin</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AccueilAdmin</servlet-name>
+  	<servlet-class>com.sdzee.servlets.AccueilAdmin</servlet-class>
+  </servlet>
+  
+  
+   <servlet-mapping>
+    <servlet-name>AccueilAdmin</servlet-name>
+    <url-pattern>/AccueilAdmin</url-pattern>
+  </servlet-mapping> 
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
     <url-pattern>/Accueil</url-pattern>
@@ -69,8 +79,8 @@
     <url-pattern>/EditerProfile</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
-    <servlet-name>AuthAdmin</servlet-name>
-    <url-pattern>/Administration</url-pattern>
+    <servlet-name>AuthentificationAdmin</servlet-name>
+    <url-pattern>/AuthentificationAdmin</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
