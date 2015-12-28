@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.sdzee.dao.DAOFactory;
+import com.sdzee.dao.AdministrateurDAOImpl;
 import com.sdzee.dao.BeneficiaireDAOImpl;
 import com.sdzee.dao.UtilisateurDAOImpl;
 import com.sdzee.utilitaires.Md5;
@@ -26,8 +27,64 @@ public class AuthentificationBean {
         return erreurs;
     }
 
+    public Administrateur authentifierAdministrateur( HttpServletRequest request ) {
+    	String id = getValeurChamp( request, CHAMP_ID );
+        String motDePasse = getValeurChamp( request, CHAMP_PASS );
+        String motDePasseBD = null;
+        
+        AdministrateurDAOImpl adminDAO = new AdministrateurDAOImpl(DAOFactory.getInstance());
+        Administrateur admin = new Administrateur();
+        
+        try {
+        	validationIdentifiant( id );
+        } catch ( Exception e ) {
+            setErreur( CHAMP_ID, e.getMessage() );
+            resultat = "Echec de la connexion.";
+            return admin;
+        }
+        
+        try {
+            validationMotDePasse( motDePasse );
+        } catch ( Exception e ) {
+            setErreur( CHAMP_PASS, e.getMessage() );
+            resultat = "Echec de la connexion.";
+            return admin;
+        }
+        
+        try {
+        	motDePasseBD= adminDAO.recupererMotDePasse(Integer.parseInt(id));
+        } catch ( Exception e ){
+        	setErreur( CHAMP_ID, "Identifiant incorrect." );
+        	resultat = "Echec de la connexion.";
+            return admin;
+        }
+        
+        if(motDePasseBD=="" || motDePasseBD==null){
+        	setErreur( CHAMP_ID, "Identifiant incorrect." );
+        	resultat = "Echec de la connexion.";
+            return admin;
+        }
+        
+        try{
+        	validationPairMdp(motDePasse, motDePasseBD);
+        } catch (Exception e){
+        	setErreur( CHAMP_PASS, e.getMessage() );
+        	resultat = "Echec de la connexion.";
+            return admin;
+        }
+        
+        /* Initialisation du resultat global de la validation. */
+        if ( erreurs.isEmpty() ) {
+            resultat = "Succes de la connexion.";
+        } else {
+            resultat = "Echec de la connexion.";
+        }
+        
+    	return admin;
+    }
+    
     public Beneficiaire authentifierBeneficiaire( HttpServletRequest request ) {
-        /* Récupération des champs du formulaire */
+        /* Rï¿½cupï¿½ration des champs du formulaire */
         String id = getValeurChamp( request, CHAMP_ID );
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
         String motDePasseBD = null;
@@ -39,7 +96,7 @@ public class AuthentificationBean {
         	validationIdentifiant( id );
         } catch ( Exception e ) {
             setErreur( CHAMP_ID, e.getMessage() );
-            resultat = "Échec de la connexion.";
+            resultat = "Echec de la connexion.";
             return beneficiaire;
         }
         
@@ -47,7 +104,7 @@ public class AuthentificationBean {
             validationMotDePasse( motDePasse );
         } catch ( Exception e ) {
             setErreur( CHAMP_PASS, e.getMessage() );
-            resultat = "Échec de la connexion.";
+            resultat = "Echec de la connexion.";
             return beneficiaire;
         }
         
@@ -57,13 +114,13 @@ public class AuthentificationBean {
         	motDePasseBD= utilisateur.recupererMotDePasse(Integer.parseInt(id));
         } catch ( Exception e ){
         	setErreur( CHAMP_ID, "Identifiant incorrect." );
-        	resultat = "Échec de la connexion.";
+        	resultat = "Echec de la connexion.";
             return beneficiaire;
         }
         
         if(motDePasseBD=="" || motDePasseBD==null){
         	setErreur( CHAMP_ID, "Identifiant incorrect." );
-        	resultat = "Échec de la connexion.";
+        	resultat = "Echec de la connexion.";
             return beneficiaire;
         }
         
@@ -71,15 +128,15 @@ public class AuthentificationBean {
         	validationPairMdp(motDePasse, motDePasseBD);
         } catch (Exception e){
         	setErreur( CHAMP_PASS, e.getMessage() );
-        	resultat = "Échec de la connexion.";
+        	resultat = "Echec de la connexion.";
             return beneficiaire;
         }
         
-        /* Initialisation du résultat global de la validation. */
+        /* Initialisation du resultat global de la validation. */
         if ( erreurs.isEmpty() ) {
-            resultat = "Succès de la connexion.";
+            resultat = "Succes de la connexion.";
         } else {
-            resultat = "Échec de la connexion.";
+            resultat = "Echec de la connexion.";
         }
                 
         beneficiaire = beneDAO.trouver(Integer.parseInt(id));
@@ -107,7 +164,7 @@ public class AuthentificationBean {
     private void validationMotDePasse( String motDePasse ) throws Exception {
         if ( motDePasse != null ) {
             if ( motDePasse.length() < 3 ) {
-                throw new Exception( "Le mot de passe doit contenir au moins 3 caractères." );
+                throw new Exception( "Le mot de passe doit contenir au moins 3 caractï¿½res." );
             }
         } else {
             throw new Exception( "Merci de saisir votre mot de passe." );
@@ -115,14 +172,14 @@ public class AuthentificationBean {
     }
 
     /*
-     * Ajoute un message correspondant au champ spécifié à la map des erreurs.
+     * Ajoute un message correspondant au champ specifiee la map des erreurs.
      */
     private void setErreur( String champ, String message ) {
         erreurs.put( champ, message );
     }
 
     /*
-     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
+     * Mï¿½thode utilitaire qui retourne null si un champ est vide, et son contenu
      * sinon.
      */
     private static String getValeurChamp( HttpServletRequest request, String nomChamp ) {

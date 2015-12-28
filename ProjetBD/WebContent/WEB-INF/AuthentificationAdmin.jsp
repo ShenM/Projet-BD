@@ -15,12 +15,12 @@
 	
 		<div class="container">
 		<div class="row">
-			<div class="col-lg-2">
+			<div class="col-lg-2">			
 			</div>
-			<div class="col-lg-8">
-				<jsp:include page="AuthentificationForm.jsp" />
+			<div class="col-lg-8">			
+				<jsp:include page="AuthentificationAdminForm.jsp" />
 			</div>
-			<div class="col-lg-2">
+			<div class="col-lg-2">			
 			</div>
 
 		</div>

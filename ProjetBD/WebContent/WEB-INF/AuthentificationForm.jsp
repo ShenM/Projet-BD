@@ -19,8 +19,9 @@
 	                </label>
 	                <a href="#" class="pull-right need-help">Besoin d'aide? </a><span class="clearfix"></span>
 	                </form>
+	                
 	            </div>
-	            <a href="#" class="text-center new-account">Créer un compte </a>
+	            <a href="#" class="text-center new-account">Créer un compte </a> <a href="AuthentificationAdmin" class="text-center new-account">Zone d'administration</a>
 	        </div>
 	    </div>
 	</div>
