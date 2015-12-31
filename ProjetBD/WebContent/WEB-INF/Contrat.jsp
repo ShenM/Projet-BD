@@ -24,6 +24,7 @@
 				<jsp:include page="Menu.jsp" />
 			</div>
 			<div class="col-lg-8">
+
 				<!-- <div class="panel panel-info">
 				<div class = "panel-heading">
 					<table >

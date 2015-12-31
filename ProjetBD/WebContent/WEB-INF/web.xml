@@ -16,9 +16,13 @@
     <servlet-name>TousRemboursements</servlet-name>
     <servlet-class>com.sdzee.servlets.TousRemboursements</servlet-class>
   </servlet>
-    <servlet>
+  <servlet>
     <servlet-name>Contrat</servlet-name>
     <servlet-class>com.sdzee.servlets.Contrat</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Demande</servlet-name>
+    <servlet-class>com.sdzee.servlets.Demande</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>MesInformations</servlet-name>
@@ -33,19 +37,17 @@
     <servlet-class>com.sdzee.servlets.EditerProfile</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>AuthentificationAdmin</servlet-name>
-  	<servlet-class>com.sdzee.servlets.AuthAdmin</servlet-class>
+    <servlet-name>AuthentificationAdmin</servlet-name>
+    <servlet-class>com.sdzee.servlets.AuthAdmin</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>AccueilAdmin</servlet-name>
-  	<servlet-class>com.sdzee.servlets.AccueilAdmin</servlet-class>
+    <servlet-name>AccueilAdmin</servlet-name>
+    <servlet-class>com.sdzee.servlets.AccueilAdmin</servlet-class>
   </servlet>
-  
-  
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>AccueilAdmin</servlet-name>
     <url-pattern>/AccueilAdmin</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
     <url-pattern>/Accueil</url-pattern>
@@ -67,6 +69,10 @@
     <url-pattern>/Contrat</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>Demande</servlet-name>
+    <url-pattern>/Demande</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>MesInformations</servlet-name>
     <url-pattern>/MesInformations</url-pattern>
   </servlet-mapping>
@@ -78,11 +84,10 @@
     <servlet-name>EditerProfile</servlet-name>
     <url-pattern>/EditerProfile</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>AuthentificationAdmin</servlet-name>
     <url-pattern>/AuthentificationAdmin</url-pattern>
   </servlet-mapping>
-  
   <welcome-file-list>
     <welcome-file>Accueil</welcome-file>
   </welcome-file-list>
