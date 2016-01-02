@@ -1,5 +1,6 @@
 package com.sdzee.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,4 +14,6 @@ public interface PrestationsSanteDAO {
 	Map<String, Float> moyenneParSexe() throws DAOException;
 	
 	PrestationsSante trouver() throws DAOException;
+	
+	HashMap<String, PrestationsSante> getMapTrierParCodeProf() throws DAOException;
 }
