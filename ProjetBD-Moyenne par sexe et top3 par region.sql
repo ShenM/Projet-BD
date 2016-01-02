@@ -1,0 +1,18 @@
+SELECT cnt.s as SEXE, AVG(cnt.c) as MOYENNE 
+FROM (SELECT b.NUM n, b.SEXE s, COUNT(1) c 
+        FROM BENEFICIAIRE b 
+          JOIN PRESTATIONS_SANTE p 
+          ON b.NUM = p.NUM_BENEFICIAIRE_SINISTRE
+        GROUP BY b.NUM, b.SEXE) cnt
+GROUP BY cnt.s;
+
+SELECT orderedList.num NUM, orderedList.lib LIB, orderedList.cnt CNT
+FROM (SELECT r.NUM_REGION num, r.LIB_REGION lib, COUNT(1) cnt
+        FROM PRESTATIONS_SANTE p, ADHESION_DETAIL a, REGIONS r, DEPARTEMENTS d
+        WHERE p.NUM_ADHESION = a.NUM_ADHESION_NORMALISE 
+          AND d.NUM_DEPARTEMENT = SUBSTR(a.CODE_POSTAL, 1,2)
+          AND d.NUM_REGION = r.NUM_REGION
+        GROUP BY r.LIB_REGION, r.NUM_REGION
+        ORDER BY cnt DESC) orderedList
+WHERE ROWNUM <=3;
+

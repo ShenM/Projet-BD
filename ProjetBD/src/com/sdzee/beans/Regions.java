@@ -5,7 +5,12 @@ public class Regions {
 	private	String	libeRegion;
 	
 	public Regions() {
-		super();
+		razBean();
+	}
+	
+	public void razBean(){
+		this.numRegion=0;
+		this.libeRegion="";
 	}
 
 	public Regions(int numRegion, String libeRegion) {
