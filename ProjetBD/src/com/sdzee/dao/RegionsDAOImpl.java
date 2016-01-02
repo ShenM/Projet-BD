@@ -29,7 +29,7 @@ public class RegionsDAOImpl implements RegionsDAO{
 		this.daoFactory = daoFactory;
 	}
 	
-	public Map<Regions, Long> getTopThree(){		
+	public Map<Regions, Long> getTopThree() throws DAOException{		
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -51,7 +51,7 @@ public class RegionsDAOImpl implements RegionsDAO{
             	mapTopThree.put(bean, resultSet.getLong("CNT"));
             }
             
-    		return null;
+    		return mapTopThree;
 
         } catch ( SQLException e ) {
             throw new DAOException( e );

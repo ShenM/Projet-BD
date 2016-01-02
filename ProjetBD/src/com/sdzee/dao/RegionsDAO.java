@@ -5,7 +5,7 @@ import java.util.Map;
 import com.sdzee.beans.Regions;
 
 public interface RegionsDAO {
-	public Map<Regions, Long> getTopThree();
+	public Map<Regions, Long> getTopThree() throws DAOException;
 	
 	
 }

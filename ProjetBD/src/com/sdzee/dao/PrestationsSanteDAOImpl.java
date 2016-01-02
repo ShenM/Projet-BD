@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.sdzee.beans.PrestationsSante;
 
@@ -17,7 +19,13 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	private static final String SQL_SELECT_PAR_NUMBENEFSINISTRE = "SELECT NUM_SINISTRE, NUM_ADHESION, NUM_BENEFICIAIRE_SINISTRE, NUM_BENEFICIAIRE, ACTE, DESIGNATION_ACTE, LIBELLE_BAREME, JOUR_DEBUT_SOINS, MOIS_DEBUT_SOINS, ANNEE_DEBUT_SOINS, JOUR_PAIEMENT, MOIS_PAIEMENT, ANNEE_PAIEMENT, FRAIS_REEL_ASSURE, MONTANT_SECU, MONTANT_REMBOURSE FROM PRESTATIONS_SANTE WHERE NUM_BENEFICIAIRE_SINISTRE = ? ORDER BY NUM_SINISTRE DESC";
 	private static final String SQL_SELECT_PAR_NUM_ADHESION = "SELECT NOM, PRENOM, NUM_SINISTRE, NUM_ADHESION, NUM_BENEFICIAIRE_SINISTRE, NUM_BENEFICIAIRE, ACTE, DESIGNATION_ACTE, LIBELLE_BAREME, JOUR_DEBUT_SOINS, MOIS_DEBUT_SOINS, ANNEE_DEBUT_SOINS, JOUR_PAIEMENT, MOIS_PAIEMENT, ANNEE_PAIEMENT, FRAIS_REEL_ASSURE, MONTANT_SECU, MONTANT_REMBOURSE FROM PRESTATIONS_SANTE, BENEFICIAIRE WHERE NUM_ADHESION = (select distinct NUM_ADHESION from PRESTATIONS_SANTE where num_beneficiaire_sinistre = ?) and prestations_sante.num_beneficiaire_sinistre = beneficiaire.num ORDER BY ANNEE_PAIEMENT DESC, MOIS_PAIEMENT DESC, JOUR_PAIEMENT DESC";
 	private static final String SQL_SELECT_PAR_NUM_ADHESION_WITH_LIMITE = "SELECT NOM, PRENOM, NUM_SINISTRE, NUM_ADHESION, NUM_BENEFICIAIRE_SINISTRE, NUM_BENEFICIAIRE, ACTE, DESIGNATION_ACTE, LIBELLE_BAREME, JOUR_DEBUT_SOINS, MOIS_DEBUT_SOINS, ANNEE_DEBUT_SOINS, JOUR_PAIEMENT, MOIS_PAIEMENT, ANNEE_PAIEMENT, FRAIS_REEL_ASSURE, MONTANT_SECU, MONTANT_REMBOURSE FROM PRESTATIONS_SANTE, BENEFICIAIRE WHERE NUM_ADHESION = (select distinct NUM_ADHESION from PRESTATIONS_SANTE where num_beneficiaire_sinistre = ?) and prestations_sante.num_beneficiaire_sinistre = beneficiaire.num and ROWNUM <=5 ORDER BY ANNEE_PAIEMENT DESC, MOIS_PAIEMENT DESC, JOUR_PAIEMENT DESC";
-
+	private static final String SQL_SELECT_MOYENNE_SEXE = 	"SELECT cnt.s as SEXE, SUBSTR(AVG(cnt.c), 1, 5) as MOYENNE "
+															+"FROM (SELECT b.NUM n, b.SEXE s, COUNT(1) c "
+															        +"FROM BENEFICIAIRE b "
+															          +"JOIN PRESTATIONS_SANTE p "
+															          +"ON b.NUM = p.NUM_BENEFICIAIRE_SINISTRE "
+															        +"GROUP BY b.NUM, b.SEXE) cnt "
+															+"GROUP BY cnt.s"; 
 	
 	public PrestationsSanteDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
@@ -145,5 +153,34 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
     	
         return presta;
     }
+
+	@Override
+	public Map<String, Float> moyenneParSexe() throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        Map<String, Float> mapMoySexee = new TreeMap<String, Float>();
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_MOYENNE_SEXE, false);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
+            if ( resultSet.next() ) {
+            	mapMoySexee.put(resultSet.getString("SEXE"), resultSet.getFloat("MOYENNE"));
+            }
+            
+    		return mapMoySexee;
+
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }   
+	}
     
 }
