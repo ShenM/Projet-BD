@@ -22,6 +22,17 @@ import com.sdzee.beans.Beneficiaire;
 
 public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {	
 	private static final String SQL_SELECT_ADHESION_PAR_NUM_CONTRAT = "SELECT DISTINCT * FROM ADHESION_DETAIL WHERE num_adhesion_normalise=? AND exercice_paiement=?";
+	private static final String SQL_SELECT_ALL_ADHESION_FROM_BENF = "  SELECT a.num_adhesion_normalise, a.num_beneficiaire_unique, a.code_profession, a.code_produit, a.code_fractionnement, a.code_garantie, a.formule, a.exercice_paiement, a.num_beneficiaire, a.type_beneficiaire, a.primes_acquises, a.code_agent, a.code_region, a.prime_garantie, a.code_postal " 
+																	  +"FROM ADHESION_DETAIL a "
+																	  +"INNER JOIN( "
+																	    +"SELECT num_adhesion_normalise, MAX(exercice_paiement) AS maxAnnee "
+																	    +"FROM ADHESION_DETAIL "
+																	    +"WHERE num_adhesion_normalise = ( SELECT num_adhesion_normalise "
+																	                                     +"FROM ADHESION_DETAIL "
+																	                                     +"WHERE num_beneficiaire_unique=? AND Rownum <2) "
+																	    +"GROUP BY num_adhesion_normalise "
+																	  +") temp ON a.num_adhesion_normalise = temp.num_adhesion_normalise "
+																	  +"WHERE a.exercice_paiement = temp.maxAnnee;";
 	
 	private DAOFactory daoFactory;
 	private  Properties exceptionProp;
@@ -42,6 +53,34 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 	
 	public List<AdhesionDetail> trouverParNumBeneficiaire(int numBeneficiaireUnique) throws DAOException{return null;}
 	
+	/* version test (seul difference ici c'est que je fais tout en une requete (pas obligé de faire ca) et je recupere l'annee max car on sait pas 
+	 * vraiment l'année pour laquelle il veulent le contrat, donc je prend la max associé à ce contrat*/
+	public HashMap<Beneficiaire,AdhesionDetail> trouverAllContratsParNumBeneficiares(int numBeneficiareUnique) throws Exception{
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Beneficiaire,AdhesionDetail> contrats = new HashMap<Beneficiaire,AdhesionDetail>();
+        BeneficiaireDAOImpl benefDAO = new BeneficiaireDAOImpl(daoFactory);
+
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL_ADHESION_FROM_BENF, false, numBeneficiareUnique);
+            resultSet = preparedStatement.executeQuery();
+            
+            if(resultSet.next()){
+            	contrats.put(benefDAO.trouver(resultSet.getInt("num_beneficiaire_unique")),map(resultSet));
+            }
+            
+            return contrats;
+            
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }
+	}
 	
 	
 	// A TESTER 
@@ -81,7 +120,7 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 		adhesion.setCodeAgent(resultSet.getInt("code_agent"));
 		adhesion.setCodeFractionnement(resultSet.getString("code_fractionnement"));
 		adhesion.setCodeGarantie(resultSet.getString("code_garantie"));
-		adhesion.setCodePostal(resultSet.getString("cod_postal"));
+		adhesion.setCodePostal(resultSet.getString("code_postal"));
 		adhesion.setCodeProduit(resultSet.getString("code_produit"));
 		adhesion.setCodeProfession(resultSet.getString("code_profession"));
 		adhesion.setCodeRegion(resultSet.getInt("code_region"));
