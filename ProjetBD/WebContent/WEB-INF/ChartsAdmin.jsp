@@ -11,9 +11,13 @@
 <script>
 	Morris.Donut({
 	  element: 'graph',
+	  colors: [ 
+	           '#0b62a4',
+	           '#ff228a'
+		],
 	  data: [
 	    {value: ${chartSexe.moyH}, label: 'Homme'},
-	    {value: ${chartSexe.moyF}, label: 'Femme'},
+	    {value: ${chartSexe.moyF}, label: 'Femme'}
 	  ],
 	  formatter: function (x) { return x }
 	}).on('click', function(i, row){
