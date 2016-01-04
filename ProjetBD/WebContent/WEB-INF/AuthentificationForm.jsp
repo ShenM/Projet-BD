@@ -8,6 +8,9 @@
 	            <div class="account-wall">
 	                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
 	                    alt="">
+        		    <c:forEach items="${erreur}" var="entry">
+				    	Erreur: <c:out value="${entry.value}"/> <br />
+				    </c:forEach> 	
 	                <form class="form-signin" method="post" action="Authentification">
 	                <input type="text" class="form-control" id="id" name="id" placeholder="Numéro Bénéficiaire" required autofocus>
 	                <input type="password" class="form-control" id="motdepasse" name="motdepasse" placeholder="Mot de passe" required>
