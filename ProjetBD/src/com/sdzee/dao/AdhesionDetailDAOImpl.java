@@ -38,7 +38,7 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 																	                                     +"WHERE num_beneficiaire_unique=? AND Rownum <2) "
 																	    +"GROUP BY num_adhesion_normalise "
 																	  +") temp ON a.num_adhesion_normalise = temp.num_adhesion_normalise "
-																	  +"WHERE a.exercice_paiement = temp.maxAnnee;";
+																	  +"WHERE a.exercice_paiement = temp.maxAnnee";
 	
 	private DAOFactory daoFactory;
 	private  Properties exceptionProp;
@@ -82,10 +82,13 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
             System.out.println("======================  APRES CO ======================");
             preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL_ADHESION_FROM_BENF, false, numBeneficiareUnique);
             System.out.println("======================  APRES PREPARE INIT ======================");
+            System.out.println(SQL_SELECT_ALL_ADHESION_FROM_BENF);
+
             resultSet = preparedStatement.executeQuery();
             
+
             System.out.println("======================  APRES PREPARE ======================");
-			System.out.println("Num bénéf : " + map(resultSet).getNumBeneficiaire() );
+			//System.out.println("Num bénéf : " + map(resultSet).getNumBeneficiaire() ); 
 	
             
             while(resultSet.next()){
@@ -153,7 +156,7 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 		adhesion.setNumBeneficiaireUnique(resultSet.getInt("num_beneficiaire_unique"));
 		adhesion.setPrimeGarantie(resultSet.getString("prime_garantie"));
 		adhesion.setPrimesAcquises(resultSet.getFloat("primes_acquises"));
-		adhesion.setTypeBeneficiaire(resultSet.getString("type_beneficiare"));
+		adhesion.setTypeBeneficiaire(resultSet.getString("type_beneficiaire"));
 
         return adhesion;
         
