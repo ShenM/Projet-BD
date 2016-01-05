@@ -36,53 +36,18 @@ public class Contrat extends HttpServlet {
 			request.setAttribute(BENEFICIAIRE, benef);
 			
 			AdhesionDetailDAOImpl adhDetailDaoImpl = new AdhesionDetailDAOImpl(DAOFactory.getInstance());
-//			HashMap<Beneficiaire, AdhesionDetail> contrat = null;
-//			try {
-//				contrat = adhDetailDaoImpl.trouverParNumBeneficiaresContrat(benef.getNum(), 2012);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			request.setAttribute(DETAILS_CONTRAT, contrat);
 			
-//			PrestationsSanteDAOImpl prestaDAOImpl = new PrestationsSanteDAOImpl(DAOFactory.getInstance());
-//			ArrayList<PrestationsSante> prestaListe = prestaDAOImpl.trouverParNumAdhesion(benef.getNum());
-			
-//======================================================================================================
-			
-			System.out.println("======================  TEST ======================");
 			HashMap<Beneficiaire,AdhesionDetail> contrats = null;
 			try {
-				System.out.println("======================  ICI ======================");
-				contrats = adhDetailDaoImpl.trouverAllContratsParNumBeneficiares(8);
-				System.out.println("======================  APRES ======================");
+				contrats = adhDetailDaoImpl.trouverAllContratsParNumBeneficiares(benef.getNum());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-//			Collection<AdhesionDetail> col = contrats.values();
-//			
-//			for (AdhesionDetail col: ) {
-//				
-//			} 
-//			AdhesionDetail adh = contrat.get(benef);		
-			
-			
-			 if(contrats != null){
-				 for (AdhesionDetail e : contrats.values()) {
-						System.out.println("Num bénéf : " + e.getNumBeneficiaire());
-					}
-			 }
-			
-			
-			//System.out.println(adh.getNumBeneficiaire());
-			
+		
+			request.setAttribute(DETAILS_CONTRAT, contrats);
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/Contrat.jsp" ).forward( request, response );
 			
-			
-			
-	//======================================================================================================
 			
 		}else {
 			response.sendRedirect("/ProjetBD/Authentification");

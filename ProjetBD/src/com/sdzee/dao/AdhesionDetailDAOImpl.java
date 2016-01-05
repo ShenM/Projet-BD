@@ -74,20 +74,12 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
         HashMap<Beneficiaire,AdhesionDetail> contrats = new HashMap<Beneficiaire,AdhesionDetail>();
         BeneficiaireDAOImpl benefDAO = new BeneficiaireDAOImpl(daoFactory);
 
-        System.out.println("======================  IN ======================");
         try {
         	
-        	System.out.println("======================  ENTRE TRY ======================");
             connexion = daoFactory.getConnection();
-            System.out.println("======================  APRES CO ======================");
             preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL_ADHESION_FROM_BENF, false, numBeneficiareUnique);
-            System.out.println("======================  APRES PREPARE INIT ======================");
-            System.out.println(SQL_SELECT_ALL_ADHESION_FROM_BENF);
 
             resultSet = preparedStatement.executeQuery();
-            
-
-            System.out.println("======================  APRES PREPARE ======================");
 			//System.out.println("Num bénéf : " + map(resultSet).getNumBeneficiaire() ); 
 	
             
