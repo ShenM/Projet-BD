@@ -6,6 +6,12 @@ import static com.sdzee.dao.DAOUtilitaire.initialisationRequetePreparee;
 
 
 
+
+
+
+
+
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -53,6 +59,12 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 	
 	public List<AdhesionDetail> trouverParNumBeneficiaire(int numBeneficiaireUnique) throws DAOException{return null;}
 	
+	
+	
+	// =======================================================================================================
+	
+	
+	
 	/* version test (seul difference ici c'est que je fais tout en une requete (pas obligé de faire ca) et je recupere l'annee max car on sait pas 
 	 * vraiment l'année pour laquelle il veulent le contrat, donc je prend la max associé à ce contrat*/
 	public HashMap<Beneficiaire,AdhesionDetail> trouverAllContratsParNumBeneficiares(int numBeneficiareUnique) throws Exception{
@@ -62,14 +74,21 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
         HashMap<Beneficiaire,AdhesionDetail> contrats = new HashMap<Beneficiaire,AdhesionDetail>();
         BeneficiaireDAOImpl benefDAO = new BeneficiaireDAOImpl(daoFactory);
 
-        
+        System.out.println("======================  IN ======================");
         try {
+        	
+        	System.out.println("======================  ENTRE TRY ======================");
             connexion = daoFactory.getConnection();
-
+            System.out.println("======================  APRES CO ======================");
             preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL_ADHESION_FROM_BENF, false, numBeneficiareUnique);
+            System.out.println("======================  APRES PREPARE INIT ======================");
             resultSet = preparedStatement.executeQuery();
             
-            if(resultSet.next()){
+            System.out.println("======================  APRES PREPARE ======================");
+			System.out.println("Num bénéf : " + map(resultSet).getNumBeneficiaire() );
+	
+            
+            while(resultSet.next()){
             	contrats.put(benefDAO.trouver(resultSet.getInt("num_beneficiaire_unique")),map(resultSet));
             }
             
@@ -81,6 +100,9 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
 	}
+	
+	
+	// =======================================================================================================
 	
 	
 	// A TESTER 
