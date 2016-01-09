@@ -24,7 +24,7 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Prénom:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="${benef.prenom}" type="text" disabled>
+              <input cla"WebContent/WEB-INF/InformationsBeneficiaire.jsp"ss="form-control" value="${benef.prenom}" type="text" disabled>
             </div>
           </div>
           <div class="form-group">

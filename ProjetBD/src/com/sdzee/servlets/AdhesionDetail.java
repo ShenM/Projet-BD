@@ -23,6 +23,7 @@ import com.sdzee.dao.PrestationsSanteDAOImpl;
 
 public class AdhesionDetail extends HttpServlet {
     public static final String LISTE_PRESTA = "lpresta";
+    public static final String LISTE_BENEF = "lpresta";
     public static final String BENEFICIAIRE = "benef";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
     public static final String CHART = "chart";
@@ -41,16 +42,16 @@ public class AdhesionDetail extends HttpServlet {
 			//A modifier le try catch & a compléter
 			try {
 				HashMap<Beneficiaire,com.sdzee.beans.AdhesionDetail> listeBenef = adhesionDetailDAO.trouverParNumBeneficiaresContrat(benef.getNum(),2015);
+				request.setAttribute(LISTE_BENEF, listeBenef);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-			
-			
 			request.setAttribute(BENEFICIAIRE, benef);
 
-			
+
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/Accueil.jsp" ).forward( request, response );
 			
 			
 		}else {
