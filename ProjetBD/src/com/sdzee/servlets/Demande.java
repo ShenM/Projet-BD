@@ -19,6 +19,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.sdzee.beans.Beneficiaire;
 import com.sdzee.beans.DemandeRemboursementBean;
+import com.sdzee.dao.DAOException;
+import com.sdzee.dao.DAOFactory;
+import com.sdzee.dao.DemandeRemboursementDAO;
+import com.sdzee.dao.DemandeRemboursementDAOImpl;
 
 
 public class Demande extends HttpServlet {
@@ -106,29 +110,45 @@ public class Demande extends HttpServlet {
 					error = "Les frais ne peuvent pas être égale à 0 !";
 					errorColor = "red";
 				}else{		  
-    	        	//Ne pas oublier de créer le dossier sur le Serveur (ici la machine local)
 					String name = params.get("fraisFile");
 					String[] tmpName = name.split("\\.");
 					
-					if(!(tmpName[tmpName.length-1].compareTo("png")==0) && !(tmpName[tmpName.length-1].compareTo("jpg")==0) && !(tmpName[tmpName.length-1].compareTo("jpeg")==0) && !(tmpName[tmpName.length-1].compareTo("bmp")==0)){
-						error = "Merci d'utiliser un format autorisé : png, jpg, jpeg, bmp";
+					if(!(tmpName[tmpName.length-1].toLowerCase().compareTo("png")==0) && !(tmpName[tmpName.length-1].toLowerCase().compareTo("jpg")==0) && !(tmpName[tmpName.length-1].toLowerCase().compareTo("jpeg")==0) && !(tmpName[tmpName.length-1].toLowerCase().compareTo("bmp")==0) && !(tmpName[tmpName.length-1].toLowerCase().compareTo("pdf")==0)){
+						error = "Merci d'utiliser un format autorisé : pdf, png, jpg, jpeg, bmp";
 						errorColor = "red";
 					}else{
 						java.util.Date dateSys = new java.util.Date();
 						
 						String fileName = params.get("benef")+formatterFile.format(dateSys)+"."+tmpName[tmpName.length-1];
 						
+						File directory = new File("C:\\ProjetBD_FichiersRemboursements\\");
+						if(!directory.exists()){
+							directory.mkdirs();
+						}
+						
 						uploadedFile = new File("C:\\ProjetBD_FichiersRemboursements"+File.separator+fileName);  
 						itemFinal.write(uploadedFile);
 						
-						DemandeRemboursementBean remboursement =  new DemandeRemboursementBean(Integer.parseInt(params.get("benef").trim()), params.get("acteId").trim(), params.get("acteDesign").trim(), params.get("acteLib").trim(), formatterForm.parse(params.get("acteDateDebutSoins").trim()), formatterForm.parse(params.get("fraisDatePaiement").trim()), Float.parseFloat(params.get("fraisReels").trim()), fileName);
+						DemandeRemboursementBean remboursement =  new DemandeRemboursementBean(
+								Integer.parseInt(params.get("benef").trim()), 
+								params.get("acteId").trim(), params.get("acteDesign").trim(), 
+								params.get("acteLib").trim(), 
+								formatterForm.parse(params.get("acteDateDebutSoins").trim()), 
+								formatterForm.parse(params.get("fraisDatePaiement").trim()), 
+								Float.parseFloat(params.get("fraisReels").trim()), 
+								"C:\\ProjetBD_FichiersRemboursements"+File.separator+fileName,
+								dateSys);
+						
+						DemandeRemboursementDAO rembDAO = new DemandeRemboursementDAOImpl(DAOFactory.getInstance());						
+						
+						rembDAO.insert(remboursement);
+					
 					}
 					
 
 				}
 		 	
 			}catch(Exception e){
-				System.out.println(e.getStackTrace().toString());
 				System.out.println(e.getMessage());
 			}
 			request.setAttribute("error", error);
