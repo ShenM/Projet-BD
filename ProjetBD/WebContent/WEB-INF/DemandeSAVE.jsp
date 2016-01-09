@@ -42,11 +42,11 @@
 				      <div class="col-md-9">
 				        <h3>Bénéficiaire</h3>
 				        
-				        <form class="form-horizontal" method="post" action="DemandeRemboursement" enctype="multipart/form-data">
+				        <form class="form-horizontal" method="post" action="DemandeRemboursement">
 				          <div class="form-group">
 				            <label class="col-lg-4 control-label">Bénéficiare :</label>
 				            <div class="col-lg-8">
-				            	<select class="select_benef" data-placeholder="Choisir un bénéficiaire" name="benef">
+				            	<select class="select_benef" data-placeholder="Choisir un bénéficiaire">
 				            		<option value="1844">Nathan dugal</option>
 				            		<option value="1845">Nohémie dugal</option>
 				            		<option value="1846">Jean dugal</option>
@@ -61,26 +61,26 @@
 				          <div class="form-group">
 				            <label class="col-lg-4 control-label">Acte :</label>
 				            <div class="col-lg-8">
-				              <input class="form-control" placeholder="Identifiant de l'acte  EX : PH7" type="text" name="acteId">
+				              <input class="form-control" placeholder="Identifiant de l'acte  EX : PH7" type="text">
 				            </div>
 				          </div>
 							<div class="form-group">
 				            <label class="col-lg-4 control-label">Designation acte :</label>
 				            <div class="col-lg-8">
-				              <input class="form-control" placeholder="EX : PHARMACIE 65%" type="text" name="acteDesign">
+				              <input class="form-control" placeholder="EX : PHARMACIE 65%" type="text">
 				            </div>
 				          </div>
 				          <div class="form-group">
 				            <label class="col-lg-4 control-label">Libellé barème :</label>
 				            <div class="col-lg-8">
-				              <input class="form-control" placeholder="EX : FORMULE/CONFORT/REGIME GENERAL" type="text" name="acteLib">
+				              <input class="form-control" placeholder="EX : FORMULE/CONFORT/REGIME GENERAL" type="text">
 				            </div>
 				          </div>
 				          <div class="form-group">
 						    <label class="col-lg-4 control-label">Date début soins :</label>
 						    <div class="input-group col-lg-4" style="padding-left: 15px;">
 						      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-						      <input class="form-control date" id="dateSoins" type="text" value="" readonly name = "acteDateDebutSoins">
+						      <input class="form-control date" id="dateSoins" type="text" value="" readonly>
 						    </div>
 						  </div>
 						  
@@ -89,25 +89,32 @@
 						    <label class="col-lg-4 control-label">Date paiement :</label>
 						    <div class="input-group col-lg-4" style="padding-left: 15px;">
 						      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-						      <input class="form-control date" id="datePaie" type="text" value="" readonly name="fraisDatePaiement">
+						      <input class="form-control date" id="datePaie" type="text" value="" readonly>
 						    </div>
 						  </div>
 						  <div class="form-group">
 				            <label class="col-lg-4 control-label">Frais réels assuré :</label>
 				            <div class="col-lg-4 ">
-				              <input class="form-control" value=0  type="number" step="any" name="fraisReels">
+				              <input class="form-control " value=0  type="number" step="any">
 				            </div>
 				            <span class="form_info">Frais réel dépensé par l'assuré</span>
 				          </div>
-      				      <div class="form-group">
-				            <label class="col-lg-4 control-label">Facture :</label>
+				          
+				          <div class="form-group">
+				            <label class="col-lg-4 control-label">Montant secu :</label>
 				            <div class="col-lg-4">
-								<input type="file" size="50" name="fraisFile">
+				              <input class="form-control" value=0 type="number" step="any">
 				            </div>
-				          </div>         
-				          <div class="form-group" >
-				         		<label class="col-lg-7 control-label" style="color: ${errorColor}; font-weight: bold;"><c:out value="${error}"/></label>
+				            <span class="form_info">Montant remboursé par la sécurité social</span>
 				          </div>
+				          <div class="form-group">
+				            <label class="col-lg-4 control-label">Montant remboursé :</label>
+				            <div class="col-lg-4">
+				              <input class="form-control" value=0 type="number" step="any">
+				            </div>
+				            <span class="form_info">Montant remboursé par l'organisme</span>
+				          </div>
+				          
 				          <hr>
 				          <div class="form-group">
 				            <label class="col-md-4 control-label"></label>

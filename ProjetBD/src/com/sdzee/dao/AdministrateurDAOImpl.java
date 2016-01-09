@@ -16,7 +16,7 @@ public class AdministrateurDAOImpl implements AdministrateurDAO{
 		this.daoFactory = daoFactory;
 	}
 	
-	public String recupererMotDePasse(int id){
+	public String recupererMotDePasse(String id){
 		String motDePasse = "";
 		
 		Connection connexion = null;

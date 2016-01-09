@@ -198,8 +198,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             resultSet = preparedStatement.executeQuery();
             
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
-            if ( resultSet.next() ) {
-            	mapMoySexee.put(resultSet.getString("SEXE"), resultSet.getFloat("MOYENNE"));
+            while ( resultSet.next() != false) {
+            	mapMoySexee.put(resultSet.getString("SEXE"), Float.parseFloat(resultSet.getString("MOYENNE").replace(',','.')));
             }
             
     		return mapMoySexee;

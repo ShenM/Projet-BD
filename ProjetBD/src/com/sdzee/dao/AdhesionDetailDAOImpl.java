@@ -6,6 +6,12 @@ import static com.sdzee.dao.DAOUtilitaire.initialisationRequetePreparee;
 
 
 
+
+
+
+
+
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -32,7 +38,7 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 																	                                     +"WHERE num_beneficiaire_unique=? AND Rownum <2) "
 																	    +"GROUP BY num_adhesion_normalise "
 																	  +") temp ON a.num_adhesion_normalise = temp.num_adhesion_normalise "
-																	  +"WHERE a.exercice_paiement = temp.maxAnnee;";
+																	  +"WHERE a.exercice_paiement = temp.maxAnnee";
 	
 	private DAOFactory daoFactory;
 	private  Properties exceptionProp;
@@ -53,6 +59,12 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 	
 	public List<AdhesionDetail> trouverParNumBeneficiaire(int numBeneficiaireUnique) throws DAOException{return null;}
 	
+	
+	
+	// =======================================================================================================
+	
+	
+	
 	/* version test (seul difference ici c'est que je fais tout en une requete (pas obligé de faire ca) et je recupere l'annee max car on sait pas 
 	 * vraiment l'année pour laquelle il veulent le contrat, donc je prend la max associé à ce contrat*/
 	public HashMap<Beneficiaire,AdhesionDetail> trouverAllContratsParNumBeneficiares(int numBeneficiareUnique) throws Exception{
@@ -62,14 +74,16 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
         HashMap<Beneficiaire,AdhesionDetail> contrats = new HashMap<Beneficiaire,AdhesionDetail>();
         BeneficiaireDAOImpl benefDAO = new BeneficiaireDAOImpl(daoFactory);
 
-        
         try {
+        	
             connexion = daoFactory.getConnection();
-
             preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL_ADHESION_FROM_BENF, false, numBeneficiareUnique);
+
             resultSet = preparedStatement.executeQuery();
+			//System.out.println("Num bénéf : " + map(resultSet).getNumBeneficiaire() ); 
+	
             
-            if(resultSet.next()){
+            while(resultSet.next()){
             	contrats.put(benefDAO.trouver(resultSet.getInt("num_beneficiaire_unique")),map(resultSet));
             }
             
@@ -81,6 +95,9 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
 	}
+	
+	
+	// =======================================================================================================
 	
 	
 	// A TESTER 
@@ -131,7 +148,7 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 		adhesion.setNumBeneficiaireUnique(resultSet.getInt("num_beneficiaire_unique"));
 		adhesion.setPrimeGarantie(resultSet.getString("prime_garantie"));
 		adhesion.setPrimesAcquises(resultSet.getFloat("primes_acquises"));
-		adhesion.setTypeBeneficiaire(resultSet.getString("type_beneficiare"));
+		adhesion.setTypeBeneficiaire(resultSet.getString("type_beneficiaire"));
 
         return adhesion;
         

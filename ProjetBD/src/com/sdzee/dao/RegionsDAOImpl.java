@@ -29,12 +29,12 @@ public class RegionsDAOImpl implements RegionsDAO{
 		this.daoFactory = daoFactory;
 	}
 	
-	public Map<Regions, Long> getTopThree() throws DAOException{		
+	public Map<Long, Regions> getTopThree() throws DAOException{		
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         
-        Map<Regions, Long> mapTopThree = new TreeMap<Regions, Long>();
+        Map<Long, Regions> mapTopThree = new TreeMap<Long, Regions>();
         
         try {
             connexion = daoFactory.getConnection();
@@ -44,11 +44,11 @@ public class RegionsDAOImpl implements RegionsDAO{
             resultSet = preparedStatement.executeQuery();
             
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
-            if ( resultSet.next() ) {
+            while ( resultSet.next() != false) {
             	Regions bean = new Regions();
             	bean = map(resultSet);
             	
-            	mapTopThree.put(bean, resultSet.getLong("CNT"));
+            	mapTopThree.put(resultSet.getLong("CNT"), bean);
             }
             
     		return mapTopThree;

@@ -34,6 +34,7 @@ public class AuthentificationBean {
         
         AdministrateurDAOImpl adminDAO = new AdministrateurDAOImpl(DAOFactory.getInstance());
         Administrateur admin = new Administrateur();
+        admin.setId(id);
         
         try {
         	validationIdentifiant( id );
@@ -52,7 +53,7 @@ public class AuthentificationBean {
         }
         
         try {
-        	motDePasseBD= adminDAO.recupererMotDePasse(Integer.parseInt(id));
+        	motDePasseBD= adminDAO.recupererMotDePasse(id);
         } catch ( Exception e ){
         	setErreur( CHAMP_ID, "Identifiant incorrect." );
         	resultat = "Echec de la connexion.";
