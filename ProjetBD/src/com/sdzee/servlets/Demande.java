@@ -18,7 +18,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.sdzee.beans.Beneficiaire;
-import com.sdzee.beans.DemandeRemboursementBean;
+import com.sdzee.beans.DemandeRemboursement;
 import com.sdzee.dao.DAOException;
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.DemandeRemboursementDAO;
@@ -129,7 +129,7 @@ public class Demande extends HttpServlet {
 						uploadedFile = new File("C:\\ProjetBD_FichiersRemboursements"+File.separator+fileName);  
 						itemFinal.write(uploadedFile);
 						
-						DemandeRemboursementBean remboursement =  new DemandeRemboursementBean(
+						DemandeRemboursement remboursement =  new DemandeRemboursement(
 								Integer.parseInt(params.get("benef").trim()), 
 								params.get("acteId").trim(), params.get("acteDesign").trim(), 
 								params.get("acteLib").trim(), 

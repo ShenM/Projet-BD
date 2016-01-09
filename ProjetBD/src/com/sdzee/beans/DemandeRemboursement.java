@@ -2,7 +2,7 @@ package com.sdzee.beans;
 
 import java.util.Date;
 
-public class DemandeRemboursementBean {
+public class DemandeRemboursement {
 	private int idBenef;
 	private String acteId;
 	private String acteDesignation;
@@ -13,7 +13,7 @@ public class DemandeRemboursementBean {
 	private String fileName;
 	private java.util.Date date_creation;
 	
-	public DemandeRemboursementBean(int idBenef, String acteId, String acteDesignation, String acteLibelle,
+	public DemandeRemboursement(int idBenef, String acteId, String acteDesignation, String acteLibelle,
 			Date acteDateDebutSoins, Date fraisDatePaiement, float fraisReels, String fileName, Date date_creation) {
 		super();
 		this.idBenef = idBenef;
@@ -26,6 +26,11 @@ public class DemandeRemboursementBean {
 		this.fileName = fileName;
 		this.setDate_creation(date_creation);
 	}
+	
+	public DemandeRemboursement() {
+		super();
+	}
+
 	public int getIdBenef() {
 		return idBenef;
 	}
