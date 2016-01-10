@@ -64,7 +64,7 @@
 					</c:choose>
 					<c:set var="val" value="2"/>
 					
-				    <div class="col-lg-5">
+				    <div class="col-lg-6">
 						<div class="panel panel-info contrat-pannel ">				
 							<div class="panel-heading">
 			                    <h3 class="panel-title">
@@ -88,6 +88,7 @@
 			                </div>
 		                	<div class="panel-footer"></div>
 		 				</div>
+		 				
 					</div>		   
 				</c:forEach>
 				
@@ -115,12 +116,15 @@
 	                	<div class="panel-footer "></div>
 	 				</div>
 				</div> -->
-				
+
+				<div>								
+					<a  href="Accueil"><button type="button" class="btn btn-default pull-right"  style="margin-bottom: 20px;">Retour</button></a>
+				</div>
 				
 			</div>
 				
 				
-				
+
 <!-- 
 CONTRAT: ( num, formule, annee paiement, garantie)
 BENEF(Nom, prenom, sexe, date naissance, email, tel, num benef sur contrat, type benef, primes acquises) -->

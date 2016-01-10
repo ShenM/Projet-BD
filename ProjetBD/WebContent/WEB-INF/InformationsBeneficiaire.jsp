@@ -68,8 +68,8 @@
             <div class="col-md-8">
               <button class="btn btn-primary" type="submit">Sauvegarder </button>
               <span></span>
-              <input class="btn btn-default" value="Annuler" type="reset">
-            </div>
+			  <a href="Accueil"><button type="button" class="btn btn-default" value="Annuler"> Annuler</button></a>            
+			</div>
           </div>
         </form>
       </div>

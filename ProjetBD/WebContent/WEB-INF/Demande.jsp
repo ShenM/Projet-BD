@@ -113,7 +113,7 @@
 				            <label class="col-md-4 control-label"></label>
 				            <div class="col-md-8">
 				              <button class="btn btn-primary" type="submit">Valider </button>
-				              <input class="btn btn-default" value="Annuler" type="reset">
+				              <a href="Accueil"><button type="button" class="btn btn-default" value="Annuler"> Annuler</button></a>
 				            </div>
 				          </div>
 				        </form>
