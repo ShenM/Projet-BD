@@ -44,6 +44,13 @@
     <servlet-name>AccueilAdmin</servlet-name>
     <servlet-class>com.sdzee.servlets.AccueilAdmin</servlet-class>
   </servlet>
+   <servlet>
+    <servlet-name>StatistiquesUser</servlet-name>
+    <servlet-class>com.sdzee.servlets.StatistiquesUser</servlet-class>
+  </servlet> 
+  
+  
+  
   <servlet-mapping>
     <servlet-name>AccueilAdmin</servlet-name>
     <url-pattern>/AccueilAdmin</url-pattern>
@@ -71,6 +78,10 @@
   <servlet-mapping>
     <servlet-name>Demande</servlet-name>
     <url-pattern>/Demande</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StatistiquesUser</servlet-name>
+    <url-pattern>/StatistiquesUser</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MesInformations</servlet-name>

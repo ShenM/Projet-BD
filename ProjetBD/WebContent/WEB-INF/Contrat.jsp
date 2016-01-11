@@ -55,9 +55,10 @@
   						<c:when test="${val == '1'}">
 					
 							<div class="row info-contrat">
-								<div class="alert alert-warning col-lg-3" ><b>Contrat:  </b>  ${ cont.value.numAdhesionNormalise }</div>
-								<div class="alert alert-warning col-lg-3" ><b>Fromule:  </b> ${ cont.value.formule }</div>
-								<div class="alert alert-warning col-lg-3" ><b>Garantie:  </b> ${ cont.value.primeGarantie }</div>
+								<div class="alert alert-warning col-lg-2" ><b>Contrat :  </b>  ${ cont.value.numAdhesionNormalise }</div>
+								<div class="alert alert-warning col-lg-2" ><b>Fromule :  </b> ${ cont.value.formule }</div>
+								<div class="alert alert-warning col-lg-2" ><b>Garantie :  </b> ${ cont.value.primeGarantie }</div>
+								<div class="alert alert-warning col-lg-2" ><b>Année :  </b> ${ cont.value.exercicePaiement }</div>
 								<div class="col-lg-3"></div>
 							</div>
 						</c:when>	
@@ -76,13 +77,13 @@
 			                <div class="panel-body">
 			                	<table class="table table-contrat-information">
 			                		<tbody>
-			                			<tr><td>Date de naissance:</td><td> ${cont.key.dateNaissanceBenficiaire}</td></tr>
-					                	<tr><td>Sexe:</td><td> ${cont.key.sexe}</td></tr>
-										<tr><td>Email:</td><td> ${cont.key.email}</td></tr>
-										<tr><td>Telephone:</td><td> ${cont.key.numTelephone}</td></tr>
-										<tr><td>Numéro bénéficiaire:</td><td> ${cont.key.num}</td></tr>
-										<tr><td>Type:</td><td> ${cont.value.typeBeneficiaire}</td></tr>
-										<tr><td>Primes acquises:</td><td> ${cont.value.primesAcquises}€</td></tr>
+			                			<tr><td>Date de naissance :</td><td> ${cont.key.dateNaissanceBenficiaire}</td></tr>
+					                	<tr><td>Sexe :</td><td> ${cont.key.sexe}</td></tr>
+										<tr><td>Email :</td><td> ${cont.key.email}</td></tr>
+										<tr><td>Telephone :</td><td> ${cont.key.numTelephone}</td></tr>
+										<tr><td>Numéro bénéficiaire :</td><td> ${cont.key.num}</td></tr>
+										<tr><td>Type :</td><td> ${cont.value.typeBeneficiaire}</td></tr>
+										<tr><td>Primes acquises :</td><td> ${cont.value.primesAcquises}€</td></tr>
 			                		</tbody>
 			                	</table>	
 			                </div>
