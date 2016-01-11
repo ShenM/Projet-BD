@@ -24,7 +24,7 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Prénom:</label>
             <div class="col-lg-8">
-              <input class="form-control" value="${benef.prenom}" type="text" disabled>
+              <input cla"WebContent/WEB-INF/InformationsBeneficiaire.jsp"ss="form-control" value="${benef.prenom}" type="text" disabled>
             </div>
           </div>
           <div class="form-group">
@@ -68,8 +68,8 @@
             <div class="col-md-8">
               <button class="btn btn-primary" type="submit">Sauvegarder </button>
               <span></span>
-              <input class="btn btn-default" value="Annuler" type="reset">
-            </div>
+			  <a href="Accueil"><button type="button" class="btn btn-default" value="Annuler"> Annuler</button></a>            
+			</div>
           </div>
         </form>
       </div>

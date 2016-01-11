@@ -52,6 +52,10 @@
   
   
   <servlet-mapping>
+    <servlet-name>Demande</servlet-name>
+    <url-pattern>/DemandeRemboursement</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>AccueilAdmin</servlet-name>
     <url-pattern>/AccueilAdmin</url-pattern>
   </servlet-mapping>
