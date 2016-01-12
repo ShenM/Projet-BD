@@ -51,12 +51,12 @@
 								<span class="glyphicon glyphicon-user" style="vertical-align:middle">Tous</span>
 							</button>
 					</div>
-					<div class="col-sm-6 text-center">
-				    	<label class="label label-success" id="label_frais">Frais pour tous</label>
+					<div class="col-sm-6 text-center" style="margin-bottom:10px">
+				    	<h3><label class="label label-success" id="label_frais">Frais et remboursements par utilisateurs</label></h3>
 				    	<div id="pie_chart" ></div>
 				    </div>
-					<div class="col-sm-6 text-center">
-				    	<label class="label label-success">Frais par date</label>
+					<div class="col-sm-6 text-center" style="margin-bottom:10px">
+				    	<h3><label class="label label-success">Frais et remboursement par mois</label></h3>
 				    	<div id="stacked" ></div>
 				    	<script type="text/javascript">var dataTab = [];</script>
 						<c:forEach var="f" items="${frais_date}">
@@ -69,8 +69,8 @@
 						</c:forEach>
     				</div>
     				
-    				<div class="col-sm-6 text-center">
-				    	<label class="label label-success">Area Chart</label>
+    				<div class="col-sm-6 text-center" style="margin-bottom:10px">
+				    	<h3><label class="label label-success">Comparaison des frais et remboursements</label></h3>
 				    	<div id="area_chart" ></div>
     				</div>
 				</div>
@@ -98,9 +98,9 @@ var donut = Morris.Donut({
     ],
     formatter: function (x) { return x + "€"},
     colors: [
-             '#40FF76',
-             '#FFFD59',
-             '#f43d3d'
+             '#0B62A4',
+             '#4DA74D',
+             '#FF4040'
            ]
 });
 function fonction(mut, sec, ch){
