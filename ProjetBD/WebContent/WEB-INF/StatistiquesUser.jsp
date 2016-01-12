@@ -8,16 +8,11 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Demander remboursement</title>
+	<title>Statistiques</title>
 	<link rel="stylesheet" href="styles/Header.css">
 	<link rel="stylesheet" href="styles/Menu.css">
 	<link rel="stylesheet" href="styles/Demande.css">
 	
-	<link rel="stylesheet" href="styles/bootstrap-datetimepicker.css">
-    <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" src="js/bootstrap-datetimepicker.fr.js"></script>
-    <script type="text/javascript" src="js/chosen.jquery.js"></script>
-    <link rel="stylesheet" href="styles/chosen.css">
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -38,17 +33,40 @@
 				<jsp:include page="Menu.jsp" />
 			</div>
 			<div class="col-lg-8">
-			
-			
-				
 				<div class="container">
+					<div class="row col-lg-8" style="margin-bottom:10px">
+						<c:set var="mut" value="0"/>
+						<c:set var="secu" value="0"/>
+						<c:set var="ch" value="0"/>
+						<c:forEach var="frais" items="${frais}">	
+							<%-- <div class="alert alert-warning col-lg-2" ><b>${frais.key}</b></div> --%>
+							<button type="button" class="btn btn-warning bouton" onclick='fonction("${frais.value.rembMut}", "${frais.value.rembSecu}", "${frais.value.aCharge}")'>
+								<span class="glyphicon glyphicon-user" style="vertical-align:middle">${frais.key}</span>
+							</button>
+							<c:set var="mut" value="${mut + frais.value.rembMut}"/>
+							<c:set var="secu" value="${secu + frais.value.rembSecu}"/>
+							<c:set var="ch" value="${ch + frais.value.aCharge}"/>
+						</c:forEach>
+							<button type="button" class="btn btn-info bouton" onclick='fonction("${mut}", "${secu}", "${ch}")'>
+								<span class="glyphicon glyphicon-user" style="vertical-align:middle">Tous</span>
+							</button>
+					</div>
 					<div class="col-sm-6 text-center">
-				    	<label class="label label-success">Bar stacked</label>
+				    	<label class="label label-success" id="label_frais">Frais pour tous</label>
 				    	<div id="pie_chart" ></div>
 				    </div>
 					<div class="col-sm-6 text-center">
-				    	<label class="label label-success">Bar stacked</label>
+				    	<label class="label label-success">Frais par date</label>
 				    	<div id="stacked" ></div>
+				    	<script type="text/javascript">var dataTab = [];</script>
+						<c:forEach var="f" items="${frais_date}">
+							<script type="text/javascript">
+							
+							var objet = {y: '${f.date}', a: "${f.rembMut}", b: "${f.rembSecu}", c: "${f.aCharge}"}; 
+							dataTab.push(objet);
+								/*  dataTab = dataTab + "{ y: '${f.date}', a: ${f.rembMut}, b: ${f.rembSecu}, c: ${f.aCharge} },";*/
+							</script>
+						</c:forEach>
     				</div>
     				
     				<div class="col-sm-6 text-center">
@@ -68,49 +86,44 @@
 
 </body>
 <script type="text/javascript">
-Morris.Donut({
+
+
+
+var donut = Morris.Donut({
     element: 'pie_chart',
     data: [
-      { label: "Download Sales", value: 120 },
-      { label: "In-Store Sales", value: 30 },
-      { label: "Mail-Order Sales", value: 20 }
-    ]
+    	{label: "Remboursement mutuelle", value:"${mut}"},
+	    {label: "Remboursement sécu", value:"${secu}"},
+	    {label: "Reste à charge", value:"${ch}"}
+    ],
+    formatter: function (x) { return x + "€"},
+    colors: [
+             '#40FF76',
+             '#FFFD59',
+             '#f43d3d'
+           ]
+});
+function fonction(mut, sec, ch){
+	donut.setData([
+	       	    {label: "Remboursement mutuelle", value: mut},
+	       	    {label: "Remboursement sécu", value: sec},
+	       	    {label: "Reste à charge", value: ch}
+	       	  ]);
+}
+
+$('.bouton').on('click', function() {
+	var prenom = $(this).children().text();
+    $('#label_frais').text("Frais pour " + prenom);
 });
 
-
-
-
-
-
-
-
-
-var data = [
-            { y: '2014', a: 50, b: 90},
-            { y: '2015', a: 65,  b: 75},
-            { y: '2016', a: 50,  b: 50},
-            { y: '2017', a: 75,  b: 60},
-            { y: '2018', a: 80,  b: 65},
-            { y: '2019', a: 90,  b: 70},
-            { y: '2020', a: 100, b: 75},
-            { y: '2021', a: 115, b: 75},
-            { y: '2022', a: 120, b: 85},
-            { y: '2023', a: 145, b: 85},
-            { y: '2024', a: 160, b: 95}
-          ],
-          config = {
-            data: data,
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Total Income', 'Total Outcome'],
-            fillOpacity: 0.6,
-            hideHover: 'auto',
-            behaveLikeLine: true,
-            resize: true,
-            pointFillColors:['#ffffff'],
-            pointStrokeColors: ['black'],
-            lineColors:['gray','red']
-        };
+config = {
+    data: dataTab,
+    xkey: 'y',
+    ykeys: ['a', 'b', 'c'],
+    labels: ['Remboursement sécu', 'Remboursement mutuelle', 'Reste à chagre'],
+    hideHover: 'auto',
+    behaveLikeLine: true
+};
       config.element = 'stacked';
       config.stacked = true;
       Morris.Bar(config);

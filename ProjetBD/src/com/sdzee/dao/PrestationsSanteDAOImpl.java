@@ -3,6 +3,7 @@ package com.sdzee.dao;
 import static com.sdzee.dao.DAOUtilitaire.fermeturesSilencieuses;
 import static com.sdzee.dao.DAOUtilitaire.initialisationRequetePreparee;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.sdzee.beans.ChartFraisByBenef;
+import com.sdzee.beans.ChartFraisByDate;
 import com.sdzee.beans.PrestationsSante;
 
 public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
@@ -32,6 +35,17 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 																  +"JOIN ADHESION_DETAIL a  "
 																  +"ON p.NUM_ADHESION = a.NUM_ADHESION_NORMALISE";
 	
+	private static final String SQL_SELECT_FRAI_BY_NUMBENEF = "select prenom,num_beneficiaire_sinistre, sum(frais_reel_assure), sum(montant_rembourse), sum(montant_secu) "
+			+ "from prestations_sante p, beneficiaire b "
+			+ "where num_adhesion in "
+			+ "(SELECT num_adhesion FROM prestations_sante WHERE num_beneficiaire_sinistre = ?) "
+			+ "and p.num_beneficiaire_sinistre = b.num GROUP BY prenom,num_beneficiaire_sinistre";
+	
+	private static final String SQL_SELECT_FRAIs_BY_NUMBENEF_DATE = "select annee_paiement, mois_paiement, sum(frais_reel_assure), sum(montant_rembourse), sum(montant_secu) "
+			+ "from prestations_sante where num_adhesion in "
+			+ "(SELECT num_adhesion FROM prestations_sante WHERE num_beneficiaire_sinistre = ?) "
+			+ "GROUP BY annee_paiement, mois_paiement ORDER BY annee_paiement, mois_paiement";
+	
 	public PrestationsSanteDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
 	}
@@ -41,6 +55,84 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 		
 		return prestaListe;
 	}
+	
+	public HashMap<String, ChartFraisByBenef> trouverFraisParNumBeneficiaire(int numBeneficiaire) throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        HashMap<String, ChartFraisByBenef> fraisListe = new HashMap<String, ChartFraisByBenef>();
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_FRAI_BY_NUMBENEF, false, numBeneficiaire );
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
+            while ( resultSet.next() ) {
+            	ChartFraisByBenef bean = new ChartFraisByBenef();
+            	
+            	bean.setPrenom(resultSet.getString("PRENOM"));
+            	bean.setNumBenef(resultSet.getInt("NUM_BENEFICIAIRE_SINISTRE"));
+            	bean.setFraisReel(resultSet.getFloat("SUM(FRAIS_REEL_ASSURE)"));
+            	bean.setRembMut(resultSet.getFloat("SUM(MONTANT_REMBOURSE)"));
+            	bean.setRembSecu(resultSet.getFloat("SUM(MONTANT_SECU)"));
+            	bean.setaCharge(bean.getaCharge());
+            	
+            	fraisListe.put(resultSet.getString("PRENOM"), bean);
+            }
+            
+            
+    		return fraisListe;
+
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }   
+	}
+	
+//	=================================================================================================================================
+	
+	public ArrayList<ChartFraisByDate> trouverFraisParNumBeneficiaireDate(int numBeneficiaire) throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        ArrayList<ChartFraisByDate> fraisListe = new ArrayList<ChartFraisByDate>();
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_FRAIs_BY_NUMBENEF_DATE, false, numBeneficiaire );
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
+            while ( resultSet.next() ) {
+            	ChartFraisByDate bean = new ChartFraisByDate();
+            	
+            	bean.setDate(resultSet.getString("ANNEE_PAIEMENT") + "-" + resultSet.getString("MOIS_PAIEMENT"));
+            	bean.setFraisReel(resultSet.getFloat("SUM(FRAIS_REEL_ASSURE)"));
+            	bean.setRembMut(resultSet.getFloat("SUM(MONTANT_REMBOURSE)"));
+            	bean.setRembSecu(resultSet.getFloat("SUM(MONTANT_SECU)"));
+            	bean.setaCharge(bean.getaCharge());
+            	
+            	fraisListe.add(bean);
+            }
+            
+            
+    		return fraisListe;
+
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }   
+	}
+	
 	public ArrayList<PrestationsSante> trouverParNumBeneficiaireSinistre(int numBeneficiaireSinistre) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
 		
