@@ -20,6 +20,9 @@
 	<jsp:include page="HeaderAdmin.jsp" />
 	<div class="container">
 			<div class="row">
+				<div class="col-lg-2">
+					<jsp:include page="MenuAdmin.jsp" />
+				</div>
 				<div class="col-lg-8">
 					<jsp:include page="ChartsAdmin.jsp"/>
 				</div>
