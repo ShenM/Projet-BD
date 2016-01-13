@@ -35,10 +35,23 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 	
 	private static final String SQL_UPDATE_FLAG_ETAT = "UPDATE DEMANDE_REMBOURSEMENT SET FLAG_ETAT = ? WHERE BENEF_ID = ? AND DATE_CREATION = ?";
 	
+	private static final String SQL_SELECT = "SELECT "
+											+"benef_id, "
+											+"presta_acte, "
+											+"presta_designation_acte, "
+											+"presta_libelle_bareme, "
+											+"presta_date_debut_soins, "
+											+"presta_date_paiement, "
+											+"presta_frais_reel, "
+											+"facture, "
+											+"date_creation "
+											+ "FROM DEMANDE_REMBOURSEMENT "
+											+ "WHERE BENEF_ID = ? AND DATE_CREATION = ?";
+	
 	public DemandeRemboursementDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
 		
-}
+	}
 
 	@Override
 	public void insert(DemandeRemboursement bean) throws DAOException {
@@ -132,6 +145,34 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 		bean.setDate_creation(resultSet.getTimestamp("date_creation"));
 		
 		return bean;
+	}
+
+	@Override
+	public DemandeRemboursement get(int benefId, Date dateCreation) throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        DemandeRemboursement bean = new DemandeRemboursement();
+        
+        try{
+        	connexion = daoFactory.getConnection();	
+            
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT, false, benefId, new java.sql.Timestamp(dateCreation.getTime()));
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            if( resultSet.next() != false) {            	
+            	bean= map(resultSet);
+            }
+            
+    		return bean;
+
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( preparedStatement, connexion );
+        }  
 	}
 	
 }
