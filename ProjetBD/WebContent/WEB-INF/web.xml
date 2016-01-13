@@ -44,12 +44,14 @@
     <servlet-name>AccueilAdmin</servlet-name>
     <servlet-class>com.sdzee.servlets.AccueilAdmin</servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>StatistiquesUser</servlet-name>
     <servlet-class>com.sdzee.servlets.StatistiquesUser</servlet-class>
-  </servlet> 
-  
-  
+  </servlet>
+    <servlet>
+    <servlet-name>TousRemboursementsAdmin</servlet-name>
+    <servlet-class>com.sdzee.servlets.TousRemboursementsAdmin</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>Demande</servlet-name>
@@ -106,4 +108,8 @@
   <welcome-file-list>
     <welcome-file>Accueil</welcome-file>
   </welcome-file-list>
+    <servlet-mapping>
+    <servlet-name>TousRemboursementsAdmin</servlet-name>
+    <url-pattern>/TousRemboursementsAdmin</url-pattern>
+  </servlet-mapping>
 </web-app>
