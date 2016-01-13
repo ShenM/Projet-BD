@@ -16,9 +16,7 @@ public class ChartFraisAnnee {
 		
 		for(PrestationsSante presta : lpresta)
 		{
-			System.out.println(presta.getFraisReelAssure());
 			this.fraisTotal += (int)presta.getFraisReelAssure();
-			System.out.println(this.fraisTotal);
 			this.remboursementMutuelle += (int)presta.getMontantRembourse();
 			this.remboursementSecu += (int)presta.getMontantSecu();
 		}

@@ -9,4 +9,5 @@ public interface DemandeRemboursementDAO {
 	public void insert(DemandeRemboursement bean) throws DAOException;
 	public void updateFlagTraite(int benefId, java.util.Date dateCreation, DemandeRemboursementFlagEtat flag) throws DAOException;
 	public List<DemandeRemboursement> getDemandesNonTraite() throws DAOException;
+	public DemandeRemboursement get(int benefId, java.util.Date dateCreation) throws DAOException;
 }
