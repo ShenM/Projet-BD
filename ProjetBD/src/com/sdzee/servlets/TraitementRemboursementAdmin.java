@@ -26,6 +26,8 @@ public class TraitementRemboursementAdmin extends HttpServlet{
     private static final String ATT_BENEF = "benef";
     private static final String ATT_ADHESION = "adhesion";
     private static final String ATT_DDE_REMB = "demande";
+    private static final String ATT_ERR = "error";
+    private static final String ATT_ERR_COL = "errorColor";
 
     public static final SimpleDateFormat formatterForm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
@@ -53,6 +55,7 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 			benefBean = benefDAO.trouver(Integer.parseInt(benefId));
 			adhBean = adhDAO.trouverLastContratParNumBenef(Integer.parseInt(benefId));
 			
+			request.setAttribute(ATT_ERR, "");
 			request.setAttribute(ATT_BENEF, benefBean);
 			request.setAttribute(ATT_ADHESION, adhBean);
 			request.setAttribute(ATT_DDE_REMB, ddRembBean);
@@ -68,8 +71,27 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_ADMIN)!=null){
+			String error = "try";
+			String errorColor = "green";
 			
+			if(request.getParameter("action").equals("TraitementRemboursementValide")){
+				error = "La demande a été validé !";
+				errorColor = "green";
+				
+				
+			}else if(request.getParameter("action").equals("TraitementRemboursementRejete")){
+				error = "La demande a été rejeté !";
+				errorColor = "red";
+				
+				
+			}
 			
+			request.setAttribute(ATT_ERR, error);
+			request.setAttribute(ATT_ERR_COL, errorColor);
+			
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/TraitementRemboursementAdmin.jsp" ).forward( request, response );
+			
+			System.out.println(request.getParameter("dateC"));
 		}else {
 			response.sendRedirect("/ProjetBD/AuthentificationAdmin");
 		}
