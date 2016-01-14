@@ -48,14 +48,13 @@
     <servlet-name>StatistiquesUser</servlet-name>
     <servlet-class>com.sdzee.servlets.StatistiquesUser</servlet-class>
   </servlet>
-
-    <servlet>
+  <servlet>
     <servlet-name>TousRemboursementsAdmin</servlet-name>
     <servlet-class>com.sdzee.servlets.TousRemboursementsAdmin</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>TraitementRemboursementAdmin</servlet-name>
     <servlet-class>com.sdzee.servlets.TraitementRemboursementAdmin</servlet-class>
-
   </servlet>
   
   <servlet-mapping>
@@ -114,13 +113,13 @@
     <servlet-name>AuthentificationAdmin</servlet-name>
     <url-pattern>/AuthentificationAdmin</url-pattern>
   </servlet-mapping>
-
+  <servlet-mapping>
+    <servlet-name>TousRemboursementsAdmin</servlet-name>
+    <url-pattern>/TousRemboursementsAdmin</url-pattern>
+  </servlet-mapping>
   
   <welcome-file-list>
     <welcome-file>Accueil</welcome-file>
   </welcome-file-list>
-    <servlet-mapping>
-    <servlet-name>TousRemboursementsAdmin</servlet-name>
-    <url-pattern>/TousRemboursementsAdmin</url-pattern>
-  </servlet-mapping>
+
 </web-app>
