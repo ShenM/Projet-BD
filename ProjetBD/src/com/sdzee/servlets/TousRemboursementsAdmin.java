@@ -47,7 +47,8 @@ public class TousRemboursementsAdmin extends HttpServlet{
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        
+		this.getServletContext().getRequestDispatcher( "/WEB-INF/TousRemboursementsAdmin.jsp" ).forward( request, response );
+
 	}
 
 	
