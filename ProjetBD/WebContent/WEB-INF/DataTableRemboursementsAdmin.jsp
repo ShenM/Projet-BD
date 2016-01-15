@@ -57,7 +57,7 @@ $(document).ready(function() {
     
     $('#table_id tbody').on('click', 'tr', function () {
         var data = table.row( this ).data();
-        window.location.replace("Demande?id="+data[0]+"&dateC="+data[1]);
+        window.location.replace("/ProjetBD/TraitementRemboursementAdmin?id="+data[0]+"&dateC="+data[1]);
     } );
     
     $('#all').on( 'click', function () {
