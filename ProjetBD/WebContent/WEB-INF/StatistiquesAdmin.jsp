@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -63,6 +64,18 @@
 							<button type="button" class="btn btn-warning btn-sm">1 mois</button>
 						</div>
 					</div>
+					
+					<script type="text/javascript">var dataTab = [];</script>
+					<c:forEach var="f" items="${remb}">
+						<script type="text/javascript">
+						var objet = {y: '${f.date}', a: "${f.remboursements_somme}", b: "${f.remboursements_moyenne}", c: "${f.benef_somme}"}; 
+						dataTab.push(objet);
+
+							/*  dataTab = dataTab + "{ y: '${f.date}', a: ${f.remboursements_somme}, b: ${f.remboursements_moyenne}, c: ${f.benef_somme} },";*/
+						</script>
+					</c:forEach>
+						
+						
    				</div>
 			</div>
 			<div class="col-lg-2">
@@ -80,7 +93,6 @@
 <script type="text/javascript">
 /* $('.chart').hide();
  */
- 
 
 $('.bouton').on('click', function() {
 	$('.chart').hide();
@@ -103,20 +115,12 @@ var donut = Morris.Donut({
 });
 
 config = {
-    data: [
-       { y: '2010-01', a: 162625.38},
-       { y: '2010-02', a: 418498.87},
-       { y: '2010-03', a: 611611.8},
-       { y: '2010-04', a: 634144.04},
-       { y: '2010-05', a: 518340.49},
-       { y: '2010-06', a: 712343.43},
-       { y: '2010-07', a: 665881.32}
-     ],
+	data: dataTab,
     xkey: 'y',
     ykeys: ['a'],
-    labels: ['Total Remboursement ', 'Moyenne'],
+    labels: ['Total Remboursement'],
     hideHover: 'auto',
-    behaveLikeLine: true
+    postUnits: '€',
 };
       config.element = 'stacked';
       Morris.Bar(config);
@@ -124,21 +128,28 @@ config = {
       config.element = 'remb_chart';
       var remb_chart = Morris.Area(config);
       
+      
+      config = {
+  		    data: dataTab,
+  		    xkey: 'y',
+  		    ykeys: ['b'],
+  		    labels: ['Bénéficiaires'],
+  		    hideHover: 'auto'
+  		};
 	  config.element = 'somme_benef_chart';
       var somme_benef_chart = Morris.Area(config);
       
       
+      config = {
+    		data: dataTab,
+  		    xkey: 'y',
+  		    ykeys: ['c'],
+  		    labels: ['Moyenne remboursement'],
+  		    hideHover: 'auto',
+  		    postUnits: '€',
+  		};
       config.element = 'moy_remb_chart';
       var moy_remb_chart = Morris.Area(config);
-      moy_remb_chart.setData([
-                                 { y: '2010-01', a:13.24526633002117608731063691154911223326},
-                                 { y: '2010-02', a:16.20392883416579548534479420761218879467},
-                                 { y: '2010-03', a:18.14548745030558357562451788998991277517},
-                                 { y: '2010-04', a:18.93532517169304269931322782920274708868},
-                                 { y: '2010-05', a:17.93131386861313868613138686131386861314},
-                                 { y: '2010-06', a:19.15159107406909530850920822691221938433},
-                                 { y: '2010-07', a:19.36996596561654594641766297233615498735}
-                               ]);
 
       
       
