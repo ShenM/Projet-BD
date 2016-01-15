@@ -1,5 +1,5 @@
 <div id="menu">
-	<a href="#">
+	<a href="StatistiquesAdmin">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-stats"></span>
