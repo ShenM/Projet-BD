@@ -134,8 +134,8 @@
 						 	<input type="hidden" name="dateC" value="${ demande.date_creation }">
 						  	<label class="col-lg-8 control-label"></label>
 						  	<div class="col-md-8">
-						  		<input type="submit" name="action" value="TraitementRemboursementValide">
-						    	<input type="submit" name="action" value="TraitementRemboursementRejete">
+						  		<input type="submit" name="action" class="btn btn-default" value="TraitementRemboursementValide">
+						    	<input type="submit" name="action" class="btn btn-default" value="TraitementRemboursementRejete">
 						    	
 						    	<a href="AccueilAdmin"><button type="button" class="btn btn-default" value="Annuler"> Annuler</button></a>
 						  </div>
