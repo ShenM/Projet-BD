@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.sdzee.beans.AdminChartRemboursement;
+import com.sdzee.beans.ChartAdminBenef;
 import com.sdzee.beans.ChartFraisByBenef;
 import com.sdzee.beans.ChartFraisByDate;
 import com.sdzee.beans.PrestationsSante;
@@ -50,6 +51,16 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	
 	private static final String SQL_SELECT_REMB_ADMIN = "select annee_paiement, mois_paiement, sum(montant_rembourse), avg(montant_rembourse), count(*) "
 			+ "from prestations_sante GROUP BY annee_paiement, mois_paiement ORDER BY annee_paiement, mois_paiement";
+	
+	private static final String SQL_SELECT_SUM_BENE_BY_RANGE_AGE_SEXE = "SELECT sexe,TO_CHAR(FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) * 10) || ' - ' || TO_CHAR(FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) * 10 + 10 - 1) AS range, COUNT(*) AS frequency "
+			+ "FROM beneficiaire "
+			+ "GROUP BY FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10), sexe "
+			+ "ORDER BY FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10)";
+	
+	private static final String SQL_SELECT_SUM_BENE_BY_RANGE_AGE = "SELECT TO_CHAR(FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) * 10) || ' - ' || TO_CHAR(FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) * 10 + 10 - 1) AS range, COUNT(*) AS frequency "
+			+ "FROM beneficiaire "
+			+ "GROUP BY FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) "
+			+ "ORDER BY FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10)";
 	
 	public PrestationsSanteDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
@@ -130,6 +141,41 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             
             
     		return fraisListe;
+
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }   
+	}
+	
+	
+	public ArrayList<ChartAdminBenef> trouverAdminChartBenef() throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        ArrayList<ChartAdminBenef> benefAgeListe = new ArrayList<ChartAdminBenef>();
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_SUM_BENE_BY_RANGE_AGE, false);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
+            while ( resultSet.next() ) {
+            	ChartAdminBenef bean = new ChartAdminBenef();
+            	
+            	bean.setRange(resultSet.getString("RANGE"));
+            	bean.setFrequence(resultSet.getInt("FREQUENCY"));
+            	
+            	benefAgeListe.add(bean);
+            }
+            
+            
+    		return benefAgeListe;
 
         } catch ( SQLException e ) {
             throw new DAOException( e );

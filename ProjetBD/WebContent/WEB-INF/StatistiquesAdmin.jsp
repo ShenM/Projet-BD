@@ -27,21 +27,24 @@
 			<div class="col-lg-8">
 				<div class="row" style="margin-bottom:10px">
 					<button type="button" class="btn btn-warning bouton">Remboursements</button>
-					<button type="button" class="btn btn-warning bouton">test1</button>
-					<button type="button" class="btn btn-warning bouton">test2</button>
-					<button type="button" class="btn btn-warning bouton">Remboursements</button>
-					<button type="button" class="btn btn-warning bouton">Remboursements</button>
+					<button type="button" class="btn btn-warning bouton">Bénéficiaires</button>
+					<button type="button" class="btn btn-warning bouton">Contrats</button>
 				</div>
-				<div class="col-sm-6 text-center chart test1" style="margin-bottom:10px">
-			    	<h3><label class="label label-success" id="label_frais">Frais et remboursements par utilisateurs</label></h3>
-			    	<div id="pie_chart" ></div>
-			    </div>
-				<div class="col-sm-6 text-center chart test2" style="margin-bottom:10px">
-			
-			    	<h3><label class="label label-success">Frais et remboursement par mois</label></h3>
-			    	<div id="stacked" ></div>
-   				</div>
-    				<div class="chart Remboursements"> 
+				<div class="chart Bénéficiaires">
+					<div class="col-sm-6 text-center" style="margin-bottom:10px">
+				
+				    	<h3><label class="label label-success">Répartition par age des bénéficiaires</label></h3>
+				    	<div id="bar_chart" ></div>
+	   				</div>
+	   			</div>
+			    <div class="chart Contrats">
+					<div class="col-sm-6 text-center" style="margin-bottom:10px">
+				
+				    	<h3><label class="label label-success">Frais et remboursement par mois</label></h3>
+				    	<div id="stacked" ></div>
+	   				</div>
+	   			</div>
+    			<div class="chart Remboursements"> 
 	   				<div class="col-sm-6 text-center chart Remboursements" style="margin-bottom:10px">
 				    	<h3><label class="label label-success">Somme des remboursements</label></h3>
 				    	<div id="remb_chart" ></div>
@@ -57,7 +60,6 @@
 	   				<div class="col-sm-6 text-center" style="margin-bottom:10px">
 		   				<h4><label class="label label-info">Tous les remboursements sur: </label></h4>
 				    	<div class="row" style="margin-bottom:10px">
-							<button type="button" class="btn btn-warning btn-sm ">Tous</button>
 							<button type="button" class="btn btn-warning btn-sm">1 an</button>
 							<button type="button" class="btn btn-warning btn-sm">6 mois</button>
 							<button type="button" class="btn btn-warning btn-sm">3 mois</button>
@@ -65,15 +67,7 @@
 						</div>
 					</div>
 					
-					<script type="text/javascript">var dataTab = [];</script>
-					<c:forEach var="f" items="${remb}">
-						<script type="text/javascript">
-						var objet = {y: '${f.date}', a: "${f.remboursements_somme}", b: "${f.remboursements_moyenne}", c: "${f.benef_somme}"}; 
-						dataTab.push(objet);
-
-							/*  dataTab = dataTab + "{ y: '${f.date}', a: ${f.remboursements_somme}, b: ${f.remboursements_moyenne}, c: ${f.benef_somme} },";*/
-						</script>
-					</c:forEach>
+					
 						
 						
    				</div>
@@ -89,7 +83,22 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">var dataTab = []; var tabBenefAge = [];</script>
+	<c:forEach var="f" items="${remb}">
+		<script type="text/javascript">
+		var objet = {y: '${f.date}', a: "${f.remboursements_somme}", b: "${f.remboursements_moyenne}", c: "${f.benef_somme}"}; 
+		dataTab.push(objet);
+		</script>
+	</c:forEach>
+	<c:forEach var="b" items="${benefs}">
+		<script type="text/javascript">
+		var objet = {y: '${b.range}', a: "${b.frequence}"}; 
+		tabBenefAge.push(objet);
+		</script>
+	</c:forEach>
 </body>
+
+
 <script type="text/javascript">
 /* $('.chart').hide();
  */
@@ -99,7 +108,7 @@ $('.bouton').on('click', function() {
 	$('.' + $(this).text()).toggle();
 });
 
-var donut = Morris.Donut({
+/* var donut = Morris.Donut({
     element: 'pie_chart',
     data: [
     	{label: "Remboursement mutuelle", value:13},
@@ -112,7 +121,7 @@ var donut = Morris.Donut({
              '#4DA74D',
              '#FF4040'
            ]
-});
+}); */
 
 config = {
 	data: dataTab,
@@ -121,6 +130,7 @@ config = {
     labels: ['Total Remboursement'],
     hideHover: 'auto',
     postUnits: '€',
+    yLabelFormat: function (x) { return x.toString();}
 };
       config.element = 'stacked';
       Morris.Bar(config);
@@ -132,8 +142,9 @@ config = {
       config = {
   		    data: dataTab,
   		    xkey: 'y',
-  		    ykeys: ['b'],
+  		    ykeys: ['c'],
   		    labels: ['Bénéficiaires'],
+  		  	yLabelFormat: function (x) { return x.toString();},
   		    hideHover: 'auto'
   		};
 	  config.element = 'somme_benef_chart';
@@ -143,17 +154,33 @@ config = {
       config = {
     		data: dataTab,
   		    xkey: 'y',
-  		    ykeys: ['c'],
+  		    ykeys: ['b'],
   		    labels: ['Moyenne remboursement'],
   		    hideHover: 'auto',
-  		    postUnits: '€',
+  		  	yLabelFormat: function (x) { return x.toString();},
+  		    postUnits: '€'
   		};
       config.element = 'moy_remb_chart';
       var moy_remb_chart = Morris.Area(config);
 
-      
+      config = {
+  		data: tabBenefAge,
+  		    xkey: 'y',
+  		    ykeys: ['a'],
+  		    labels: ['Nombre de bénéficiaires'],
+  		    hideHover: 'auto',
+  		    behaveLikeLine: true
+  		};
+		config.element = 'bar_chart';
+	  	/* config.stacked = true; */
+		Morris.Area(config);
+     
       
       $('.chart').hide();
       $('.Remboursements').toggle();
+      
+      
+
+
 </script>
 </html>
