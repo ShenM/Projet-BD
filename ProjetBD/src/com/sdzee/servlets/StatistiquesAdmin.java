@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sdzee.beans.AdminChartRemboursement;
+import com.sdzee.beans.ChartAdminBenef;
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.PrestationsSanteDAOImpl;
 
@@ -19,6 +20,7 @@ public class StatistiquesAdmin extends HttpServlet{
     private static final String ATT_SESSION_ADMIN = "sessionAdministrateur";
     private static final String ADMIN = "admin";
     private static final String REMBOURSEMENT = "remb";
+    private static final String BENEFICIAIRES = "benefs";
 
     
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
@@ -31,8 +33,10 @@ public class StatistiquesAdmin extends HttpServlet{
 			PrestationsSanteDAOImpl prestaDaoImpl = new PrestationsSanteDAOImpl(DAOFactory.getInstance());
 			
 			ArrayList<AdminChartRemboursement> remb = null;
+			ArrayList<ChartAdminBenef> benefs = null;
 			try {
 				remb = prestaDaoImpl.trouverRemboursementsAdmin();
+				benefs = prestaDaoImpl.trouverAdminChartBenef();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -40,6 +44,7 @@ public class StatistiquesAdmin extends HttpServlet{
 			
 			
 			request.setAttribute(REMBOURSEMENT, remb);
+			request.setAttribute(BENEFICIAIRES, benefs);
 			
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/StatistiquesAdmin.jsp" ).forward( request, response );	
 		}else {
