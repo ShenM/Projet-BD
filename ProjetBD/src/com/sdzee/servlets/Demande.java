@@ -30,6 +30,7 @@ public class Demande extends HttpServlet {
 	public static final String BENEFICIAIRE = "benef";
     public static final SimpleDateFormat formatterFile = new SimpleDateFormat("ddMMyyyyHHmmss");
     public static final SimpleDateFormat formatterForm = new SimpleDateFormat("dd-MM-yyyy");
+    public static final String DIR_REMBOURSEMENT = "C:\\ProjetBD_FichiersRemboursements\\";
 
     
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
@@ -136,7 +137,7 @@ public class Demande extends HttpServlet {
 								formatterForm.parse(params.get("acteDateDebutSoins").trim()), 
 								formatterForm.parse(params.get("fraisDatePaiement").trim()), 
 								Float.parseFloat(params.get("fraisReels").trim()), 
-								"C:\\ProjetBD_FichiersRemboursements"+File.separator+fileName,
+								fileName,
 								dateSys);
 						
 						DemandeRemboursementDAO rembDAO = new DemandeRemboursementDAOImpl(DAOFactory.getInstance());						

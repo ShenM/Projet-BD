@@ -12,6 +12,7 @@ public class DemandeRemboursement {
 	private float fraisReels;
 	private String fileName;
 	private java.util.Date date_creation;
+	private String motifRejet;
 	
 	public DemandeRemboursement(int idBenef, String acteId, String acteDesignation, String acteLibelle,
 			Date acteDateDebutSoins, Date fraisDatePaiement, float fraisReels, String fileName, Date date_creation) {
@@ -84,6 +85,14 @@ public class DemandeRemboursement {
 	}
 	public void setDate_creation(java.util.Date date_creation) {
 		this.date_creation = date_creation;
+	}
+
+	public String getMotifRejet() {
+		return motifRejet;
+	}
+
+	public void setMotifRejet(String motifRejet) {
+		this.motifRejet = motifRejet;
 	}
 	
 	

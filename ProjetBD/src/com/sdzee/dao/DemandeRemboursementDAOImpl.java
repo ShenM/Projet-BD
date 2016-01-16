@@ -34,7 +34,8 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 															+"ORDER BY date_creation ASC";										
 	
 	private static final String SQL_UPDATE_FLAG_ETAT = "UPDATE DEMANDE_REMBOURSEMENT SET FLAG_ETAT = ? WHERE BENEF_ID = ? AND DATE_CREATION = ?";
-	
+	private static final String SQL_UPDATE_FLAG_ETAT_REJET = "UPDATE DEMANDE_REMBOURSEMENT SET FLAG_ETAT = ?, MOTIF_REJET = ? WHERE BENEF_ID = ? AND DATE_CREATION = ?";
+
 	private static final String SQL_SELECT = "SELECT "
 											+"benef_id, "
 											+"presta_acte, "
@@ -101,6 +102,29 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
         } 
 		
 	}
+	
+	@Override
+	public void updateFlagTraiteRejet(int benefId, Date dateCreation, DemandeRemboursementFlagEtat flag, String motifRejet) throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+                
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_UPDATE_FLAG_ETAT_REJET, false,
+            		flag.getVal(),
+            		motifRejet,
+            		benefId,
+            		new java.sql.Timestamp(dateCreation.getTime()));
+            
+           preparedStatement.executeUpdate();
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( preparedStatement, connexion );
+        } 
+		
+	}
 
 	@Override
 	public List<DemandeRemboursement> getDemandesNonTraite() throws DAOException {
@@ -147,6 +171,23 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 		return bean;
 	}
 
+	private DemandeRemboursement mapRejet(ResultSet resultSet) throws SQLException {
+		DemandeRemboursement bean = new DemandeRemboursement();
+		
+		bean.setIdBenef(resultSet.getInt("benef_id"));
+		bean.setActeId(resultSet.getString("presta_acte"));
+		bean.setActeDesignation(resultSet.getString("presta_designation_acte"));
+		bean.setActeLibelle(resultSet.getString("presta_libelle_bareme"));
+		bean.setActeDateDebutSoins(resultSet.getDate("presta_date_debut_soins"));
+		bean.setFraisDatePaiement(resultSet.getDate("presta_date_paiement"));
+		bean.setFraisReels(resultSet.getFloat("presta_frais_reel"));
+		bean.setFileName(resultSet.getString("facture"));
+		bean.setDate_creation(resultSet.getTimestamp("date_creation"));
+		bean.setMotifRejet(resultSet.getString("motif_rejet"));
+		
+		return bean;
+	}
+	
 	@Override
 	public DemandeRemboursement get(int benefId, Date dateCreation) throws DAOException {
 		Connection connexion = null;

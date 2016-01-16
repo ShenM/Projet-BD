@@ -24,6 +24,7 @@ import com.sdzee.dao.PrestationsSanteDAOImpl;
 public class TousRemboursementsAdmin extends HttpServlet{
     public static final String ATT_SESSION_ADMIN = "sessionAdministrateur";
     public static final String LISTE_REMB = "lremb";
+    private static final String ADMIN = "admin";
 
     
 
@@ -36,6 +37,8 @@ public class TousRemboursementsAdmin extends HttpServlet{
 			DemandeRemboursementDAOImpl demandeRemboursmentImpl = new DemandeRemboursementDAOImpl(DAOFactory.getInstance());
 			List<DemandeRemboursement> demandeRemb = demandeRemboursmentImpl.getDemandesNonTraite();
 			
+			request.setAttribute(ADMIN, session.getAttribute(ATT_SESSION_ADMIN));
+
 			request.setAttribute(LISTE_REMB, demandeRemb);
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/TousRemboursementsAdmin.jsp" ).forward( request, response );
 

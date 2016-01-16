@@ -84,7 +84,7 @@
 					                				<td> ${demande.fraisDatePaiement}</td>	               
 						                			<td> ${demande.fraisReels}</td>
 								                	<td> ${demande.date_creation}</td>
-													<td> [Je suis un bouton de DL]</td>
+													<td> <a href="Telechargement?filename=${demande.fileName}" target="_blank" >[${demande.fileName}]</a></td>
 												</tr>
 					                		</tbody>
 					                	</table>	
@@ -120,6 +120,15 @@
 			 				</div>
 			 				
 						</div>
+						
+						<div class="form-group">
+					    	<div class="col-lg-8">
+						  		<label class="col-lg-4 control-label">Motif :</label>
+						  
+						    	<input class="form-control" maxlength="255" placeholder="Motif du rejet EX: Facture invalide" type="text" name="motifRejet">
+						    </div>
+						</div>
+						
 						<div class="form-group">
 						 	<input type="hidden" name="id" value="${ benef.num }">
 						 	<input type="hidden" name="dateC" value="${ demande.date_creation }">
