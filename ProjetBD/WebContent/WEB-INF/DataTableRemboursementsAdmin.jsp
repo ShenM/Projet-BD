@@ -27,8 +27,13 @@
     
     <thead>
         <tr>
-            <th>ID Bénéficiare</th>
+            <th>N° Bénéficiare</th>
             <th>Date Création</th>
+            <th>Désignation</th>
+            <th>Libellé</th>
+            <th>Date début de soin</th>
+            <th>Frais date paiement</th>
+            <th>Frais rééls</th>
         </tr>
     </thead>
     <tbody>	
@@ -36,6 +41,11 @@
 		    <tr>
 		    	<td><c:out value="${remb.idBenef}"/> </td>
 		    	<td><c:out value="${remb.date_creation}"/> </td>
+		    	<td><c:out value="${remb.acteDesignation}"/> </td>
+		    	<td><c:out value="${remb.acteLibelle}"/> </td>
+		    	<td><c:out value="${remb.acteDateDebutSoins}"/> </td>
+		    	<td><c:out value="${remb.fraisDatePaiement}"/> </td>
+		    	<td><c:out value="${remb.fraisReels}"/> </td>
 			</tr>
 		</c:forEach>
 		   
