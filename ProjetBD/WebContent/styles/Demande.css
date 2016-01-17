@@ -1,3 +1,26 @@
 .form_info{
 	color: grey;
 }
+
+.info-contrat div{
+	margin-right: 10px;
+	text-align: center;
+}
+
+.info-contrat {
+	margin-left: 15px;
+}
+
+
+.contrat-pannel{
+	background-color: #FAFAFA;
+}
+
+.contrat-pannel .glyphicon {
+	padding-right: 10px;
+    font-size: 20px;
+}
+
+.contrat-pannel .panel-footer{
+	background-color: #fff;
+}

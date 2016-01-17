@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.sdzee.beans.AdminChartRemboursement;
+import com.sdzee.beans.ChartAdminBenef;
 import com.sdzee.beans.ChartFraisByBenef;
 import com.sdzee.beans.ChartFraisByDate;
 import com.sdzee.beans.PrestationsSante;
@@ -45,6 +47,20 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 			+ "from prestations_sante where num_adhesion in "
 			+ "(SELECT num_adhesion FROM prestations_sante WHERE num_beneficiaire_sinistre = ?) "
 			+ "GROUP BY annee_paiement, mois_paiement ORDER BY annee_paiement, mois_paiement";
+	
+	
+	private static final String SQL_SELECT_REMB_ADMIN = "select annee_paiement, mois_paiement, sum(montant_rembourse), avg(montant_rembourse), count(*) "
+			+ "from prestations_sante GROUP BY annee_paiement, mois_paiement ORDER BY annee_paiement, mois_paiement";
+	
+	private static final String SQL_SELECT_SUM_BENE_BY_RANGE_AGE_SEXE = "SELECT sexe,TO_CHAR(FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) * 10) || ' - ' || TO_CHAR(FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) * 10 + 10 - 1) AS range, COUNT(*) AS frequency "
+			+ "FROM beneficiaire "
+			+ "GROUP BY FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10), sexe "
+			+ "ORDER BY FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10)";
+	
+	private static final String SQL_SELECT_SUM_BENE_BY_RANGE_AGE = "SELECT TO_CHAR(FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) * 10) || ' - ' || TO_CHAR(FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) * 10 + 10 - 1) AS range, COUNT(*) AS frequency "
+			+ "FROM beneficiaire "
+			+ "GROUP BY FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10) "
+			+ "ORDER BY FLOOR(floor(months_between(sysdate, date_naissance_beneficiaire) /12)/10)";
 	
 	public PrestationsSanteDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
@@ -132,6 +148,81 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }   
 	}
+	
+	
+	public ArrayList<ChartAdminBenef> trouverAdminChartBenef() throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        ArrayList<ChartAdminBenef> benefAgeListe = new ArrayList<ChartAdminBenef>();
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_SUM_BENE_BY_RANGE_AGE, false);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
+            while ( resultSet.next() ) {
+            	ChartAdminBenef bean = new ChartAdminBenef();
+            	
+            	bean.setRange(resultSet.getString("RANGE"));
+            	bean.setFrequence(resultSet.getInt("FREQUENCY"));
+            	
+            	benefAgeListe.add(bean);
+            }
+            
+            
+    		return benefAgeListe;
+
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }   
+	}
+	
+	
+	public ArrayList<AdminChartRemboursement> trouverRemboursementsAdmin() throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        ArrayList<AdminChartRemboursement> rembList = new ArrayList<AdminChartRemboursement>();
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_REMB_ADMIN, false);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
+            while ( resultSet.next() ) {
+            	AdminChartRemboursement bean = new AdminChartRemboursement();
+            	
+            	bean.setDate(resultSet.getString("ANNEE_PAIEMENT") + "-" + resultSet.getString("MOIS_PAIEMENT"));
+            	bean.setRemboursements_somme(resultSet.getFloat("SUM(MONTANT_REMBOURSE)"));
+            	bean.setRemboursements_moyenne(resultSet.getFloat("AVG(MONTANT_REMBOURSE)"));
+            	bean.setBenef_somme(resultSet.getFloat("COUNT(*)"));
+            	System.out.println(bean.getDate() + " ----- " + bean.getRemboursements_somme() + " ----- " + bean.getRemboursements_moyenne() + " ----- " + bean.getBenef_somme() + " -----\n ");
+            	rembList.add(bean);
+            }
+            
+            
+    		return rembList;
+
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }   
+	}
+	
+	
+	
 	
 	public ArrayList<PrestationsSante> trouverParNumBeneficiaireSinistre(int numBeneficiaireSinistre) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
