@@ -7,6 +7,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Classe DAO permettant la gestion de la connexion à la base de données à partir d'un fichier properties
+ *
+ */
 public class DAOFactory {
 	private static final String FICHIER_PROPERTIES       = "/com/sdzee/dao/dao.properties";
     private static final String PROPERTY_URL             = "url";
@@ -28,9 +32,10 @@ public class DAOFactory {
         this.password = password;
     }
 
-    /*
-     * M�thode charg�e de r�cup�rer les informations de connexion � la base de
-     * donn�es, charger le driver JDBC et retourner une instance de la Factory
+    /**
+     * Methode permettant de récupérer les informations d'accès à la base, ainsi que le driver
+     * @return
+     * @throws DAOConfigurationException
      */
     public static DAOFactory getInstance() throws DAOConfigurationException {
         Properties properties = new Properties();
@@ -66,16 +71,13 @@ public class DAOFactory {
         return instance;
     }
 
-    /* M�thode charg�e de fournir une connexion � la base de donn�es */
-     /* package */ public Connection getConnection() throws SQLException {
+    /**
+     * Methode permettant de récuperer l'objet de connexion 
+     * @return
+     * @throws SQLException
+     */
+    public Connection getConnection() throws SQLException {
     		return DriverManager.getConnection( url, username, password );
     }
 
-    /*
-     * M�thodes de r�cup�ration de l'impl�mentation des diff�rents DAO (un seul
-     * pour le moment)
-     */
-//    public UtilisateurDao getUtilisateurDao() {
-//        return new UtilisateurDaoImpl( this );
-//    }
 }

@@ -36,6 +36,7 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 
     
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+		//On vérifie qu'un admin est connecté, sinon on le redirige
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_ADMIN)!=null){	
 			HttpSession session = request.getSession();
 			
@@ -49,13 +50,15 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 			Beneficiaire benefBean = new Beneficiaire();
 			AdhesionDetail adhBean = new AdhesionDetail();
 			
+			//On récupère les informations de la demande en base
 			try {
 				ddRembBean = ddeRembDAO.get(Integer.parseInt(benefId), formatterForm.parse(dateCreation));
 			} catch (NumberFormatException | DAOException | ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-						
+				
+			//On récupère les informations du bénéficiaire concerné ainsi que de son contrat
 			benefBean = benefDAO.trouver(Integer.parseInt(benefId));
 			adhBean = adhDAO.trouverLastContratParNumBenef(Integer.parseInt(benefId));
 			
@@ -80,12 +83,14 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 			String error = "Erreur";
 			String errorColor = "red";
 			try {
+				//On vérifie le type de la demande : Valide | Rejete
 				if(request.getParameter("action").equals("TraitementRemboursementValide")){
 					String benefId = request.getParameter("id");
 					String dateCreation = request.getParameter("dateC");
 					
 					DemandeRemboursementDAO ddeRembDAO = new DemandeRemboursementDAOImpl(DAOFactory.getInstance());
-
+					
+					//On fait un update sur la demande concerné
 					ddeRembDAO.updateFlagTraite(Integer.parseInt(benefId), formatterForm.parse(dateCreation), DemandeRemboursementFlagEtat.VALIDE);
 					
 					error = "La demande a été validé !";
@@ -97,7 +102,8 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 					String motifRejet = "";
 					motifRejet = request.getParameter("motifRejet");
 					DemandeRemboursementDAO ddeRembDAO = new DemandeRemboursementDAOImpl(DAOFactory.getInstance());
-
+					
+					//On fait un update sur la demande concerné
 					ddeRembDAO.updateFlagTraiteRejet(Integer.parseInt(benefId), formatterForm.parse(dateCreation), DemandeRemboursementFlagEtat.REFUS, motifRejet);
 					
 					error = "La demande a été rejeté !";

@@ -27,7 +27,7 @@ public class Contrat extends HttpServlet {
 	public static final String DETAILS_CONTRAT = "contrat";
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-		//On vérifie qu'un utilisateur est connecté, sinon on le redirigie
+		//On vérifie qu'un utilisateur est connecté, sinon on le redirige
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_USER)!=null){
 			
 
