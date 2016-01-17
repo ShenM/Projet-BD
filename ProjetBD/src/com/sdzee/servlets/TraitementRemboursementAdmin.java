@@ -75,6 +75,7 @@ public class TraitementRemboursementAdmin extends HttpServlet{
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    	//On vérifie qu'un admin est connecté, sinon on le redirigie
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_ADMIN)!=null){
 			String error = "Erreur";
 			String errorColor = "red";

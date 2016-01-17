@@ -29,6 +29,7 @@ public class TousRemboursementsAdmin extends HttpServlet{
     
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+		//On vérifie qu'un admin est connecté, sinon on le redirigie
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_ADMIN)!=null){
 			
 			HttpSession session = request.getSession();

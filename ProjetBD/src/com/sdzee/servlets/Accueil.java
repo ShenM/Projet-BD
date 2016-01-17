@@ -23,23 +23,26 @@ public class Accueil extends HttpServlet {
 
     
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+		//On vérifie qu'un utilisateur est connecté, sinon on le redirigie
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_USER)!=null){
 			
 			HttpSession session = request.getSession();
 			
 			PrestationsSanteDAOImpl prestaDAOImpl = new PrestationsSanteDAOImpl(DAOFactory.getInstance());
 			Beneficiaire benef = new Beneficiaire();		
+			//On récupère les informations du bénéficiaire connecté par la variable de session
 			benef = (Beneficiaire) session.getAttribute(ATT_SESSION_USER);
+			//On récupère la liste des 5 dernieres prestations de santes du beneficiaire connecte
 			ArrayList<PrestationsSante> prestaListe = prestaDAOImpl.trouverParNumAdhesionLimite(benef.getNum());
 			
+			//On construit le bean pour le chartFraisAnnee
 			ChartFraisAnnee chart = new ChartFraisAnnee(prestaListe);
 			
 			request.setAttribute(LISTE_PRESTA, prestaListe);
 			request.setAttribute(BENEFICIAIRE, benef);
 			request.setAttribute(CHART, chart);
 			
-			
-			
+	
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/Accueil.jsp" ).forward( request, response );
 			
 		}else {
