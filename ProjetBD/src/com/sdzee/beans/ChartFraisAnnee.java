@@ -1,34 +1,60 @@
 package com.sdzee.beans;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
+/**
+ * Classe utiliser pour des chart frais annee
+ */
 public class ChartFraisAnnee {
-	int fraisTotal;
-	int fraisPayer;
-	int remboursementMutuelle;
-	int remboursementSecu;
+	float fraisTotal;
+	float fraisPayer;
+	float remboursementMutuelle;
+	float remboursementSecu;
 	
+	/**
+	 * Constructeur permettant de construire un ChartFraisAnnee à partir d'une liste de prestatation de sante
+	 * @param lpresta
+	 */
 	public ChartFraisAnnee(ArrayList<PrestationsSante> lpresta) {
-		this.fraisTotal = 0;
-		this.fraisPayer = 0;
-		this.remboursementMutuelle = 0;
-		this.remboursementSecu = 0;
+		this.fraisTotal = 0F;
+		this.fraisPayer = 0F;
+		this.remboursementMutuelle = 0F;
+		this.remboursementSecu = 0F;
+		
+		BigDecimal fraisTotalBD = new BigDecimal(0F);
+		BigDecimal fraisPayerBD = new BigDecimal(0F);
+		BigDecimal remboursementMutuelleBD = new BigDecimal(0F);
+		BigDecimal remboursementSecuBD = new BigDecimal(0F);
+		
+		
 		
 		for(PrestationsSante presta : lpresta)
 		{
-			this.fraisTotal += (int)presta.getFraisReelAssure();
-			this.remboursementMutuelle += (int)presta.getMontantRembourse();
-			this.remboursementSecu += (int)presta.getMontantSecu();
+			fraisTotalBD = fraisTotalBD.add(new BigDecimal(presta.getFraisReelAssure()));
+			remboursementMutuelleBD = remboursementMutuelleBD.add(new BigDecimal(presta.getMontantRembourse()));
+			remboursementSecuBD = remboursementSecuBD.add(new BigDecimal(presta.getMontantSecu()));
+			
+//			this.fraisTotal += (float)presta.getFraisReelAssure();
+//			this.remboursementMutuelle += (float)presta.getMontantRembourse();
+//			this.remboursementSecu += (float)presta.getMontantSecu();
 		}
 		
 		
+		fraisPayerBD = fraisTotalBD.setScale(2, RoundingMode.DOWN).subtract(remboursementMutuelleBD.add(remboursementSecuBD).setScale(2, RoundingMode.DOWN));
 		
-		this.fraisPayer = this.fraisTotal - this.remboursementMutuelle - this.remboursementSecu;
+		fraisPayer = fraisPayerBD.floatValue();
+		fraisTotal = fraisTotalBD.floatValue();
+		remboursementMutuelle = remboursementMutuelleBD.floatValue();
+		remboursementSecu = remboursementSecuBD.floatValue();
+		
+//		this.fraisPayer = this.fraisTotal - this.remboursementMutuelle - this.remboursementSecu;
 	}
 
 
-	public ChartFraisAnnee(int fraisTotal, int fraisPayer,
-			int remboursementMutuelle, int remboursementSecu) {
+	public ChartFraisAnnee(float fraisTotal, float fraisPayer,
+			float remboursementMutuelle, float remboursementSecu) {
 		super();
 		this.fraisTotal = fraisTotal;
 		this.fraisPayer = fraisPayer;
@@ -38,10 +64,10 @@ public class ChartFraisAnnee {
 
 
 	public ChartFraisAnnee() {
-		this.fraisTotal = 0;
-		this.fraisPayer = 0;
-		this.remboursementMutuelle = 0;
-		this.remboursementSecu = 0;
+		this.fraisTotal = 0F;
+		this.fraisPayer = 0F;
+		this.remboursementMutuelle = 0F;
+		this.remboursementSecu = 0F;
 	}
 
 	
@@ -50,32 +76,32 @@ public class ChartFraisAnnee {
 	}
 
 
-	public void setFraisPayer(int fraisPayer ) {
+	public void setFraisPayer(float fraisPayer ) {
 		this.fraisPayer = fraisPayer;
 	}
 
 
-	public int getFraisTotal() {
+	public float getFraisTotal() {
 		return fraisTotal;
 	}
 
-	public void setFraisTotal(int frais) {
+	public void setFraisTotal(float frais) {
 		this.fraisTotal = frais;
 	}
 
-	public int getRemboursementMutuelle() {
+	public float getRemboursementMutuelle() {
 		return remboursementMutuelle;
 	}
 
-	public void setRemboursementMutuelle(int remboursementMutuelle) {
+	public void setRemboursementMutuelle(float remboursementMutuelle) {
 		this.remboursementMutuelle = remboursementMutuelle;
 	}
 
-	public int getRemboursementSecu() {
+	public float getRemboursementSecu() {
 		return remboursementSecu;
 	}
 
-	public void setRemboursementSecu(int remboursementSecu) {
+	public void setRemboursementSecu(float remboursementSecu) {
 		this.remboursementSecu = remboursementSecu;
 	}
 	

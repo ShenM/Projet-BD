@@ -1,7 +1,13 @@
 package com.sdzee.dao;
 
+/**
+ * Classe permettant l'éventuel gestion des Exceptions concernant la configuration DAO
+ */
 public class DAOConfigurationException extends RuntimeException{
-    public DAOConfigurationException( String message ) {
+	private static final long serialVersionUID = 1L;
+
+
+	public DAOConfigurationException( String message ) {
         super( message );
     }
 
