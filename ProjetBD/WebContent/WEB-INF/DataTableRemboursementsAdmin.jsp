@@ -27,7 +27,7 @@
     
     <thead>
         <tr>
-            <th>N° Bénéficiare</th>
+            <th>N° Bénéficaire</th>
             <th>Date Création</th>
             <th>Désignation</th>
             <th>Libellé</th>
