@@ -33,7 +33,7 @@
 				<div class="chart Bénéficiaires">
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
 				
-				    	<h3><label class="label label-success">Répartition par age des bénéficiaires</label></h3>
+				    	<h3><label class="label label-success">Répartition par âge des bénéficiaires</label></h3>
 				    	<div id="bar_chart" ></div>
 	   				</div>
 	   			</div>
@@ -42,6 +42,7 @@
 				
 				    	<h3><label class="label label-success">Répartition des formules par an</label></h3>
 				    	<div id="formules" ></div>
+
 	   				</div>
 	   			</div>
     			<div class="chart Remboursements"> 

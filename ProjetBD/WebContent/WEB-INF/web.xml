@@ -25,10 +25,6 @@
     <servlet-class>com.sdzee.servlets.Demande</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>MesInformations</servlet-name>
-    <servlet-class>com.sdzee.servlets.MesInformations</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>com.sdzee.servlets.Deconnexion</servlet-class>
   </servlet>
@@ -106,7 +102,7 @@
     <url-pattern>/StatistiquesUser</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>MesInformations</servlet-name>
+    <servlet-name>EditerProfile</servlet-name>
     <url-pattern>/MesInformations</url-pattern>
   </servlet-mapping>
   <servlet-mapping>

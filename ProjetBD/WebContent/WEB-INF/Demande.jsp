@@ -65,7 +65,7 @@
 				            </div>
 				          </div>
 							<div class="form-group">
-				            <label class="col-lg-4 control-label">Designation acte :</label>
+				            <label class="col-lg-4 control-label">Désignation acte :</label>
 				            <div class="col-lg-8">
 				              <input class="form-control" maxlength="25" placeholder="EX : PHARMACIE 65%" type="text" name="acteDesign">
 				            </div>
@@ -86,7 +86,7 @@
 						  
 				          <hr><h3>Frais</h3>
 				          <div class="form-group">
-						    <label class="col-lg-4 control-label">Date paiement :</label>
+						    <label class="col-lg-4 control-label">Date de paiement :</label>
 						    <div class="input-group col-lg-4" style="padding-left: 15px;">
 						      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 						      <input class="form-control date" id="datePaie" type="text" value="" readonly name="fraisDatePaiement">

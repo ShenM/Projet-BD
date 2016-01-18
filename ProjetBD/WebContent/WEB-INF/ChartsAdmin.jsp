@@ -6,8 +6,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
-<div id="graphSexe" style="height: 300px;"></div>
-<div id="graphRegionTTT" style="height: 300px; width: 700px;"></div>
+<div class="col-lg-4" id="graphSexe" style="height: 300px;"></div>
+<div class="col-lg-4" id="graphRegionTTT" style="height: 300px; width: 600px;"></div>
 
 
 <script>

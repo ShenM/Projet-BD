@@ -26,13 +26,13 @@
     
     <thead>
         <tr>
-            <th>Nom/Prénom Bénéficiare</th>
+            <th>Nom/Prénom bénéficiare</th>
             <th>Désignation acte</th>
-            <th>Libellé Barème</th>
+            <th>Libellé barème</th>
             <th>Date début soin</th>
-            <th>Date Paiement</th>
-            <th>Frais réel</th>
-            <th>Montant sécu</th>
+            <th>Date de paiement</th>
+            <th>Frais réels</th>
+            <th>Montant sécurité sociale</th>
             <th>Montant remboursé</th>
         </tr>
     </thead>

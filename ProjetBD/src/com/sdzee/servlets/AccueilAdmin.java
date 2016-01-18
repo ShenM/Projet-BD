@@ -18,6 +18,8 @@ import com.sdzee.dao.RegionsDAOImpl;
 
 public class AccueilAdmin extends HttpServlet{
     private static final String ATT_SESSION_ADMIN = "sessionAdministrateur";
+    private static final String ATT_SESSION_CHART_SEXE = "sessionSexe";
+    private static final String ATT_SESSION_CHART_REGION = "sessionRegion";
     private static final String ADMIN = "admin";
     private static final String CHARTSEXE = "chartSexe";
     private static final String CHARTREGIONS = "chartRegions";
@@ -31,8 +33,23 @@ public class AccueilAdmin extends HttpServlet{
 			
 			HttpSession session = request.getSession();
 			
-			ChartPrestaParSexe chartSexe = new ChartPrestaParSexe(prestaDAO.moyenneParSexe());
-			ChartRegions chartRegions = new ChartRegions(regDAO.getTopThree());
+			ChartPrestaParSexe chartSexe = new ChartPrestaParSexe();
+			ChartRegions chartRegions = new ChartRegions();
+			
+			if(session.getAttribute(ATT_SESSION_CHART_SEXE)!=null){
+				chartSexe = (ChartPrestaParSexe) session.getAttribute(ATT_SESSION_CHART_SEXE);
+			}else{
+				chartSexe= new ChartPrestaParSexe(prestaDAO.moyenneParSexe());
+				session.setAttribute(ATT_SESSION_CHART_SEXE, chartSexe);
+			}
+			
+			if(session.getAttribute(ATT_SESSION_CHART_REGION)!=null){
+				chartRegions = (ChartRegions) session.getAttribute(ATT_SESSION_CHART_REGION);
+			}else{
+				chartRegions = new ChartRegions(regDAO.getTopThree());
+				session.setAttribute(ATT_SESSION_CHART_REGION, chartRegions);
+			}
+			
 			
 			
 			request.setAttribute(ADMIN, session.getAttribute(ATT_SESSION_ADMIN));
