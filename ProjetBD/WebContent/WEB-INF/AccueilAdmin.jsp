@@ -23,7 +23,7 @@
 				<div class="col-lg-2">
 					<jsp:include page="MenuAdmin.jsp" />
 				</div>
-				<div class="col-lg-8">
+				<div class="col-lg-10">
 					<jsp:include page="ChartsAdmin.jsp"/>
 				</div>
 		</div>

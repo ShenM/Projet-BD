@@ -34,7 +34,6 @@ public class Authentification extends HttpServlet {
         Beneficiaire benef = auth.authentifierBeneficiaire( request );
 
         HttpSession session = request.getSession();
-        
 
         if ( auth.getErreurs().isEmpty() ) {
         	
@@ -43,6 +42,7 @@ public class Authentification extends HttpServlet {
 
         } else {
             session.setAttribute( ATT_SESSION_USER, null );
+
             request.setAttribute(ATT_ERREUR, auth.getErreurs());
     		this.getServletContext().getRequestDispatcher( "/WEB-INF/Authentification.jsp" ).forward( request, response );
         }
