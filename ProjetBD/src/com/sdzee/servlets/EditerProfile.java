@@ -19,6 +19,9 @@ import com.sdzee.dao.UtilisateurDAOImpl;
 import com.sdzee.utilitaires.Md5;
 
 
+/**
+ * Servlet de gestion d'edition de profil utilisateur par ce dernier
+ */
 public class EditerProfile extends HttpServlet { 
     public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";

@@ -1,6 +1,5 @@
 package com.sdzee.dao;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -8,6 +7,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Classe DAO permettant la gestion de la connexion Ã  la base de donnÃ©es Ã  partir d'un fichier properties
+ *
+ */
 public class DAOFactory {
 	private static final String FICHIER_PROPERTIES       = "/com/sdzee/dao/dao.properties";
     private static final String PROPERTY_URL             = "url";
@@ -29,9 +32,10 @@ public class DAOFactory {
         this.password = password;
     }
 
-    /*
-     * Méthode chargée de récupérer les informations de connexion à la base de
-     * données, charger le driver JDBC et retourner une instance de la Factory
+    /**
+     * Methode permettant de rÃ©cupÃ©rer les informations d'accÃ¨s Ã  la base, ainsi que le driver
+     * @return
+     * @throws DAOConfigurationException
      */
     public static DAOFactory getInstance() throws DAOConfigurationException {
         Properties properties = new Properties();
@@ -67,16 +71,13 @@ public class DAOFactory {
         return instance;
     }
 
-    /* Méthode chargée de fournir une connexion à la base de données */
-     /* package */ public Connection getConnection() throws SQLException {
+    /**
+     * Methode permettant de rÃ©cuperer l'objet de connexion 
+     * @return
+     * @throws SQLException
+     */
+    public Connection getConnection() throws SQLException {
     		return DriverManager.getConnection( url, username, password );
     }
 
-    /*
-     * Méthodes de récupération de l'implémentation des différents DAO (un seul
-     * pour le moment)
-     */
-//    public UtilisateurDao getUtilisateurDao() {
-//        return new UtilisateurDaoImpl( this );
-//    }
 }

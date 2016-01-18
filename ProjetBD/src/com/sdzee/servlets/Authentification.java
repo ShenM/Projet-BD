@@ -20,6 +20,7 @@ public class Authentification extends HttpServlet {
     public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
     public static final String ATT_ID = "id";
+    public static final String ATT_ERREUR = "erreur"; 
 
 	
 	
@@ -33,6 +34,7 @@ public class Authentification extends HttpServlet {
         Beneficiaire benef = auth.authentifierBeneficiaire( request );
 
         HttpSession session = request.getSession();
+
         if ( auth.getErreurs().isEmpty() ) {
         	
             session.setAttribute( ATT_SESSION_USER, benef );
@@ -40,8 +42,9 @@ public class Authentification extends HttpServlet {
 
         } else {
             session.setAttribute( ATT_SESSION_USER, null );
+
+            request.setAttribute(ATT_ERREUR, auth.getErreurs());
     		this.getServletContext().getRequestDispatcher( "/WEB-INF/Authentification.jsp" ).forward( request, response );
-    		//this.getServletContext().getRequestDispatcher( "/WEB-INF/Accueil.jsp" ).forward( request, response );
         }
 
         request.setAttribute( ATT_ID, request.getParameter( "id" ));

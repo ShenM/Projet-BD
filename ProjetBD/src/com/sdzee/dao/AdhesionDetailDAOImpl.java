@@ -3,22 +3,12 @@ package com.sdzee.dao;
 import static com.sdzee.dao.DAOUtilitaire.fermeturesSilencieuses;
 import static com.sdzee.dao.DAOUtilitaire.initialisationRequetePreparee;
 
-
-
-
-
-
-
-
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -39,6 +29,13 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 																	    +"GROUP BY num_adhesion_normalise "
 																	  +") temp ON a.num_adhesion_normalise = temp.num_adhesion_normalise "
 																	  +"WHERE a.exercice_paiement = temp.maxAnnee";
+	
+	private static final String SQL_SELECT_LAST_ADHESION_PAR_NUM_BENEF = "SELECT a.num_adhesion_normalise, a.num_beneficiaire_unique, a.code_profession, a.code_produit, a.code_fractionnement, a.code_garantie, a.formule, a.exercice_paiement, a.num_beneficiaire, a.type_beneficiaire, a.primes_acquises, a.code_agent, a.code_region, a.prime_garantie, a.code_postal "
+																	+ " FROM ADHESION_DETAIL a "
+																	+ " WHERE a.num_beneficiaire_unique=? AND a.exercice_paiement = "
+																		+ "(SELECT MAX(exercice_paiement)"
+																		+ "FROM ADHESION_DETAIL "
+																		+ "WHERE num_beneficiaire_unique=? AND Rownum <2 )";
 	
 	private DAOFactory daoFactory;
 	private  Properties exceptionProp;
@@ -127,9 +124,32 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
         
-		
 	}
 	
+	public AdhesionDetail trouverLastContratParNumBenef(int numBeneficiareUnique) throws DAOException{
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        AdhesionDetail contrat = new AdhesionDetail();
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_LAST_ADHESION_PAR_NUM_BENEF, false, numBeneficiareUnique, numBeneficiareUnique);
+
+            resultSet = preparedStatement.executeQuery();
+            
+            if(resultSet.next()){
+            	contrat = map(resultSet);
+            }
+            
+            return contrat;
+            
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }
+	}
 	
 	private static AdhesionDetail map(ResultSet resultSet) throws SQLException {
 		AdhesionDetail adhesion = new AdhesionDetail();

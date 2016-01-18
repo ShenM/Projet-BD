@@ -61,19 +61,19 @@
 				          <div class="form-group">
 				            <label class="col-lg-4 control-label">Acte :</label>
 				            <div class="col-lg-8">
-				              <input class="form-control" placeholder="Identifiant de l'acte  EX : PH7" type="text" name="acteId">
+				              <input class="form-control" maxlength="7" placeholder="Identifiant de l'acte  EX : PH7" type="text" name="acteId">
 				            </div>
 				          </div>
 							<div class="form-group">
 				            <label class="col-lg-4 control-label">Designation acte :</label>
 				            <div class="col-lg-8">
-				              <input class="form-control" placeholder="EX : PHARMACIE 65%" type="text" name="acteDesign">
+				              <input class="form-control" maxlength="25" placeholder="EX : PHARMACIE 65%" type="text" name="acteDesign">
 				            </div>
 				          </div>
 				          <div class="form-group">
 				            <label class="col-lg-4 control-label">Libellé barème :</label>
 				            <div class="col-lg-8">
-				              <input class="form-control" placeholder="EX : FORMULE/CONFORT/REGIME GENERAL" type="text" name="acteLib">
+				              <input class="form-control" maxlength="45" placeholder="EX : FORMULE/CONFORT/REGIME GENERAL" type="text" name="acteLib">
 				            </div>
 				          </div>
 				          <div class="form-group">
@@ -113,7 +113,7 @@
 				            <label class="col-md-4 control-label"></label>
 				            <div class="col-md-8">
 				              <button class="btn btn-primary" type="submit">Valider </button>
-				              <input class="btn btn-default" value="Annuler" type="reset">
+				              <a href="Accueil"><button type="button" class="btn btn-default" value="Annuler"> Annuler</button></a>
 				            </div>
 				          </div>
 				        </form>

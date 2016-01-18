@@ -9,11 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-import com.sdzee.beans.AuthentificationBean;
 import com.sdzee.beans.Beneficiaire;
 import com.sdzee.beans.PrestationsSante;
-import com.sdzee.dao.BeneficiaireDAOImpl;
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.PrestationsSanteDAOImpl;
 
@@ -25,6 +22,7 @@ public class TousRemboursements extends HttpServlet{
     
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+		//On vérifie qu'un utilisateur est connecté, sinon on le redirige
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_USER)!=null){
 			
 			HttpSession session = request.getSession();

@@ -18,21 +18,33 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.sdzee.beans.Beneficiaire;
-import com.sdzee.beans.DemandeRemboursementBean;
+import com.sdzee.beans.DemandeRemboursement;
+import com.sdzee.dao.DAOException;
+import com.sdzee.dao.DAOFactory;
+import com.sdzee.dao.DemandeRemboursementDAO;
+import com.sdzee.dao.DemandeRemboursementDAOImpl;
 
 
+/**
+ * Servlet permettant la gestion des demande de remboursements
+ *
+ */
 public class Demande extends HttpServlet {
 	public static final String ATT_SESSION_USER = "sessionUtilisateur";
 	public static final String BENEFICIAIRE = "benef";
     public static final SimpleDateFormat formatterFile = new SimpleDateFormat("ddMMyyyyHHmmss");
     public static final SimpleDateFormat formatterForm = new SimpleDateFormat("dd-MM-yyyy");
+    public static final String DIR_REMBOURSEMENT = "C:\\ProjetBD_FichiersRemboursements\\";
 
     
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+		//On vérifie qu'un utilisateur est connecté, sinon on le redirige
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_USER)!=null){
 			
 			HttpSession session = request.getSession();
 			Beneficiaire benef = new Beneficiaire();		
+			
+			//On récupères les information du bénéficiaire à partir de la session et les renvoies à la JSP
 			benef = (Beneficiaire) session.getAttribute(ATT_SESSION_USER);
 			request.setAttribute(BENEFICIAIRE, benef);
 
@@ -52,9 +64,11 @@ public class Demande extends HttpServlet {
 			benef = (Beneficiaire) session.getAttribute(ATT_SESSION_USER);
 			request.setAttribute(BENEFICIAIRE, benef);
 			
+			//On initialise nos variables de gestions d'erreur
 			String error = "Votre demande a été effectué !";
 			String errorColor = "green";
 			
+			//On initialise nos variables de gestions de formulaire Encrypté
 		    HashMap<String, String> params = new HashMap<String, String>();  
 			boolean isMultipart = ServletFileUpload.isMultipartContent(request);  
 			boolean flagFile = false; 
@@ -71,9 +85,13 @@ public class Demande extends HttpServlet {
 					//upload.setSizeMax(500000);
 				    List<FileItem> items = null;
 
+				    //On parse notre requete en liste d'objet
 					items = upload.parseRequest(request);
 
-				    Iterator<FileItem> iter = items.iterator();  
+					/*Pour chaque occurence de cette liste, on vérifie si c'est un champs ou un fichier, selon le cas soit on l'ajoute
+					* à notre HashMap, soit on l'ajoute à notre HashMap ET on stock l'item contenant le file
+					*/
+					Iterator<FileItem> iter = items.iterator();  
 				    while (iter.hasNext()) {  
 			    		FileItem item = (FileItem) iter.next();  
 		    			if (item.isFormField()) {  		    	           
@@ -88,7 +106,7 @@ public class Demande extends HttpServlet {
 			    }  
 					
 
-			
+				//On vérifie que tout les champs sont remplis 
 			 	if(params.get("benef").trim().compareTo("") == 0||
 					params.get("acteId").trim().compareTo("") == 0 ||
 					params.get("acteDesign").trim().compareTo("") == 0 ||
@@ -106,29 +124,50 @@ public class Demande extends HttpServlet {
 					error = "Les frais ne peuvent pas être égale à 0 !";
 					errorColor = "red";
 				}else{		  
-    	        	//Ne pas oublier de créer le dossier sur le Serveur (ici la machine local)
 					String name = params.get("fraisFile");
 					String[] tmpName = name.split("\\.");
 					
-					if(!(tmpName[tmpName.length-1].compareTo("png")==0) && !(tmpName[tmpName.length-1].compareTo("jpg")==0) && !(tmpName[tmpName.length-1].compareTo("jpeg")==0) && !(tmpName[tmpName.length-1].compareTo("bmp")==0)){
-						error = "Merci d'utiliser un format autorisé : png, jpg, jpeg, bmp";
+					//On vérifie le format du fichier
+					if(!(tmpName[tmpName.length-1].toLowerCase().compareTo("png")==0) && !(tmpName[tmpName.length-1].toLowerCase().compareTo("jpg")==0) && !(tmpName[tmpName.length-1].toLowerCase().compareTo("jpeg")==0) && !(tmpName[tmpName.length-1].toLowerCase().compareTo("bmp")==0) && !(tmpName[tmpName.length-1].toLowerCase().compareTo("pdf")==0)){
+						error = "Merci d'utiliser un format autorisé : pdf, png, jpg, jpeg, bmp";
 						errorColor = "red";
 					}else{
 						java.util.Date dateSys = new java.util.Date();
 						
 						String fileName = params.get("benef")+formatterFile.format(dateSys)+"."+tmpName[tmpName.length-1];
 						
+						//On vérifie si le dossier de stockage d'image sur le serveur existe, sinon on le crée. 
+						File directory = new File("C:\\ProjetBD_FichiersRemboursements\\");
+						if(!directory.exists()){
+							directory.mkdirs();
+						}
+						
+						//On écrit notre fichier sur le serveur avec comme non une association des clés primaires composées : ID et DateCreation
 						uploadedFile = new File("C:\\ProjetBD_FichiersRemboursements"+File.separator+fileName);  
 						itemFinal.write(uploadedFile);
 						
-						DemandeRemboursementBean remboursement =  new DemandeRemboursementBean(Integer.parseInt(params.get("benef").trim()), params.get("acteId").trim(), params.get("acteDesign").trim(), params.get("acteLib").trim(), formatterForm.parse(params.get("acteDateDebutSoins").trim()), formatterForm.parse(params.get("fraisDatePaiement").trim()), Float.parseFloat(params.get("fraisReels").trim()), fileName);
+						//On crée le bean à insérer en base
+						DemandeRemboursement remboursement =  new DemandeRemboursement(
+								Integer.parseInt(params.get("benef").trim()), 
+								params.get("acteId").trim(), params.get("acteDesign").trim(), 
+								params.get("acteLib").trim(), 
+								formatterForm.parse(params.get("acteDateDebutSoins").trim()), 
+								formatterForm.parse(params.get("fraisDatePaiement").trim()), 
+								Float.parseFloat(params.get("fraisReels").trim()), 
+								fileName,
+								dateSys);
+						
+						DemandeRemboursementDAO rembDAO = new DemandeRemboursementDAOImpl(DAOFactory.getInstance());	
+						
+						//On insert la demande en base
+						rembDAO.insert(remboursement);
+					
 					}
 					
 
 				}
 		 	
 			}catch(Exception e){
-				System.out.println(e.getStackTrace().toString());
 				System.out.println(e.getMessage());
 			}
 			request.setAttribute("error", error);
