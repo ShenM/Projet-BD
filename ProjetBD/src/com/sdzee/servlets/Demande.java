@@ -65,7 +65,7 @@ public class Demande extends HttpServlet {
 			request.setAttribute(BENEFICIAIRE, benef);
 			
 			//On initialise nos variables de gestions d'erreur
-			String error = "Votre demande a été effectué !";
+			String error = "Votre demande a été effectuée !";
 			String errorColor = "green";
 			
 			//On initialise nos variables de gestions de formulaire Encrypté
@@ -115,13 +115,13 @@ public class Demande extends HttpServlet {
 					params.get("fraisDatePaiement").trim().compareTo("") == 0 ||
 					params.get("fraisReels").trim().compareTo("") == 0)
 				{
-			 		error = "Merci de remplir tout les champs !";
+			 		error = "Merci de remplir tous les champs !";
 					errorColor = "red";
 				}else if(params.get("fraisFile").trim().compareTo("") == 0){
 					error = "Merci de joindre un fichier !";
 					errorColor = "red";
 				}else if(params.get("fraisReels").trim().compareTo("0") == 0){
-					error = "Les frais ne peuvent pas être égale à 0 !";
+					error = "Les frais ne peuvent pas être égaux à 0 !";
 					errorColor = "red";
 				}else{		  
 					String name = params.get("fraisFile");

@@ -33,14 +33,14 @@
 				<div class="chart Bénéficiaires">
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
 				
-				    	<h3><label class="label label-success">Répartition par age des bénéficiaires</label></h3>
+				    	<h3><label class="label label-success">Répartition par âge des bénéficiaires</label></h3>
 				    	<div id="bar_chart" ></div>
 	   				</div>
 	   			</div>
 			    <div class="chart Contrats">
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
 				
-				    	<h3><label class="label label-success">Frais et remboursement par mois</label></h3>
+				    	<h3><label class="label label-success">Frais et remboursements par mois</label></h3>
 				    	<div id="stacked" ></div>
 	   				</div>
 	   			</div>

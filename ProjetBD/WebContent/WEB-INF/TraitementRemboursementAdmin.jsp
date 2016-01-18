@@ -63,8 +63,8 @@
 					                		<tbody>
 					                			<tr style="font-weight:bold;">
 					                				<td>Acte :</td>
-					                				<td>Designation de l'acte :</td>
-					                				<td>Libelle de l'acte :</td>
+					                				<td>Désignation de l'acte :</td>
+					                				<td>Libellé de l'acte :</td>
 					                				<td>Debut des soins :</td>
 					                			</tr>
 					                			<tr>
@@ -76,7 +76,7 @@
 												<tr>
 					                			<tr style="font-weight:bold;">
 					                				<td>Date de paiement :</td>
-					                				<td>Frais reels :</td>
+					                				<td>Frais réels :</td>
 					                				<td>Date de création :</td>
 					                				<td>Facture :</td>
 					                			</tr>
@@ -111,7 +111,7 @@
 				                			<tr><td>Date de naissance :</td><td> ${benef.dateNaissanceBenficiaire}</td></tr>
 						                	<tr><td>Sexe :</td><td> ${benef.sexe}</td></tr>
 											<tr><td>Email :</td><td> ${benef.email}</td></tr>
-											<tr><td>Telephone :</td><td> ${benef.numTelephone}</td></tr>
+											<tr><td>Téléphone :</td><td> ${benef.numTelephone}</td></tr>
 				                		</tbody>
 				                	</table>	
 				                </div>

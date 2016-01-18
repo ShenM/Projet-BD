@@ -7,7 +7,7 @@
 	
 
 <div class="container">
-    <h1>Editer le Profile</h1>
+    <h1>Editer le profile</h1>
   	<hr>
 	<div class="row">
       
