@@ -79,7 +79,7 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 			String error = "Erreur";
 			String errorColor = "red";
 			try {
-				if(request.getParameter("action").equals("TraitementRemboursementValide")){
+				if(request.getParameter("action").equals("Valider")){
 					String benefId = request.getParameter("id");
 					String dateCreation = request.getParameter("dateC");
 					
@@ -90,7 +90,7 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 					error = "La demande a été validée !";
 					errorColor = "green";
 					
-				}else if(request.getParameter("action").equals("TraitementRemboursementRejete")){
+				}else if(request.getParameter("action").equals("Rejeter")){
 					String benefId = request.getParameter("id");
 					String dateCreation = request.getParameter("dateC");
 					String motifRejet = "";
