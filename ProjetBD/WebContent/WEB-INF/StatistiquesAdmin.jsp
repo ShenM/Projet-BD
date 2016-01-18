@@ -61,10 +61,10 @@
 	   				<div class="col-sm-6 text-center" style="margin-bottom:10px">
 		   				<h4><label class="label label-info">Tous les remboursements sur: </label></h4>
 				    	<div class="row" style="margin-bottom:10px">
-							<button type="button" class="btn btn-warning btn-sm">1 an</button>
-							<button type="button" class="btn btn-warning btn-sm">6 mois</button>
-							<button type="button" class="btn btn-warning btn-sm">3 mois</button>
-							<button type="button" class="btn btn-warning btn-sm">1 mois</button>
+							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(12)">1 an</button>
+							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(6)">6 mois</button>
+							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(3)">3 mois</button>
+							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(1)">1 mois</button>
 						</div>
 					</div>
 						
@@ -81,11 +81,12 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">var dataTab = []; var tabBenefAge = []; var tabFormules = []; var annee; var formule = [];</script>
+	<script type="text/javascript">var dataTab = [];var dataTabMonth = []; var tabBenefAge = []; var tabFormules = []; var annee; var formule = [];</script>
 	<c:forEach var="f" items="${remb}">
 		<script type="text/javascript">
 		var objet = {y: '${f.date}', a: "${f.remboursements_somme}", b: "${f.remboursements_moyenne}", c: "${f.benef_somme}"}; 
-		dataTab.push(objet);
+		dataTabMonth.push(objet);
+		dataTab = dataTabMonth;
 		</script>
 	</c:forEach>
 	<c:forEach var="b" items="${benefs}">
@@ -182,6 +183,15 @@ $('.bouton').on('click', function() {
   		};
 		config.element = 'bar_chart';
 		Morris.Area(config);
+		
+		function triTab(inter){
+			var i = 0;
+			for	(index = 0; index < dataTabMonth.length; index++) {
+			    console.log(index % inter, i);
+			    i++;
+			} 
+			console.log(dataTab);
+		}
      
       
       $('.chart').hide();
