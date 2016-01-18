@@ -9,12 +9,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
 import com.sdzee.beans.AdhesionDetail;
 import com.sdzee.beans.Beneficiaire;
+import com.sdzee.beans.ChartAdminBenef;
+import com.sdzee.beans.ChartFormules;
 
 public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {	
 	private static final String SQL_SELECT_ADHESION_PAR_NUM_CONTRAT = "SELECT DISTINCT * FROM ADHESION_DETAIL WHERE num_adhesion_normalise=? AND exercice_paiement=?";
@@ -37,6 +40,9 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 																		+ "FROM ADHESION_DETAIL "
 																		+ "WHERE num_beneficiaire_unique=? AND Rownum <2 )";
 	
+	private static final String SQL_SELECT_ALL_FORMULES = "select formule, count(*) as nb, exercice_paiement as annee "
+			+ "from adhesion_detail group by formule, exercice_paiement order by exercice_paiement, formule";
+	
 	private DAOFactory daoFactory;
 	private  Properties exceptionProp;
 	
@@ -56,7 +62,39 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
 	
 	public List<AdhesionDetail> trouverParNumBeneficiaire(int numBeneficiaireUnique) throws DAOException{return null;}
 	
-	
+	public ArrayList<ChartFormules> trouverAdminChartFormules() throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        ArrayList<ChartFormules> formules = new ArrayList<ChartFormules>();
+        
+        try {
+            connexion = daoFactory.getConnection();
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL_FORMULES, false);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
+            while ( resultSet.next() ) {
+            	ChartFormules bean = new ChartFormules();
+            	
+            	bean.setAnnee(resultSet.getInt("ANNEE"));
+            	bean.setFormule(resultSet.getString("FORMULE"));
+            	bean.setNb(resultSet.getInt("NB"));
+            	formules.add(bean);
+            }
+            
+            
+    		return formules;
+
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }   
+	}
 	
 	// =======================================================================================================
 	

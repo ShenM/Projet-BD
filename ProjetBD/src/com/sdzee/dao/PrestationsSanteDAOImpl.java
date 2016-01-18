@@ -109,9 +109,7 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }   
 	}
-	
-//	=================================================================================================================================
-	
+		
 	public ArrayList<ChartFraisByDate> trouverFraisParNumBeneficiaireDate(int numBeneficiaire) throws DAOException {
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -170,7 +168,6 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             	
             	bean.setRange(resultSet.getString("RANGE"));
             	bean.setFrequence(resultSet.getInt("FREQUENCY"));
-            	
             	benefAgeListe.add(bean);
             }
             
@@ -207,7 +204,6 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             	bean.setRemboursements_somme(resultSet.getFloat("SUM(MONTANT_REMBOURSE)"));
             	bean.setRemboursements_moyenne(resultSet.getFloat("AVG(MONTANT_REMBOURSE)"));
             	bean.setBenef_somme(resultSet.getFloat("COUNT(*)"));
-            	System.out.println(bean.getDate() + " ----- " + bean.getRemboursements_somme() + " ----- " + bean.getRemboursements_moyenne() + " ----- " + bean.getBenef_somme() + " -----\n ");
             	rembList.add(bean);
             }
             
