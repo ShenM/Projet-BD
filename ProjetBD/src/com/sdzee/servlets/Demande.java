@@ -19,6 +19,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.sdzee.beans.Beneficiaire;
 import com.sdzee.beans.DemandeRemboursement;
+import com.sdzee.dao.AdhesionDetailDAO;
+import com.sdzee.dao.AdhesionDetailDAOImpl;
+import com.sdzee.dao.BeneficiaireDAO;
+import com.sdzee.dao.BeneficiaireDAOImpl;
 import com.sdzee.dao.DAOException;
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.DemandeRemboursementDAO;
@@ -35,7 +39,7 @@ public class Demande extends HttpServlet {
     public static final SimpleDateFormat formatterFile = new SimpleDateFormat("ddMMyyyyHHmmss");
     public static final SimpleDateFormat formatterForm = new SimpleDateFormat("dd-MM-yyyy");
     public static final String DIR_REMBOURSEMENT = "C:\\ProjetBD_FichiersRemboursements\\";
-
+    public static final String ATT_LIST_BENEF = "lBenef";
     
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		//On vérifie qu'un utilisateur est connecté, sinon on le redirige
@@ -46,6 +50,13 @@ public class Demande extends HttpServlet {
 			
 			//On récupères les information du bénéficiaire à partir de la session et les renvoies à la JSP
 			benef = (Beneficiaire) session.getAttribute(ATT_SESSION_USER);
+			
+			AdhesionDetailDAO adhDAO = new AdhesionDetailDAOImpl(DAOFactory.getInstance());
+			
+			List<Beneficiaire> lBenef = adhDAO.trouverBenefsMemeContrat(benef.getNum());
+			
+			
+			request.setAttribute(ATT_LIST_BENEF, lBenef);
 			request.setAttribute(BENEFICIAIRE, benef);
 
 			
