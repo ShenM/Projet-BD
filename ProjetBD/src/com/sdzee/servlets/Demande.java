@@ -2,6 +2,7 @@ package com.sdzee.servlets;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.Authenticator;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,6 +18,12 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+
+
+
+
+
+
 import com.sdzee.beans.Beneficiaire;
 import com.sdzee.beans.DemandeRemboursement;
 import com.sdzee.dao.AdhesionDetailDAO;
@@ -27,6 +34,10 @@ import com.sdzee.dao.DAOException;
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.DemandeRemboursementDAO;
 import com.sdzee.dao.DemandeRemboursementDAOImpl;
+
+import javax.mail.*;
+
+
 
 
 /**
@@ -172,7 +183,8 @@ public class Demande extends HttpServlet {
 						
 						//On insert la demande en base
 						rembDAO.insert(remboursement);
-					
+						
+						
 					}
 					
 
