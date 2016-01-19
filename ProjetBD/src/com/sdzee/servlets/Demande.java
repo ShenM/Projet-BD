@@ -173,18 +173,7 @@ public class Demande extends HttpServlet {
 						//On insert la demande en base
 						rembDAO.insert(remboursement);
 						
-						SimpleEmail email = new SimpleEmail();
 						
-						email.setSmtpPort(587);
-					    email.setAuthentication("poly.mutuelle@gmail.com", "#Tototata69");
-					    email.setDebug(false);
-					    email.setHostName("smtp.gmail.com");
-					    email.setFrom("poly.mutuelle@gmail.com");
-					    email.setSubject("Hi");
-					    email.setMsg("This is a test mail ... :-)");
-					    email.addTo("poly.mutuelle@gmail.com");
-					    email.send();
-					    System.out.println("Mail sent!");
 					}
 					
 
