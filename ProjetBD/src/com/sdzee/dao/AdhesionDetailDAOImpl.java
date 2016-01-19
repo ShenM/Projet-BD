@@ -16,7 +16,6 @@ import java.util.Properties;
 
 import com.sdzee.beans.AdhesionDetail;
 import com.sdzee.beans.Beneficiaire;
-import com.sdzee.beans.ChartAdminBenef;
 import com.sdzee.beans.ChartFormules;
 
 public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {	
@@ -187,6 +186,36 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
         } finally {
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
+	}
+	
+	public List<Beneficiaire> trouverBenefsMemeContrat(int numBeneficiaireUnique) throws DAOException{
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        List<Beneficiaire> benefs = new ArrayList<Beneficiaire>();
+        
+        BeneficiaireDAOImpl benefDAO = new BeneficiaireDAOImpl(daoFactory);
+
+        try {
+        	
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL_ADHESION_FROM_BENF, false, numBeneficiaireUnique);
+
+            resultSet = preparedStatement.executeQuery();	
+            
+            while(resultSet.next()){
+            	benefs.add(benefDAO.trouver(resultSet.getInt("num_beneficiaire_unique")));
+            }
+            
+            return benefs;
+            
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }
+
 	}
 	
 	private static AdhesionDetail map(ResultSet resultSet) throws SQLException {

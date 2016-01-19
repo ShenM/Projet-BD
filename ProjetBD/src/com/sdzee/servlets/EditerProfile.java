@@ -28,12 +28,13 @@ public class EditerProfile extends HttpServlet {
     public static final String ATT_ID = "id";
     public static final String LISTE_PRESTA = "lpresta";
     public static final String BENEFICIAIRE = "benef";
-	
+	public static final String ATT_SUCCESS = "success";
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		//On vérifie qu'un utilisateur est connecté, sinon on le redirige
 		if (request.getSession()!=null && request.getSession().getAttribute(ATT_SESSION_USER)!=null){
-			
+    		String success = "";
+
 			HttpSession session = request.getSession();
 			
 			PrestationsSanteDAOImpl prestaDAOImpl = new PrestationsSanteDAOImpl(DAOFactory.getInstance());
@@ -44,7 +45,8 @@ public class EditerProfile extends HttpServlet {
 			
 			request.setAttribute(LISTE_PRESTA, prestaListe);
 			request.setAttribute(BENEFICIAIRE, benef);
-			
+    		request.setAttribute(ATT_SUCCESS, success);
+
 
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/MesInformations.jsp" ).forward( request, response );
 
@@ -98,7 +100,7 @@ public class EditerProfile extends HttpServlet {
             	success = "Modifications réussies !";
             }
     		benedao.modifier(benef);
-    		request.setAttribute("success", success);
+    		request.setAttribute(ATT_SUCCESS, success);
     		request.setAttribute("benef", benef);
 
     		
