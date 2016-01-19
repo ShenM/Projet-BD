@@ -33,15 +33,16 @@
 				<div class="chart Bénéficiaires">
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
 				
-				    	<h3><label class="label label-success">Répartition par age des bénéficiaires</label></h3>
+				    	<h3><label class="label label-success">Répartition par âge des bénéficiaires</label></h3>
 				    	<div id="bar_chart" ></div>
 	   				</div>
 	   			</div>
 			    <div class="chart Contrats">
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
 				
-				    	<h3><label class="label label-success">Frais et remboursement par mois</label></h3>
-				    	<div id="stacked" ></div>
+				    	<h3><label class="label label-success">Répartition des formules par an</label></h3>
+				    	<div id="formules" ></div>
+
 	   				</div>
 	   			</div>
     			<div class="chart Remboursements"> 
@@ -60,15 +61,12 @@
 	   				<div class="col-sm-6 text-center" style="margin-bottom:10px">
 		   				<h4><label class="label label-info">Tous les remboursements sur: </label></h4>
 				    	<div class="row" style="margin-bottom:10px">
-							<button type="button" class="btn btn-warning btn-sm">1 an</button>
-							<button type="button" class="btn btn-warning btn-sm">6 mois</button>
-							<button type="button" class="btn btn-warning btn-sm">3 mois</button>
-							<button type="button" class="btn btn-warning btn-sm">1 mois</button>
+							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(12)">1 an</button>
+							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(6)">6 mois</button>
+							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(3)">3 mois</button>
+							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(1)">1 mois</button>
 						</div>
 					</div>
-					
-					
-						
 						
    				</div>
 			</div>
@@ -83,17 +81,31 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">var dataTab = []; var tabBenefAge = [];</script>
+	<script type="text/javascript">var dataTab = [];var dataTabMonth = []; var tabBenefAge = []; var tabFormules = []; var annee; var formule = [];</script>
 	<c:forEach var="f" items="${remb}">
 		<script type="text/javascript">
 		var objet = {y: '${f.date}', a: "${f.remboursements_somme}", b: "${f.remboursements_moyenne}", c: "${f.benef_somme}"}; 
-		dataTab.push(objet);
+		dataTabMonth.push(objet);
+		dataTab = dataTabMonth;
 		</script>
 	</c:forEach>
 	<c:forEach var="b" items="${benefs}">
 		<script type="text/javascript">
 		var objet = {y: '${b.range}', a: "${b.frequence}"}; 
 		tabBenefAge.push(objet);
+		</script>
+	</c:forEach>
+	<c:forEach var="f" items="${formules}">
+		<script type="text/javascript">
+		if (annee == ${f.annee}){
+			formule.push(${f.nb});
+		}else{
+			var objet = {y:annee, a:formule[0], b:formule[1], c:formule[2], d:formule[3], e:formule[4], f:formule[5]}; 
+			tabFormules.push(objet);
+			var formule = [];
+			formule.push(${f.nb});
+			annee = ${f.annee};
+		}
 		</script>
 	</c:forEach>
 </body>
@@ -108,32 +120,28 @@ $('.bouton').on('click', function() {
 	$('.' + $(this).text()).toggle();
 });
 
-/* var donut = Morris.Donut({
-    element: 'pie_chart',
-    data: [
-    	{label: "Remboursement mutuelle", value:13},
-	    {label: "Remboursement sécu", value:34},
-	    {label: "Reste à charge", value:42}
-    ],
-    formatter: function (x) { return x + "€"},
-    colors: [
-             '#0B62A4',
-             '#4DA74D',
-             '#FF4040'
-           ]
-}); */
+ 	tabFormules.shift();
+ 	config = {
+	    data: tabFormules,
+	    xkey: 'y',
+	    ykeys: ['a', 'b', 'c', 'd', 'e', 'f'],
 
-config = {
-	data: dataTab,
-    xkey: 'y',
-    ykeys: ['a'],
-    labels: ['Total Remboursement'],
-    hideHover: 'auto',
-    postUnits: '€',
-    yLabelFormat: function (x) { return x.toString();}
-};
-      config.element = 'stacked';
+	    labels: ['Confort', 'Confort specifique', 'Privilege', 'Privilege specifique', 'TM+', 'TM+   specifique'],
+	    hideHover: 'auto',
+	    behaveLikeLine: true
+	};
+
+      config.element = 'formules';
       Morris.Bar(config);
+      
+      config = {
+    			data: dataTab,
+    		    xkey: 'y',
+    		    ykeys: ['a'],
+    		    labels: ['Total Remboursement'],
+    		    hideHover: 'auto',
+    		    yLabelFormat: function (x) { return x.toString();}
+    		};
       
       config.element = 'remb_chart';
       var remb_chart = Morris.Area(config);
@@ -162,18 +170,28 @@ config = {
   		};
       config.element = 'moy_remb_chart';
       var moy_remb_chart = Morris.Area(config);
-
+      
       config = {
   		data: tabBenefAge,
   		    xkey: 'y',
   		    ykeys: ['a'],
   		    labels: ['Nombre de bénéficiaires'],
+  		  	yLabelFormat: function (x) { return x.toString();},
   		    hideHover: 'auto',
+  		  parseTime: false,
   		    behaveLikeLine: true
   		};
 		config.element = 'bar_chart';
-	  	/* config.stacked = true; */
 		Morris.Area(config);
+		
+		function triTab(inter){
+			var i = 0;
+			for	(index = 0; index < dataTabMonth.length; index++) {
+			    console.log(index % inter, i);
+			    i++;
+			} 
+			console.log(dataTab);
+		}
      
       
       $('.chart').hide();

@@ -65,7 +65,7 @@
 				            </div>
 				          </div>
 							<div class="form-group">
-				            <label class="col-lg-4 control-label">Designation acte :</label>
+				            <label class="col-lg-4 control-label">Désignation acte :</label>
 				            <div class="col-lg-8">
 				              <input class="form-control" placeholder="EX : PHARMACIE 65%" type="text">
 				            </div>
@@ -97,11 +97,11 @@
 				            <div class="col-lg-4 ">
 				              <input class="form-control " value=0  type="number" step="any">
 				            </div>
-				            <span class="form_info">Frais réel dépensé par l'assuré</span>
+				            <span class="form_info">Frais réel dépensés par l'assuré</span>
 				          </div>
 				          
 				          <div class="form-group">
-				            <label class="col-lg-4 control-label">Montant secu :</label>
+				            <label class="col-lg-4 control-label">Montant securité sociale :</label>
 				            <div class="col-lg-4">
 				              <input class="form-control" value=0 type="number" step="any">
 				            </div>

@@ -96,7 +96,7 @@ var donut = Morris.Donut({
 	    {label: "Remboursement sécu", value:"${secu}"},
 	    {label: "Reste à charge", value:"${ch}"}
     ],
-    formatter: function (x) { return x + "€"},
+    formatter: function (x) { return parseFloat(x).toFixed(2) + "€"},
     colors: [
              '#0B62A4',
              '#4DA74D',

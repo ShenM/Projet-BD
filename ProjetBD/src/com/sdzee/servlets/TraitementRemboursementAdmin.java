@@ -79,7 +79,7 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 			String error = "Erreur";
 			String errorColor = "red";
 			try {
-				if(request.getParameter("action").equals("TraitementRemboursementValide")){
+				if(request.getParameter("action").equals("Valider")){
 					String benefId = request.getParameter("id");
 					String dateCreation = request.getParameter("dateC");
 					
@@ -87,10 +87,10 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 
 					ddeRembDAO.updateFlagTraite(Integer.parseInt(benefId), formatterForm.parse(dateCreation), DemandeRemboursementFlagEtat.VALIDE);
 					
-					error = "La demande a été validé !";
+					error = "La demande a été validée !";
 					errorColor = "green";
 					
-				}else if(request.getParameter("action").equals("TraitementRemboursementRejete")){
+				}else if(request.getParameter("action").equals("Rejeter")){
 					String benefId = request.getParameter("id");
 					String dateCreation = request.getParameter("dateC");
 					String motifRejet = "";
@@ -99,7 +99,7 @@ public class TraitementRemboursementAdmin extends HttpServlet{
 
 					ddeRembDAO.updateFlagTraiteRejet(Integer.parseInt(benefId), formatterForm.parse(dateCreation), DemandeRemboursementFlagEtat.REFUS, motifRejet);
 					
-					error = "La demande a été rejeté !";
+					error = "La demande a été rejetée !";
 					errorColor = "red";
 								
 				}
