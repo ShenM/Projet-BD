@@ -6,8 +6,17 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
-<div class="col-lg-4" id="graphSexe" style="height: 300px;"></div>
-<div class="col-lg-4" id="graphRegionTTT" style="height: 300px; width: 750px;"></div>
+<div class="col-lg-4" id="graphSexe" style="height: 300px; text-align:center;">
+	<div class="col-sm-6 text-center chart Remboursements">
+		<h3><label class="label label-success">Nombre moyen de soins partiqué par sexe</label></h3>
+			
+	</div>
+</div>
+	<div class="col-sm-6 text-center chart Remboursements">
+<div class="col-lg-4" id="graphRegionTTT" style="height: 300px; width: 750px; text-align:center;">	
+		<h3><label class="label label-success">Les actes les plus pratiqués par région</label></h3>
+	</div>
+</div>
 
 
 <script>

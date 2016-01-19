@@ -47,10 +47,10 @@
 				            <label class="col-lg-4 control-label">Bénéficiare :</label>
 				            <div class="col-lg-8">
 				            	<select class="select_benef" data-placeholder="Choisir un bénéficiaire" name="benef">
-				            		<option value="1844">Nathan dugal</option>
-				            		<option value="1845">Nohémie dugal</option>
-				            		<option value="1846">Jean dugal</option>
-				            		<option value="1847">Madi dugal</option>
+				            		<c:forEach items="${lBenef}" var="entry">
+				            			<option value="${entry.num}"> ${entry.prenom} ${entry.nom}</option> 
+				            		</c:forEach>
+
 				            	</select>
 							</div>
 							

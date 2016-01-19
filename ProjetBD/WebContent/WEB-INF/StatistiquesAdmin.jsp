@@ -84,7 +84,7 @@
 	<script type="text/javascript">var dataTab = [];var dataTabMonth = []; var tabBenefAge = []; var tabFormules = []; var annee; var formule = [];</script>
 	<c:forEach var="f" items="${remb}">
 		<script type="text/javascript">
-		var objet = {y: '${f.date}', a: "${f.remboursements_somme}", b: "${f.remboursements_moyenne}", c: "${f.benef_somme}"}; 
+		var objet = {y: '${f.date}', a:${f.remboursements_somme}, b:${f.remboursements_moyenne}, c: ${f.benef_somme}}; 
 		dataTabMonth.push(objet);
 		dataTab = dataTabMonth;
 		</script>
@@ -108,6 +108,60 @@
 		}
 		</script>
 	</c:forEach>
+	<script type="text/javascript">
+		var dataTabAll = [];
+		dataTabAll[1] = dataTabMonth;
+		var tabTrois = []; var tabSix = []; var tabDouze = [];	
+		
+		var ObjetsommeTrois = $.extend({}, dataTabMonth[0]);
+ 		var ObjetsommeSix = $.extend({}, dataTabMonth[0]);
+		var ObjetsommeDouze = $.extend({}, dataTabMonth[0]);
+
+		for	(index = 1; index < dataTabMonth.length; index++) {
+			if((index+1) % 3 == 0){
+				tabTrois.push(ObjetsommeTrois);
+				
+				var ObjetsommeTrois = $.extend({}, dataTabMonth[0]);
+				ObjetsommeTrois.y = dataTabMonth[index].y;
+				ObjetsommeTrois.a = 0;
+				ObjetsommeTrois.b = 0;
+				ObjetsommeTrois.c = 0;
+				
+			}
+			if((index+1) % 6 == 0){
+				tabSix.push(ObjetsommeSix);
+				var ObjetsommeSix = $.extend({}, dataTabMonth[0]);
+				ObjetsommeSix.y = dataTabMonth[index].y;
+				ObjetsommeSix.a = 0;
+				ObjetsommeSix.b = 0;
+				ObjetsommeSix.c = 0;
+			}
+			if((index+1) % 12 == 0){
+				tabDouze.push(ObjetsommeDouze);
+				var ObjetsommeDouze = $.extend({}, dataTabMonth[0]);
+				ObjetsommeDouze.y = dataTabMonth[index].y;
+				ObjetsommeDouze.a = 0;
+				ObjetsommeDouze.b = 0;
+				ObjetsommeDouze.c = 0;
+			}
+
+			ObjetsommeTrois.a += parseFloat(dataTabMonth[index].a);
+			ObjetsommeTrois.b += parseFloat(dataTabMonth[index].b);
+			ObjetsommeTrois.c += parseFloat(dataTabMonth[index].c);
+			 
+			ObjetsommeSix.a += parseFloat(dataTabMonth[index].a);
+			ObjetsommeSix.b += parseFloat(dataTabMonth[index].b);
+			ObjetsommeSix.c += parseFloat(dataTabMonth[index].c);
+			
+			ObjetsommeDouze.a += parseFloat(dataTabMonth[index].a);
+			ObjetsommeDouze.b += parseFloat(dataTabMonth[index].b);
+			ObjetsommeDouze.c += parseFloat(dataTabMonth[index].c);
+
+		} 
+		dataTabAll[3] = tabTrois;
+	 	dataTabAll[6] = tabSix;
+		dataTabAll[12] = tabDouze;
+	</script>
 </body>
 
 
@@ -128,7 +182,8 @@ $('.bouton').on('click', function() {
 
 	    labels: ['Confort', 'Confort specifique', 'Privilege', 'Privilege specifique', 'TM+', 'TM+   specifique'],
 	    hideHover: 'auto',
-	    behaveLikeLine: true
+	    behaveLikeLine: true,
+	    yLabelFormat: function (x) { return x.toString();}
 	};
 
       config.element = 'formules';
@@ -140,6 +195,7 @@ $('.bouton').on('click', function() {
     		    ykeys: ['a'],
     		    labels: ['Total Remboursement'],
     		    hideHover: 'auto',
+    		    resize: true,
     		    yLabelFormat: function (x) { return x.toString();}
     		};
       
@@ -153,6 +209,7 @@ $('.bouton').on('click', function() {
   		    ykeys: ['c'],
   		    labels: ['Bénéficiaires'],
   		  	yLabelFormat: function (x) { return x.toString();},
+  		  	resize: true,
   		    hideHover: 'auto'
   		};
 	  config.element = 'somme_benef_chart';
@@ -165,6 +222,7 @@ $('.bouton').on('click', function() {
   		    ykeys: ['b'],
   		    labels: ['Moyenne remboursement'],
   		    hideHover: 'auto',
+  		  	resize: true,
   		  	yLabelFormat: function (x) { return x.toString();},
   		    postUnits: '€'
   		};
@@ -185,12 +243,9 @@ $('.bouton').on('click', function() {
 		Morris.Area(config);
 		
 		function triTab(inter){
-			var i = 0;
-			for	(index = 0; index < dataTabMonth.length; index++) {
-			    console.log(index % inter, i);
-			    i++;
-			} 
-			console.log(dataTab);
+			remb_chart.setData(dataTabAll[inter]);
+			somme_benef_chart.setData(dataTabAll[inter]);
+			moy_remb_chart.setData(dataTabAll[inter]);
 		}
      
       
@@ -198,7 +253,6 @@ $('.bouton').on('click', function() {
       $('.Remboursements').toggle();
       
       
-
 
 </script>
 </html>
