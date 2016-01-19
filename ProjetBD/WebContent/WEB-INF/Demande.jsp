@@ -109,6 +109,7 @@
 				         		<label class="col-lg-7 control-label" style="color: ${errorColor}; font-weight: bold;"><c:out value="${error}"/></label>
 				          </div>
 				          <hr>
+				          
 				          <div class="form-group">
 				            <label class="col-md-4 control-label"></label>
 				            <div class="col-md-8">

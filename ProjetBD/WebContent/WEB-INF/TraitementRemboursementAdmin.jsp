@@ -131,6 +131,7 @@
 						
 						<div class="form-group">
 						 	<input type="hidden" name="id" value="${ benef.num }">
+						 	<input type="hidden" name="email" value="${benef.email}">
 						 	<input type="hidden" name="dateC" value="${ demande.date_creation }">
 						  	<label class="col-lg-8 control-label"></label>
 						  	<div class="col-md-8">

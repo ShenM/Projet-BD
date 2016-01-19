@@ -30,9 +30,10 @@ import com.sdzee.dao.DAOException;
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.DemandeRemboursementDAO;
 import com.sdzee.dao.DemandeRemboursementDAOImpl;
-
+import java.util.*;
 import javax.mail.*;
-
+import javax.mail.internet.*;
+import javax.activation.*;
 
 
 
@@ -173,7 +174,45 @@ public class Demande extends HttpServlet {
 						//On insert la demande en base
 						rembDAO.insert(remboursement);
 						
+						//Identifiant gmail
+						final String username = "poly.mutuelle@gmail.com";
+						final String password = "#Tototata69";
 						
+						// Utilisation du smtp de google
+						Properties props = new Properties();
+						props.put("mail.smtp.auth", "true");
+						props.put("mail.smtp.starttls.enable", "true");
+						props.put("mail.smtp.host", "smtp.gmail.com");
+						props.put("mail.smtp.port", "587");
+
+						//Authentification
+						Session httpSession = Session.getInstance(props,
+						  new javax.mail.Authenticator() {
+							protected PasswordAuthentication getPasswordAuthentication() {
+								return new PasswordAuthentication(username, password);
+							}
+						  });
+
+						try {
+							//définition du message, destinataire
+							Message message = new MimeMessage(httpSession);
+							message.setFrom(new InternetAddress("poly.mutuelle@gmail.com"));
+							message.setRecipients(Message.RecipientType.TO,
+								InternetAddress.parse(benef.getEmail()));
+							message.setSubject("Demande de remboursement");
+							message.setText(benef.getPrenom()+" " +benef.getNom()+","
+								+ "\n\nVotre demande de remboursement a bien été effectuée.\n"
+								+remboursement.getActeLibelle() + " : "+remboursement.getFraisReels()+ "€ \n"
+								+ "Nous traitons actuellement votre demande, vous serez notifié de notre décision sous peu.\n\n"
+								+ "Cordialement,\n\nL'équipe Poly Mutuelle.");
+							//Envvoi
+							Transport.send(message);
+
+							System.out.println("Done");
+
+						} catch (MessagingException e) {
+							throw new RuntimeException(e);
+						}
 					}
 					
 
