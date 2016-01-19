@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	
 	
 	
@@ -11,13 +12,20 @@
   	<hr>
 	<div class="row">
       
-      <!-- edit form column -->
-      <div class="col-md-9 personal-info">
-        <div class="alert alert-info alert-dismissable">
-          <a class="panel-close close" data-dismiss="alert">×</a> 
-          <i class="fa fa-coffee"></i>
-          ${success}
-        </div>
+      	<!-- edit form column -->
+      	<div class="col-md-9 personal-info">
+			<c:choose>
+  				<c:when test="${success != ''}">
+    				<div class="alert alert-info alert-dismissable">
+			          <a class="panel-close close" data-dismiss="alert">×</a> 
+			          <i class="fa fa-coffee"></i>
+			          ${success}
+				    </div>
+ 				</c:when>
+ 				<c:otherwise>
+ 				</c:otherwise>
+ 			</c:choose>
+
         <h3>Informations Personelles</h3>
         
         <form class="form-horizontal" method="post" action="EditerProfile">
