@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,8 +34,8 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 															+"WHERE FLAG_ETAT = '0' "
 															+"ORDER BY date_creation ASC";										
 	
-	private static final String SQL_UPDATE_FLAG_ETAT = "UPDATE DEMANDE_REMBOURSEMENT SET FLAG_ETAT = ? WHERE BENEF_ID = ? AND DATE_CREATION = ?";
-	private static final String SQL_UPDATE_FLAG_ETAT_REJET = "UPDATE DEMANDE_REMBOURSEMENT SET FLAG_ETAT = ?, MOTIF_REJET = ? WHERE BENEF_ID = ? AND DATE_CREATION = ?";
+	private static final String SQL_UPDATE_FLAG_ETAT = "UPDATE DEMANDE_REMBOURSEMENT SET FLAG_ETAT = ? WHERE BENEF_ID = ? AND TO_CHAR(DATE_CREATION , 'DD/MM/YYYY HH24:MI:SS') = ?";
+	private static final String SQL_UPDATE_FLAG_ETAT_REJET = "UPDATE DEMANDE_REMBOURSEMENT SET FLAG_ETAT = ?, MOTIF_REJET = ? WHERE BENEF_ID = ? AND TO_CHAR(DATE_CREATION , 'DD/MM/YYYY HH24:MI:SS') = ?";
 
 	private static final String SQL_SELECT = "SELECT "
 											+"benef_id, "
@@ -47,8 +48,10 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 											+"facture, "
 											+"date_creation "
 											+ "FROM DEMANDE_REMBOURSEMENT "
-											+ "WHERE BENEF_ID = ? AND DATE_CREATION = ?";
+											+ "WHERE BENEF_ID = ? AND TO_CHAR(DATE_CREATION , 'DD/MM/YYYY HH24:MI:SS') = ?";
 	
+    public static final SimpleDateFormat formatterForm = new SimpleDateFormat("DD/MM/YYYY HH:mm:ss");
+
 	public DemandeRemboursementDAOImpl( DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
 		
@@ -92,7 +95,7 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
             preparedStatement = initialisationRequetePreparee( connexion, SQL_UPDATE_FLAG_ETAT, false,
             		flag.getVal(),
             		benefId,
-            		new java.sql.Timestamp(dateCreation.getTime()));
+            		formatterForm.format(dateCreation.getTime()));
             
            preparedStatement.executeUpdate();
         } catch ( SQLException e ) {
@@ -115,7 +118,7 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
             		flag.getVal(),
             		motifRejet,
             		benefId,
-            		new java.sql.Timestamp(dateCreation.getTime()));
+            		formatterForm.format(dateCreation.getTime()));
             
            preparedStatement.executeUpdate();
         } catch ( SQLException e ) {
@@ -198,8 +201,8 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
         
         try{
         	connexion = daoFactory.getConnection();	
-            
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT, false, benefId, new java.sql.Timestamp(dateCreation.getTime()));
+
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT, false, benefId, formatterForm.format(dateCreation));
             
             resultSet = preparedStatement.executeQuery();
             

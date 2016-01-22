@@ -41,7 +41,7 @@ public class TraitementRemboursementAdmin extends HttpServlet{
     private static final String ATT_ERR_COL = "errorColor";
     private static final String ADMIN = "admin";
 
-    public static final SimpleDateFormat formatterForm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    public static final SimpleDateFormat formatterForm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS");
 
     
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
