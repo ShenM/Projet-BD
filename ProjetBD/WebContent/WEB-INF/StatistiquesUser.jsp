@@ -65,7 +65,7 @@
 											<c:set var="secu" value="${secu + frais.value.rembSecu}" />
 											<c:set var="ch" value="${ch + frais.value.aCharge}" />
 										</c:forEach>
-										<option onclick='fonction("${mut}", "${secu}", "${ch}")'>Tous</option>
+										<option selected=true onclick='fonction("${mut}", "${secu}", "${ch}")'>Tous</option>
 										
 									</select>
 								</div>
