@@ -24,6 +24,7 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+	
 
 
 
@@ -44,35 +45,30 @@
 					<div class="col-lg-6">
 						<div class="panel panel-info contrat-pannel ">
 							<div class="panel-heading">
-								<h3 class="panel-title">
-								Frais et remboursements par utilisateurs
-								</h3>
+								<h3 class="panel-title">Frais et remboursements par
+									utilisateurs</h3>
 							</div>
 							<div class="panel-body">
-												<div class="row info-contrat" style="margin-bottom: 10px">
-						<c:set var="mut" value="0" />
-						<c:set var="secu" value="0" />
-						<c:set var="ch" value="0" />
-						<c:forEach var="frais" items="${frais}">
-							<%-- <div class="alert alert-warning col-lg-2" ><b>${frais.key}</b></div> --%>
-							<button type="button" class="alert btn-warning col-lg-2"
-								style="margin-right: 10px; background-color: #FCF8E3"
-								onclick='fonction("${frais.value.rembMut}", "${frais.value.rembSecu}", "${frais.value.aCharge}")'>
-								<span class="glyphicon glyphicon-user"
-									style="color: #8A6D3B; font-size: 18px;"><span
-									style="vertical-align: middle; margin-right: 10px;"></span>${frais.key}</span>
-							</button>
-							<c:set var="mut" value="${mut + frais.value.rembMut}" />
-							<c:set var="secu" value="${secu + frais.value.rembSecu}" />
-							<c:set var="ch" value="${ch + frais.value.aCharge}" />
-						</c:forEach>
-						<button style="background-color: #E2DFCC" type="button" class="alert btn-warning col-lg-2"
-							onclick='fonction("${mut}", "${secu}", "${ch}")'>
-							<span class="glyphicon glyphicon-user"
-								style="color: #8A6D3B; font-size: 18px;"><span
-								style="vertical-align: middle; margin-right: 10px;"></span>Tous</span>
-						</button>
-					</div>
+				            <label class="col-lg-4 control-label">Bénéficiaire :</label>
+								<div class="row info-contrat" style="margin-bottom: 10px; margin-right: 20px;">
+									<c:set var="mut" value="0" />
+									<c:set var="secu" value="0" />
+									<c:set var="ch" value="0" />
+									<select class="select_benef form-control"
+										data-placeholder="Choisir un bénéficiaire" name="benef">
+										
+										<c:forEach items="${frais}" var="frais">
+											<option
+												onclick='fonction("${frais.value.rembMut}", "${frais.value.rembSecu}", "${frais.value.aCharge}")'>
+												${frais.key}</option>
+											<c:set var="mut" value="${mut + frais.value.rembMut}" />
+											<c:set var="secu" value="${secu + frais.value.rembSecu}" />
+											<c:set var="ch" value="${ch + frais.value.aCharge}" />
+										</c:forEach>
+										<option onclick='fonction("${mut}", "${secu}", "${ch}")'>Tous</option>
+										
+									</select>
+								</div>
 								<div id="pie_chart"></div>
 							</div>
 						</div>
@@ -80,9 +76,7 @@
 					<div class="col-lg-6">
 						<div class="panel panel-info contrat-pannel ">
 							<div class="panel-heading">
-								<h3 class="panel-title">
-									Frais et remboursement par mois
-								</h3>
+								<h3 class="panel-title">Frais et remboursement par mois</h3>
 							</div>
 							<div class="panel-body">
 								<div id="pie_chart"></div>
@@ -109,9 +103,8 @@
 					<div class="col-lg-6">
 						<div class="panel panel-info contrat-pannel">
 							<div class="panel-heading">
-								<h3 class="panel-title">
-									Comparaison des frais et remboursements
-								</h3>
+								<h3 class="panel-title">Comparaison des frais et
+									remboursements</h3>
 							</div>
 							<div class="panel-body">
 								<div id="area_chart"></div>
