@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.TreeMap;
 
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+
 import com.sdzee.beans.Regions;
 
 public class RegionsDAOImpl implements RegionsDAO{
@@ -39,9 +42,15 @@ public class RegionsDAOImpl implements RegionsDAO{
         try {
             connexion = daoFactory.getConnection();
 
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_TOP_3, false);
             
-            resultSet = preparedStatement.executeQuery();
+            OracleCallableStatement cs = (OracleCallableStatement)connexion.prepareCall("{call REGIONTOPREMB(?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            
+            cs.execute();
+            resultSet = cs.getCursor(1);
+//            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_TOP_3, false);
+//            
+//            resultSet = preparedStatement.executeQuery();
             
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
             while ( resultSet.next() != false) {
