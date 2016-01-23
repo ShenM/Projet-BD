@@ -2,10 +2,7 @@ package com.sdzee.dao;
 
 import static com.sdzee.dao.DAOUtilitaire.fermeturesSilencieuses;
 import static com.sdzee.dao.DAOUtilitaire.initialisationRequetePreparee;
-import oracle.jdbc.pool.OracleDataSource;
-import oracle.jdbc.*;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +17,9 @@ import com.sdzee.beans.ChartAdminBenef;
 import com.sdzee.beans.ChartFraisByBenef;
 import com.sdzee.beans.ChartFraisByDate;
 import com.sdzee.beans.PrestationsSante;
+
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 
 public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	private DAOFactory daoFactory;
