@@ -26,17 +26,8 @@
 			<div class="panel-content"> Mes Statistiques 
 				<span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></div>
 		</div>
-	</a>
-		<a href="#">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<span class="glyphicon glyphicon-print"></span>
-			</div>
-			<div class="panel-content"> Editer mes attestations-tier payant 
-				<span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></div>
-		</div>
-	</a>
-		<a href="Demande">
+
+	<a href="Demande">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-euro"></span>

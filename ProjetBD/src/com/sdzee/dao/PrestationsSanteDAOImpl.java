@@ -3,7 +3,6 @@ package com.sdzee.dao;
 import static com.sdzee.dao.DAOUtilitaire.fermeturesSilencieuses;
 import static com.sdzee.dao.DAOUtilitaire.initialisationRequetePreparee;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +17,9 @@ import com.sdzee.beans.ChartAdminBenef;
 import com.sdzee.beans.ChartFraisByBenef;
 import com.sdzee.beans.ChartFraisByDate;
 import com.sdzee.beans.PrestationsSante;
+
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 
 public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	private DAOFactory daoFactory;
@@ -372,9 +374,14 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         try {
             connexion = daoFactory.getConnection();
 
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_MOYENNE_SEXE, false);
+            OracleCallableStatement cs = (OracleCallableStatement)connexion.prepareCall("{call MOYPRESTAPARSEXE(?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
             
-            resultSet = preparedStatement.executeQuery();
+            cs.execute();
+            resultSet = cs.getCursor(1);
+//            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_MOYENNE_SEXE, false);
+//            
+//            resultSet = preparedStatement.executeQuery();
             
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
             while ( resultSet.next() != false) {
