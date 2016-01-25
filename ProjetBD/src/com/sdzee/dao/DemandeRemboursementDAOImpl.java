@@ -56,7 +56,8 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 		this.daoFactory = daoFactory;
 		
 	}
-
+	
+	/*=====================================================================================*/
 	@Override
 	public void insert(DemandeRemboursement bean) throws DAOException {
 		Connection connexion = null;
@@ -84,6 +85,7 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
         } 
 	}
 
+	/*=====================================================================================*/
 	@Override
 	public void updateFlagTraite(int benefId, Date dateCreation, DemandeRemboursementFlagEtat flag) throws DAOException {
 		Connection connexion = null;
@@ -106,6 +108,7 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 		
 	}
 	
+	/*=====================================================================================*/
 	@Override
 	public void updateFlagTraiteRejet(int benefId, Date dateCreation, DemandeRemboursementFlagEtat flag, String motifRejet) throws DAOException {
 		Connection connexion = null;
@@ -129,6 +132,7 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 		
 	}
 
+	/*=====================================================================================*/
 	@Override
 	public List<DemandeRemboursement> getDemandesNonTraite() throws DAOException {
 		Connection connexion = null;
@@ -158,6 +162,7 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
         }  
 	}
 
+	/*=====================================================================================*/
 	private DemandeRemboursement map(ResultSet resultSet) throws SQLException {
 		DemandeRemboursement bean = new DemandeRemboursement();
 		
@@ -174,6 +179,7 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 		return bean;
 	}
 
+	/*=====================================================================================*/
 	private DemandeRemboursement mapRejet(ResultSet resultSet) throws SQLException {
 		DemandeRemboursement bean = new DemandeRemboursement();
 		
@@ -190,6 +196,8 @@ public class DemandeRemboursementDAOImpl implements DemandeRemboursementDAO{
 		
 		return bean;
 	}
+	
+	/*=====================================================================================*/
 	
 	@Override
 	public DemandeRemboursement get(int benefId, Date dateCreation) throws DAOException {
