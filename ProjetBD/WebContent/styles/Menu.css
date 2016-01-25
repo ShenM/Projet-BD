@@ -1,6 +1,6 @@
 #menu .panel-heading{
-padding:25px;
-height:90px;
+padding:15px;
+height:70px;
 }
 #menu .panel{
 vertical-align:middle;
@@ -9,7 +9,7 @@ vertical-align:middle;
 #menu .panel-content{
 padding:10px;
 background-color:#F5F5F5;
-height:50px;
+height:40px;
 }
 
 #menu a:hover{
