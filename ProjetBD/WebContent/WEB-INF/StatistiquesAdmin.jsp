@@ -43,14 +43,14 @@
 	   				</div>
 	   			</div>
 			    <div class="chart Contrats">
-					<div class="col-sm-6 text-center" style="margin-bottom:10px">
-				    	<h3><label class="label label-success">Répartition des formules par an</label></h3>
-				    	<div id="formules" ></div>
-	   				</div>
-	   				<div class="col-sm-6 text-center" style="margin-bottom:10px">
+					<div class="col-sm-10 text-center" style="margin-bottom:10px">
 				    	<h3><label class="label label-success">Les actes les plus pratiqués par région</label></h3>
 				    	<div id="graphRegionTTT" ></div>
 	   				</div>
+					<div class="col-sm-6 text-center" style="margin-bottom:10px">
+				    	<h3><label class="label label-success">Répartition des formules par an</label></h3>
+				    	<div id="formules" ></div>
+	   				</div>   				
 	   			</div>
     			<div class="chart Remboursements"> 
 	   				<div class="col-sm-6 text-center chart Remboursements" style="margin-bottom:10px">
@@ -66,12 +66,12 @@
 				    	<div id="moy_remb_chart" ></div>
 	   				</div>
 	   				<div class="col-sm-6 text-center" style="margin-bottom:10px">
-		   				<h4><label class="label label-info">Tous les remboursements sur: </label></h4>
+		   				<h3><label class="label label-success">Tous les remboursements sur: </label></h3>
 				    	<div class="row" style="margin-bottom:10px">
-							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(12)">1 an</button>
-							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(6)">6 mois</button>
-							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(3)">3 mois</button>
-							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(1)">1 mois</button>
+							<button type="button" class="btn btn-info btn-sm" onclick="triTab(12)">1 an</button>
+							<button type="button" class="btn btn-info btn-sm" onclick="triTab(6)">6 mois</button>
+							<button type="button" class="btn btn-info btn-sm" onclick="triTab(3)">3 mois</button>
+							<button type="button" class="btn btn-info btn-sm" onclick="triTab(1)">1 mois</button>
 						</div>
 					</div>
 						
@@ -79,9 +79,14 @@
 			</div>
 			<div class="col-lg-2">
 				<div class="panel panel-primary">
-					<div class="panel-heading">Informations :</div>
+					<div class="panel-heading text-center"><b>Astuces</b></div>
 					<div class="panel-content" style="padding:10px;">
-					<p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker
+					<p>
+						<ul>
+						<li>Cliquer sur les <b>boutons orange</b> pour changer le <b>domaine</b> représenté.<br><br></li>
+						<li>Les <b>boutons bleu ciel</b> permettent de changer <b>l'interval de temps</b> représenté.<br><br></li>
+						<li><b>Survoler un graphique</b> avec la souris affiche des <b>informations complémentaires</b></li>
+						</ul>
 					</p>
 					</div>
 				</div>
@@ -189,7 +194,6 @@ $('.bouton').on('click', function() {
 	    data: tabFormules,
 	    xkey: 'y',
 	    ykeys: ['a', 'b', 'c', 'd', 'e', 'f'],
-
 	    labels: ['Confort', 'Confort specifique', 'Privilege', 'Privilege specifique', 'TM+', 'TM+   specifique'],
 	    hideHover: 'auto',
 	    behaveLikeLine: true
@@ -203,6 +207,9 @@ $('.bouton').on('click', function() {
     		    xkey: 'y',
     		    ykeys: ['a'],
     		    labels: ['Total Remboursement'],
+    		    lineColors: [ 
+    		  		           '#0b62a4'
+    		  			],
     		    hideHover: 'auto',
     		    resize: true,
     		    yLabelFormat: function (x) { return x.toString();}
@@ -217,6 +224,9 @@ $('.bouton').on('click', function() {
   		    xkey: 'y',
   		    ykeys: ['c'],
   		    labels: ['Bénéficiaires'],
+  		  	lineColors: [ 
+  	  		           '#7a92a3'
+  	  			],
   		  	yLabelFormat: function (x) { return x.toString();},
   		  	resize: true,
   		    hideHover: 'auto'
@@ -230,6 +240,9 @@ $('.bouton').on('click', function() {
   		    xkey: 'y',
   		    ykeys: ['b'],
   		    labels: ['Moyenne remboursement'],
+  		 	lineColors: [ 
+  	  		           '#4da74d'
+  	  			],
   		    hideHover: 'auto',
   		  	resize: true,
   		  	yLabelFormat: function (x) { return x.toString();},
@@ -245,7 +258,11 @@ $('.bouton').on('click', function() {
   		    labels: ['Nombre de bénéficiaires'],
   		  	yLabelFormat: function (x) { return x.toString();},
   		    hideHover: 'auto',
-  		  parseTime: false,
+  		  	parseTime: false,
+  			xLabelAngle: 45,
+  			lineColors: [ 
+  		           '#0b62a4'
+  			],
   		    behaveLikeLine: true
   		};
 		config.element = 'bar_chart';
@@ -278,9 +295,13 @@ $('.bouton').on('click', function() {
 			    {x: '${chartRegions.label2}', y: ${chartRegions.nb2}},
 			    {x: '${chartRegions.label3}', y: ${chartRegions.nb3}}
 			  ],
+			  barColors: [ 
+			           '#0b62a4'
+				],
 			  xkey: 'x',
 			  ykeys: ['y'],
-			  labels: ['Y']
+			  labels: ['Y'],
+	      	  hideHover: 'auto'
 			});
      
       

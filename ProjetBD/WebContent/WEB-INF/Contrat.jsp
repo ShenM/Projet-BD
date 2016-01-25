@@ -24,31 +24,6 @@
 				<jsp:include page="Menu.jsp" />
 			</div>
 			<div class="col-lg-8">
-
-				<!-- <div class="panel panel-info">
-				<div class = "panel-heading">
-					<table >
-		            	<tbody class="info-contrat">
-		            		<tr>
-		            			<td><b>Contrat </b></td>
-		            			<td>123626</td>
-		            		</tr>
-		            		<tr>
-		            			<td><b>fromule</b> </td>
-		            			<td>privilège</td>
-		            		</tr>
-		            		<tr>
-		            			<td><b>Garantie:</b> </td>
-		            			<td>oui</td>
-		            		</tr>
-		            	</tbody>
-		            </table>
-				
-				</div>
-				</div> -->
-				
-				
-				
 				<c:set var="val" value="1"/>
 				<c:forEach var="cont" items="${contrat}">	
 					<c:choose> 
@@ -71,9 +46,7 @@
 			                    <h3 class="panel-title">
 			                        <span class="glyphicon glyphicon-user"></span>${cont.key.nom}   ${cont.key.prenom}
 			                    </h3>
-			                </div>
-			                
-			                
+			                </div> 
 			                <div class="panel-body">
 			                	<table class="table table-contrat-information">
 			                		<tbody>
@@ -88,55 +61,18 @@
 			                	</table>	
 			                </div>
 		                	<div class="panel-footer"></div>
-		 				</div>
-		 				
+		 				</div>		 				
 					</div>		   
 				</c:forEach>
-				
-				<!-- <div class="col-lg-5">
-					<div class="panel panel-info contrat-pannel ">						
-						<div class="panel-heading">
-		                    <h3 class="panel-title">
-		                        <span class="glyphicon glyphicon-user"></span>Robert DUPONT
-		                    </h3>
-		                </div>
-		                <div class="panel-body">
-		                	<table class="table table-contrat-information">
-		                		<tbody>
-		                			<tr><td>Date de naissance:</td><td> 12/02/1990</td></tr>
-				                	<tr><td>Sexe:</td><td> Homme</td></tr>
-									<tr><td>Email:</td><td> dupon@gmail.com</td></tr>
-									<tr><td>Telephone:</td><td> 1232347667</td></tr>
-									<tr><td>Numéro bénéficiaire:</td><td> 3</td></tr>
-									<tr><td>Type:</td><td> Assuré</td></tr>
-									<tr><td>Primes acquises:</td><td> 153€</td></tr>
-		                		</tbody>
-		                	</table>
-			                	
-		                </div>
-	                	<div class="panel-footer "></div>
-	 				</div>
-				</div> -->
-
-				<div>								
+				<div class="col-lg-12">								
 					<a  href="Accueil"><button type="button" class="btn btn-default pull-right"  style="margin-bottom: 20px;">Retour</button></a>
 				</div>
 				
 			</div>
-				
-				
-
-<!-- 
-CONTRAT: ( num, formule, annee paiement, garantie)
-BENEF(Nom, prenom, sexe, date naissance, email, tel, num benef sur contrat, type benef, primes acquises) -->
-
-
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />
-				<jsp:include page="Info2.jsp" />
 			</div>
 		</div>
-		
 	</div>
 
 </body>

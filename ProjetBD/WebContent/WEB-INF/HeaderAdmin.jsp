@@ -10,12 +10,12 @@
 			</div>
 		</div>
 		<div class="col-lg-4 user pull-right">
-			<div class="user-avatar col-lg-4">
+			<div class="user-avatar col-lg-5">
 				<img class="user-icon" src="res/avatar.jpg">
 			</div>
-			<div class="user-name col-lg-5"><p><c:out value="${admin.id}"/></p></div>
-			<div class="logout col-lg-3">
-				<a class="glyphicon glyphicon-off" href="Deconnexion" ></a>
+			<div class="user-name col-lg-3"><p><c:out value="${admin.id}"/></p></div>
+			<div class="logout col-lg-2">
+				<a class="glyphicon glyphicon-off" href="Deconnexion"></a>
 			</div>
 
 
