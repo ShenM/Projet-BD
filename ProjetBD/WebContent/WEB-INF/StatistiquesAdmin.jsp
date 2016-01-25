@@ -36,13 +36,20 @@
 				    	<h3><label class="label label-success">Répartition par âge des bénéficiaires</label></h3>
 				    	<div id="bar_chart" ></div>
 	   				</div>
+	   				<div class="col-sm-6 text-center" style="margin-bottom:10px">
+				
+				    	<h3><label class="label label-success">Nombre moyen de soins partiqué par sexe</label></h3>
+				    	<div id="graphSexe" ></div>
+	   				</div>
 	   			</div>
 			    <div class="chart Contrats">
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
-				
 				    	<h3><label class="label label-success">Répartition des formules par an</label></h3>
 				    	<div id="formules" ></div>
-
+	   				</div>
+	   				<div class="col-sm-6 text-center" style="margin-bottom:10px">
+				    	<h3><label class="label label-success">Les actes les plus pratiqués par région</label></h3>
+				    	<div id="graphRegionTTT" ></div>
 	   				</div>
 	   			</div>
     			<div class="chart Remboursements"> 
@@ -96,18 +103,23 @@
 		</script>
 	</c:forEach>
 	<c:forEach var="f" items="${formules}">
-		<script type="text/javascript">
-		if (annee == ${f.annee}){
-			formule.push(${f.nb});
+		<script type="text/javascript"> // permet de trier les formule par année sous forme de tableau d'objet (Pour les morris chart)
+ 		if(annee == undefined){
+			annee = "${f.annee}";
+		}
+		if (annee == "${f.annee}"){
+			formule.push("${f.nb}");
 		}else{
-			var objet = {y:annee, a:formule[0], b:formule[1], c:formule[2], d:formule[3], e:formule[4], f:formule[5]}; 
-			tabFormules.push(objet);
-			var formule = [];
-			formule.push(${f.nb});
-			annee = ${f.annee};
+			tabFormules.push({y:annee, a:formule[0], b:formule[1], c:formule[2], d:formule[3], e:formule[4], f:formule[5]});
+			annee = "${f.annee}";
+			formule = [];
+			formule.push("${f.nb}");
 		}
 		</script>
 	</c:forEach>
+	<script type="text/javascript"> //push dans le tab le dernier element du foreach.
+		tabFormules.push({y:annee, a:formule[0], b:formule[1], c:formule[2], d:formule[3], e:formule[4], f:formule[5]});
+	</script>
 	<script type="text/javascript">
 		var dataTabAll = [];
 		dataTabAll[1] = dataTabMonth;
@@ -173,8 +185,6 @@ $('.bouton').on('click', function() {
 	$('.chart').hide();
 	$('.' + $(this).text()).toggle();
 });
-
- 	tabFormules.shift();
  	config = {
 	    data: tabFormules,
 	    xkey: 'y',
@@ -182,8 +192,7 @@ $('.bouton').on('click', function() {
 
 	    labels: ['Confort', 'Confort specifique', 'Privilege', 'Privilege specifique', 'TM+', 'TM+   specifique'],
 	    hideHover: 'auto',
-	    behaveLikeLine: true,
-	    yLabelFormat: function (x) { return x.toString();}
+	    behaveLikeLine: true
 	};
 
       config.element = 'formules';
@@ -247,6 +256,32 @@ $('.bouton').on('click', function() {
 			somme_benef_chart.setData(dataTabAll[inter]);
 			moy_remb_chart.setData(dataTabAll[inter]);
 		}
+		
+		
+		Morris.Donut({
+		  element: 'graphSexe',
+		  colors: [ 
+		           '#0b62a4',
+		           '#ff228a'
+			],
+		  data: [
+		    {value: ${chartSexe.moyH}, label: 'Homme'},
+		    {value: ${chartSexe.moyF}, label: 'Femme'}
+		  ],
+		  formatter: function (x) { return x }
+		});
+
+		Morris.Bar({
+			  element: 'graphRegionTTT',
+			  data: [
+			    {x: '${chartRegions.label1}', y: ${chartRegions.nb1}},
+			    {x: '${chartRegions.label2}', y: ${chartRegions.nb2}},
+			    {x: '${chartRegions.label3}', y: ${chartRegions.nb3}}
+			  ],
+			  xkey: 'x',
+			  ykeys: ['y'],
+			  labels: ['Y']
+			});
      
       
       $('.chart').hide();

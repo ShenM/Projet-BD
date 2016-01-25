@@ -30,7 +30,7 @@ public class AuthAdmin extends HttpServlet {
 
         if ( auth.getErreurs().isEmpty() ) {
             session.setAttribute( ATT_SESSION_ADMIN, admin );
-            response.sendRedirect("/ProjetBD/AccueilAdmin");
+            response.sendRedirect("/ProjetBD/StatistiquesAdmin");
 
         } else {
             session.setAttribute( ATT_SESSION_ADMIN, null );

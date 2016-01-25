@@ -12,8 +12,8 @@
 			
 	</div>
 </div>
-	<div class="col-sm-6 text-center chart Remboursements">
-<div class="col-lg-4" id="graphRegionTTT" style="height: 300px; width: 750px; text-align:center;">	
+<div class="col-sm-6 text-center chart Remboursements">
+	<div class="col-lg-4" id="graphRegionTTT" style="height: 300px; width: 750px; text-align:center;">	
 		<h3><label class="label label-success">Les actes les plus pratiqués par région</label></h3>
 	</div>
 </div>

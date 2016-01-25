@@ -6,7 +6,7 @@
 				<img src="res/logoPolyMut.png">
 			</div>
 			<div class="col-lg-9">
-				<div class="title-text"><a href="AccueilAdmin"><p>Mutuelle Polytech</p></a></div>
+				<div class="title-text"><a href="StatistiquesAdmin"><p>Mutuelle Polytech</p></a></div>
 			</div>
 		</div>
 		<div class="col-lg-4 user pull-right">

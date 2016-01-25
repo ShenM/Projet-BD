@@ -50,8 +50,6 @@ public class AccueilAdmin extends HttpServlet{
 				session.setAttribute(ATT_SESSION_CHART_REGION, chartRegions);
 			}
 			
-			
-			
 			request.setAttribute(ADMIN, session.getAttribute(ATT_SESSION_ADMIN));
 			request.setAttribute(CHARTSEXE, chartSexe);
 			request.setAttribute(CHARTREGIONS, chartRegions);
