@@ -16,6 +16,8 @@ public class AdministrateurDAOImpl implements AdministrateurDAO{
 		this.daoFactory = daoFactory;
 	}
 	
+	/* ======================================================================================================= */
+	
 	public String recupererMotDePasse(String id){
 		String motDePasse = "";
 		

@@ -21,6 +21,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		this.daoFactory = daoFactory;
 	}
 	
+	/*=====================================================================================*/
+	
 	public String recupererMotDePasse(int id){
 		String motDePasse = "";
 		
@@ -48,6 +50,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }   		
 	}
+	
+	/*=====================================================================================*/
 	
 	public void modifier(String password, int benefid){
 		Connection connexion = null;

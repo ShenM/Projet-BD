@@ -6,9 +6,10 @@
 	        <div class="col-sm-6 col-md-4 col-md-offset-4">
 	            <h1 class="text-center login-title">Connectez-vous à votre plateforme d'administration</h1>
 	            <div class="account-wall">
-	                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-	                    alt="">
+
 		            <c:forEach items="${erreur}" var="entry">
+        	            <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+	                    alt="">
 				    	Erreur: <c:out value="${entry.value}"/> <br />
 				    </c:forEach> 	
 	                <form class="form-signin" method="post" action="AuthentificationAdmin">

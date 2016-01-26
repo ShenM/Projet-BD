@@ -32,6 +32,8 @@ public class DAOFactory {
         this.password = password;
     }
 
+    /*=====================================================================================*/
+    
     /**
      * Methode permettant de récupérer les informations d'accès à la base, ainsi que le driver
      * @return
@@ -70,6 +72,8 @@ public class DAOFactory {
         DAOFactory instance = new DAOFactory( url, nomUtilisateur, motDePasse );
         return instance;
     }
+    
+    /*=====================================================================================*/
 
     /**
      * Methode permettant de récuperer l'objet de connexion 
