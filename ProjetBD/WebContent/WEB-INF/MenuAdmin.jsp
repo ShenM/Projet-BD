@@ -1,11 +1,12 @@
-<div id="menu">
+<div id="menu" class="col-lg-12">
 	<a href="StatistiquesAdmin">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-stats"></span>
 			</div>
 			<div class="panel-content"> Statistiques 
-				<span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></div>
+				<span class="glyphicon glyphicon-circle-arrow-right pull-right"></span>
+			</div>
 		</div>
 	</a>
 	<a href="TousRemboursementsAdmin">

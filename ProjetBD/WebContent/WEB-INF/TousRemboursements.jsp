@@ -27,6 +27,25 @@
 			</div>
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />
+				<div>
+					<div class="panel panel-info">
+						<div class="panel-heading text-center">
+							<h3 class="panel-title">
+				            	<span class="glyphicon glyphicon-info-sign" style="font-size:1.5em;padding-right: 10px;"></span><b>Astuces</b>
+				        	</h3>
+				        </div>
+						<div class="panel-content" style="padding:10px;">
+						<p>
+							<ul>
+							<li>Cliquer sur les <b>entêtes du tableau</b> pour le trier.<br><br></li>
+							<li>Appuyer sur la touche <b>ctrl</b> puis sur les <b>entêtes de colonnes</b> pour appliquer plusieurs tris.<br><br></li>
+							<li>Le bouton <b>choisir les champs visibles</b> permet de choisir les <b>colonnes affichées</b> dans le tableau.<br><br></li>
+							<li>Cliquer sur le <b>bouton bleu</b> pour choisir le <b>nombre de lignes</b> par page du tableau</li>
+							</ul>
+						</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		

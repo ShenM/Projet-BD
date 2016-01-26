@@ -32,4 +32,3 @@ var donut = Morris.Donut({
 	colors : [ '#0B62A4', '#4DA74D', '#FF4040' ]
 });
 </script>
-

@@ -11,7 +11,7 @@
 			<div class="user-avatar col-lg-4">
 				<img class="user-icon" src="res/avatar.jpg">
 			</div>
-			<div class="user-name col-lg-5"><p>${benef.prenom} ${benef.nom}</p></div>
+			<a class="user" href="MesInformations"><div class="user-name col-lg-5"><p>${benef.prenom} ${benef.nom}</p></div></a>
 			<div class="logout col-lg-3">
 				<a class="glyphicon glyphicon-off" href="Deconnexion" ></a>
 			</div>

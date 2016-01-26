@@ -16,20 +16,12 @@
 <link rel="stylesheet" href="styles/Demande.css">
 <link rel="stylesheet" href="styles/Contrat.css">
 
-
-<link rel="stylesheet"
-	href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<link rel="stylesheet"	href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-	
-
-
 
 </head>
-
-
 <body>
 
 	<jsp:include page="Header.jsp" />
@@ -55,7 +47,6 @@
 									<c:set var="ch" value="0" />
 									<select class="select_benef form-control"
 										data-placeholder="Choisir un bénéficiaire" name="benef">
-										
 										<c:forEach items="${frais}" var="frais">
 											<option
 												onclick='fonction("${frais.value.rembMut}", "${frais.value.rembSecu}", "${frais.value.aCharge}")'>
@@ -65,7 +56,6 @@
 											<c:set var="ch" value="${ch + frais.value.aCharge}" />
 										</c:forEach>
 										<option selected=true onclick='fonction("${mut}", "${secu}", "${ch}")'>Tous</option>
-										
 									</select>
 								</div>
 								<div id="pie_chart"></div>
@@ -119,10 +109,26 @@
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />
 			</div>
+			<div class="col-lg-2">
+				<div class="panel panel-info">
+					<div class="panel-heading text-center">
+						<h3 class="panel-title">
+			            	<span class="glyphicon glyphicon-info-sign" style="font-size:1.5em;padding-right: 10px;"></span><b>Astuces</b>
+			        	</h3>
+			        </div>
+					<div class="panel-content" style="padding:10px;">
+					<p>
+						<ul>
+						<li>Cliquer sur la <b>liste bénéficiaire</b> pour choisir les informations représentées.<br><br></li>
+						<li><b>Survoler un graphique</b> avec la souris affiche des <b>informations complémentaires</b></li>
+						</ul>
+					</p>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>
-
 </body>
 <script type="text/javascript">
 	var donut = Morris.Donut({
@@ -174,6 +180,6 @@
 	Morris.Bar(config);
 
 	config.element = 'area_chart';
-	Morris.Area(config);
+	Morris.Area(config); 
 </script>
 </html>

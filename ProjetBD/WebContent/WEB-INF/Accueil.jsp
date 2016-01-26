@@ -26,7 +26,24 @@
 				<jsp:include page="Remboursements.jsp" />
 			</div>
 			<div class="col-lg-2">
-				<jsp:include page="Info1.jsp" />
+				<jsp:include page="Info1.jsp" />       
+				<div class="panel panel-info">
+					<div class="panel-heading text-center">
+						<h3 class="panel-title">
+			            	<span class="glyphicon glyphicon-info-sign" style="font-size:1.5em;padding-right: 10px;"></span><b>Astuces</b>
+			        	</h3>
+			        </div>
+					<div class="panel-content" style="padding:10px;">
+					<p>
+						<ul>
+						<li>Cliquer sur les <b>lignes du tableau</b> pour afficher des <b>des informations suplémentaires</b>.<br><br></li>
+						<li>Cliquer à nouveau sur <b>la même ligne</b> pour <b>cacher</b> ces informations.<br><br></li>
+						<li><b>Survoler une partie du graphique</b> avec la souris pour afficher ses <b>données</b></li>
+						</ul>
+					</p>
+					</div>
+				</div>
+		
 			</div>
 
 		</div>

@@ -123,3 +123,22 @@ height:405px;
 border-style: solid;
 height:255px;
 }
+
+
+
+.user a:hover{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+.user a:active{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+.user a:link{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+.user a:visited{
+	text-decoration: none;
+	color: #F5F5F5;
+}

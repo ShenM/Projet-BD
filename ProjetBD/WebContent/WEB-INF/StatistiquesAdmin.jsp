@@ -78,8 +78,12 @@
    				</div>
 			</div>
 			<div class="col-lg-2">
-				<div class="panel panel-primary">
-					<div class="panel-heading text-center"><b>Astuces</b></div>
+				<div class="panel panel-info">
+					<div class="panel-heading text-center">
+						<h3 class="panel-title">
+			            	<span class="glyphicon glyphicon-info-sign" style="font-size:1.5em;padding-right: 10px;"></span><b>Astuces</b>
+			        	</h3>
+			        </div>
 					<div class="panel-content" style="padding:10px;">
 					<p>
 						<ul>
