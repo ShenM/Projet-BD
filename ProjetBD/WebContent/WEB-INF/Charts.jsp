@@ -71,6 +71,6 @@ $(function () {
 <script src="js/highcharts.js"></script>
 <!--script src="js/modules/exporting.js"></script-->
 <div class="panel panel-default"> 
-	<div class="panel-heading"> Graphique des 5 derniers remboursements </div>
+	<div class="panel-heading">Vos 5 derniers remboursements </div>
 	<div class="panel-body"> <div id="container"></div></div>
 </div>
