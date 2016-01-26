@@ -36,14 +36,21 @@
 				    	<h3><label class="label label-success">Répartition par âge des bénéficiaires</label></h3>
 				    	<div id="bar_chart" ></div>
 	   				</div>
+	   				<div class="col-sm-6 text-center" style="margin-bottom:10px">
+				
+				    	<h3><label class="label label-success">Nombre moyen de soins partiqué par sexe</label></h3>
+				    	<div id="graphSexe" ></div>
+	   				</div>
 	   			</div>
 			    <div class="chart Contrats">
+					<div class="col-sm-10 text-center" style="margin-bottom:10px">
+				    	<h3><label class="label label-success">Les actes les plus pratiqués par région</label></h3>
+				    	<div id="graphRegionTTT" ></div>
+	   				</div>
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
-				
 				    	<h3><label class="label label-success">Répartition des formules par an</label></h3>
 				    	<div id="formules" ></div>
-
-	   				</div>
+	   				</div>   				
 	   			</div>
     			<div class="chart Remboursements"> 
 	   				<div class="col-sm-6 text-center chart Remboursements" style="margin-bottom:10px">
@@ -59,12 +66,12 @@
 				    	<div id="moy_remb_chart" ></div>
 	   				</div>
 	   				<div class="col-sm-6 text-center" style="margin-bottom:10px">
-		   				<h4><label class="label label-info">Tous les remboursements sur: </label></h4>
+		   				<h3><label class="label label-success">Tous les remboursements sur: </label></h3>
 				    	<div class="row" style="margin-bottom:10px">
-							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(12)">1 an</button>
-							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(6)">6 mois</button>
-							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(3)">3 mois</button>
-							<button type="button" class="btn btn-warning btn-sm" onclick="triTab(1)">1 mois</button>
+							<button type="button" class="btn btn-info btn-sm" onclick="triTab(12)">1 an</button>
+							<button type="button" class="btn btn-info btn-sm" onclick="triTab(6)">6 mois</button>
+							<button type="button" class="btn btn-info btn-sm" onclick="triTab(3)">3 mois</button>
+							<button type="button" class="btn btn-info btn-sm" onclick="triTab(1)">1 mois</button>
 						</div>
 					</div>
 						
@@ -72,9 +79,14 @@
 			</div>
 			<div class="col-lg-2">
 				<div class="panel panel-primary">
-					<div class="panel-heading">Informations :</div>
+					<div class="panel-heading text-center"><b>Astuces</b></div>
 					<div class="panel-content" style="padding:10px;">
-					<p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker
+					<p>
+						<ul>
+						<li>Cliquer sur les <b>boutons orange</b> pour changer le <b>domaine</b> représenté.<br><br></li>
+						<li>Les <b>boutons bleu ciel</b> permettent de changer <b>l'interval de temps</b> représenté.<br><br></li>
+						<li><b>Survoler un graphique</b> avec la souris affiche des <b>informations complémentaires</b></li>
+						</ul>
 					</p>
 					</div>
 				</div>
@@ -96,18 +108,23 @@
 		</script>
 	</c:forEach>
 	<c:forEach var="f" items="${formules}">
-		<script type="text/javascript">
-		if (annee == ${f.annee}){
-			formule.push(${f.nb});
+		<script type="text/javascript"> // permet de trier les formule par année sous forme de tableau d'objet (Pour les morris chart)
+ 		if(annee == undefined){
+			annee = "${f.annee}";
+		}
+		if (annee == "${f.annee}"){
+			formule.push("${f.nb}");
 		}else{
-			var objet = {y:annee, a:formule[0], b:formule[1], c:formule[2], d:formule[3], e:formule[4], f:formule[5]}; 
-			tabFormules.push(objet);
-			var formule = [];
-			formule.push(${f.nb});
-			annee = ${f.annee};
+			tabFormules.push({y:annee, a:formule[0], b:formule[1], c:formule[2], d:formule[3], e:formule[4], f:formule[5]});
+			annee = "${f.annee}";
+			formule = [];
+			formule.push("${f.nb}");
 		}
 		</script>
 	</c:forEach>
+	<script type="text/javascript"> //push dans le tab le dernier element du foreach.
+		tabFormules.push({y:annee, a:formule[0], b:formule[1], c:formule[2], d:formule[3], e:formule[4], f:formule[5]});
+	</script>
 	<script type="text/javascript">
 		var dataTabAll = [];
 		dataTabAll[1] = dataTabMonth;
@@ -173,17 +190,13 @@ $('.bouton').on('click', function() {
 	$('.chart').hide();
 	$('.' + $(this).text()).toggle();
 });
-
- 	tabFormules.shift();
  	config = {
 	    data: tabFormules,
 	    xkey: 'y',
 	    ykeys: ['a', 'b', 'c', 'd', 'e', 'f'],
-
 	    labels: ['Confort', 'Confort specifique', 'Privilege', 'Privilege specifique', 'TM+', 'TM+   specifique'],
 	    hideHover: 'auto',
-	    behaveLikeLine: true,
-	    yLabelFormat: function (x) { return x.toString();}
+	    behaveLikeLine: true
 	};
 
       config.element = 'formules';
@@ -194,6 +207,9 @@ $('.bouton').on('click', function() {
     		    xkey: 'y',
     		    ykeys: ['a'],
     		    labels: ['Total Remboursement'],
+    		    lineColors: [ 
+    		  		           '#0b62a4'
+    		  			],
     		    hideHover: 'auto',
     		    resize: true,
     		    yLabelFormat: function (x) { return x.toString();}
@@ -208,6 +224,9 @@ $('.bouton').on('click', function() {
   		    xkey: 'y',
   		    ykeys: ['c'],
   		    labels: ['Bénéficiaires'],
+  		  	lineColors: [ 
+  	  		           '#7a92a3'
+  	  			],
   		  	yLabelFormat: function (x) { return x.toString();},
   		  	resize: true,
   		    hideHover: 'auto'
@@ -221,6 +240,9 @@ $('.bouton').on('click', function() {
   		    xkey: 'y',
   		    ykeys: ['b'],
   		    labels: ['Moyenne remboursement'],
+  		 	lineColors: [ 
+  	  		           '#4da74d'
+  	  			],
   		    hideHover: 'auto',
   		  	resize: true,
   		  	yLabelFormat: function (x) { return x.toString();},
@@ -236,7 +258,11 @@ $('.bouton').on('click', function() {
   		    labels: ['Nombre de bénéficiaires'],
   		  	yLabelFormat: function (x) { return x.toString();},
   		    hideHover: 'auto',
-  		  parseTime: false,
+  		  	parseTime: false,
+  			xLabelAngle: 45,
+  			lineColors: [ 
+  		           '#0b62a4'
+  			],
   		    behaveLikeLine: true
   		};
 		config.element = 'bar_chart';
@@ -247,6 +273,36 @@ $('.bouton').on('click', function() {
 			somme_benef_chart.setData(dataTabAll[inter]);
 			moy_remb_chart.setData(dataTabAll[inter]);
 		}
+		
+		
+		Morris.Donut({
+		  element: 'graphSexe',
+		  colors: [ 
+		           '#0b62a4',
+		           '#ff228a'
+			],
+		  data: [
+		    {value: ${chartSexe.moyH}, label: 'Homme'},
+		    {value: ${chartSexe.moyF}, label: 'Femme'}
+		  ],
+		  formatter: function (x) { return x }
+		});
+
+		Morris.Bar({
+			  element: 'graphRegionTTT',
+			  data: [
+			    {x: '${chartRegions.label1}', y: ${chartRegions.nb1}},
+			    {x: '${chartRegions.label2}', y: ${chartRegions.nb2}},
+			    {x: '${chartRegions.label3}', y: ${chartRegions.nb3}}
+			  ],
+			  barColors: [ 
+			           '#0b62a4'
+				],
+			  xkey: 'x',
+			  ykeys: ['y'],
+			  labels: ['Y'],
+	      	  hideHover: 'auto'
+			});
      
       
       $('.chart').hide();

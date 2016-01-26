@@ -44,7 +44,7 @@
 				        
 				        <form class="form-horizontal" method="post" action="DemandeRemboursement" enctype="multipart/form-data">
 				          <div class="form-group">
-				            <label class="col-lg-4 control-label">Bénéficiare :</label>
+				            <label class="col-lg-4 control-label">Bénéficiaire :</label>
 				            <div class="col-lg-8">
 				            	<select class="select_benef" data-placeholder="Choisir un bénéficiaire" name="benef">
 				            		<c:forEach items="${lBenef}" var="entry">
@@ -93,11 +93,11 @@
 						    </div>
 						  </div>
 						  <div class="form-group">
-				            <label class="col-lg-4 control-label">Frais réels assuré :</label>
+				            <label class="col-lg-4 control-label">Frais réels assurés :</label>
 				            <div class="col-lg-4 ">
 				              <input class="form-control" value=0  type="number" step="any" name="fraisReels">
 				            </div>
-				            <span class="form_info">Frais réel dépensé par l'assuré</span>
+				            <span class="form_info">Frais réels dépensés par l'assuré</span>
 				          </div>
       				      <div class="form-group">
 				            <label class="col-lg-4 control-label">Facture :</label>
@@ -149,7 +149,6 @@
 			</div>
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />
-				<jsp:include page="Info2.jsp" />
 			</div>
 		</div>
 		

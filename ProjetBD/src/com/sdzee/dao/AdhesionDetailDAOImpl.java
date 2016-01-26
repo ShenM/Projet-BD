@@ -160,7 +160,6 @@ public class AdhesionDetailDAOImpl implements AdhesionDetailDAO {
         } finally {
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
-        
 	}
 	
 	public AdhesionDetail trouverLastContratParNumBenef(int numBeneficiareUnique) throws DAOException{

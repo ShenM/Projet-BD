@@ -24,9 +24,6 @@
 			<div class="col-lg-8">
 				<jsp:include page="InformationsBeneficiaire.jsp" />
 			</div>
-			<div class="col-lg-2">
-				<jsp:include page="Info2.jsp" />
-			</div>
 		</div>
 	</div>
 

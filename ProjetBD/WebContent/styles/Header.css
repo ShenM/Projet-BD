@@ -33,6 +33,28 @@ font-size:18pt;
 	color: #F5F5F5;
 }
 
+
+.logout a:hover{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+.logout a:active{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+.logout a:link{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+.logout a:visited{
+	text-decoration: none;
+	color: #F5F5F5;
+}
+
+.logout{
+	font-size: 15px;
+}
+
 .user-icon{
 height:40px;
 float : right;

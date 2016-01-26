@@ -3,7 +3,6 @@ package com.sdzee.dao;
 import static com.sdzee.dao.DAOUtilitaire.fermeturesSilencieuses;
 import static com.sdzee.dao.DAOUtilitaire.initialisationRequetePreparee;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +17,9 @@ import com.sdzee.beans.ChartAdminBenef;
 import com.sdzee.beans.ChartFraisByBenef;
 import com.sdzee.beans.ChartFraisByDate;
 import com.sdzee.beans.PrestationsSante;
+
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 
 public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	private DAOFactory daoFactory;
@@ -66,11 +68,15 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 		this.daoFactory = daoFactory;
 	}
 	
+	/*=====================================================================================*/
+	
 	public ArrayList<PrestationsSante> trouverParNumBeneficiaire(int numBeneficiaire) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
 		
 		return prestaListe;
 	}
+	
+	/*=====================================================================================*/
 	
 	public HashMap<String, ChartFraisByBenef> trouverFraisParNumBeneficiaire(int numBeneficiaire) throws DAOException {
 		Connection connexion = null;
@@ -109,6 +115,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }   
 	}
+	
+	/*=====================================================================================*/
 		
 	public ArrayList<ChartFraisByDate> trouverFraisParNumBeneficiaireDate(int numBeneficiaire) throws DAOException {
 		Connection connexion = null;
@@ -147,6 +155,7 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         }   
 	}
 	
+	/*=====================================================================================*/
 	
 	public ArrayList<ChartAdminBenef> trouverAdminChartBenef() throws DAOException {
 		Connection connexion = null;
@@ -181,6 +190,7 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         }   
 	}
 	
+	/*=====================================================================================*/
 	
 	public ArrayList<AdminChartRemboursement> trouverRemboursementsAdmin() throws DAOException {
 		Connection connexion = null;
@@ -218,7 +228,7 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	}
 	
 	
-	
+	/*=====================================================================================*/
 	
 	public ArrayList<PrestationsSante> trouverParNumBeneficiaireSinistre(int numBeneficiaireSinistre) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
@@ -249,6 +259,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         }	
 	}
 	
+	/*=====================================================================================*/
+	
 	public ArrayList<PrestationsSante> trouverParNumAdhesion(int numBeneficiaireSinistre) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
 		
@@ -277,6 +289,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }	
 	}
+	
+	/*=====================================================================================*/
 	
 	public ArrayList<PrestationsSante> trouverParNumAdhesionLimite(int numBeneficiaireSinistre) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
@@ -307,11 +321,15 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         }	
 	}
 	
+	/*=====================================================================================*/
+	
 	public PrestationsSante trouver() throws DAOException{
 		PrestationsSante presta = new PrestationsSante();
 		
 		return presta;
 	}
+	
+	/*=====================================================================================*/
 	
     private static PrestationsSante map( ResultSet resultSet ) throws SQLException {
     	PrestationsSante presta = new PrestationsSante();
@@ -337,6 +355,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
     	
         return presta;
     }
+    
+    /*=====================================================================================*/
 
     private static PrestationsSante mapSimple( ResultSet resultSet ) throws SQLException {
     	PrestationsSante presta = new PrestationsSante();
@@ -361,6 +381,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         return presta;
     }
     
+    /*=====================================================================================*/
+    
 	@Override
 	public Map<String, Float> moyenneParSexe() throws DAOException {
 		Connection connexion = null;
@@ -372,9 +394,14 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         try {
             connexion = daoFactory.getConnection();
 
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_MOYENNE_SEXE, false);
+            OracleCallableStatement cs = (OracleCallableStatement)connexion.prepareCall("{call MOYPRESTAPARSEXE(?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
             
-            resultSet = preparedStatement.executeQuery();
+            cs.execute();
+            resultSet = cs.getCursor(1);
+//            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_MOYENNE_SEXE, false);
+//            
+//            resultSet = preparedStatement.executeQuery();
             
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
             while ( resultSet.next() != false) {
@@ -389,6 +416,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }   
 	}
+	
+	/*=====================================================================================*/
 
 	@Override
 	public HashMap<String, PrestationsSante> getMapTrierParCodeProf() throws DAOException {

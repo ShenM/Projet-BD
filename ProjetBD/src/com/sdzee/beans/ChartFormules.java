@@ -5,7 +5,6 @@ public class ChartFormules {
 	private String formule;
 	private int nb;
 
-	
 	public int getAnnee() {
 		return annee;
 	}

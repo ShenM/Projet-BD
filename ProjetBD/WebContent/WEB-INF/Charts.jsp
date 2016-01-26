@@ -2,75 +2,34 @@
 	pageEncoding="UTF-8"%>
 
 
+<link rel="stylesheet"	href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+	
+<div class="panel panel-default"> 
+	<div class="panel-heading"> Vos 5 derniers remboursements </div>
+	<div class="panel-body"> <div id="pie_chart"></div></div>
+</div>
+
 <script type="text/javascript">
-$(function () {
 
-    // Radialize the colors
-    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
-        return {
-            radialGradient: {
-                cx: 0,
-                cy: 0,
-                r: 0
-            },
-            stops: [
-                [0, color],
-                [1, Highcharts.Color(color).brighten(0.2).get('rgb')] // darken
-            ]
-        };
-    });
-
-    // Build the chart
-    $('#container').highcharts({
-        chart: {
-            margin: [0, 0, 0, 0],
-            spacingTop: 0,
-            spacingBottom: 0,
-            spacingLeft: 0,
-            spacingRight: 0,
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: true,
-            type: 'pie'
-        },
-        title: {
-            text: ""
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                size:'100%',
-                dataLabels: {
-                    enabled: true,
-                    format: '<div style="font-size: 200%">{y}</div>',
-                    inside : true,
-                    distance : -120,
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'blue'
-                    }
-                }
-            },
-            showInLegend: true
-        },
-        series: [{
-            name: "Montant",
-            colorByPoint: true,
-            data: [
-                {name: "Mes frais", y: ${chart.fraisPayer}},
-                {name: "Remboursement Sécu", y: ${chart.remboursementSecu}},
-                {name: "Remboursement Mutuelle", y: ${chart.remboursementMutuelle}},
-            ]
-        }]
-    });
+var donut = Morris.Donut({
+	element : 'pie_chart',
+	data : [ {
+		label : "Remboursement mutuelle",
+		value : "${chart.remboursementMutuelle}"
+	}, {
+		label : "Remboursement sécu",
+		value : "${chart.remboursementSecu}"
+	}, {
+		label : "Reste à charge",
+		value : "${chart.fraisPayer}"
+	} ],
+	formatter : function(x) {
+		return parseFloat(x).toFixed(2) + "€"
+	},
+	colors : [ '#0B62A4', '#4DA74D', '#FF4040' ]
 });
 </script>
-<script src="js/highcharts.js"></script>
-<!--script src="js/modules/exporting.js"></script-->
-<div class="panel panel-default"> 
-	<div class="panel-heading">Vos 5 derniers remboursements </div>
-	<div class="panel-body"> <div id="container"></div></div>
-</div>
+
