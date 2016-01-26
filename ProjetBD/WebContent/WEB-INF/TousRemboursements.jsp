@@ -11,10 +11,7 @@
 <link rel="stylesheet" href="styles/Header.css">
 <link rel="stylesheet" href="styles/Menu.css">
 </head>
-
-
 <body>
-
 	<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="row">
@@ -48,8 +45,6 @@
 				</div>
 			</div>
 		</div>
-		
 	</div>
-
 </body>
 </html>

@@ -14,9 +14,7 @@
 <link rel="stylesheet" href="styles/Contrat.css">
 </head>
 
-
 <body>
-
 	<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="row">
@@ -39,7 +37,6 @@
 						</c:when>	
 					</c:choose>
 					<c:set var="val" value="2"/>
-					
 				    <div class="col-lg-6">
 						<div class="panel panel-info contrat-pannel ">				
 							<div class="panel-heading">
@@ -67,13 +64,11 @@
 				<div class="col-lg-12">								
 					<a  href="Accueil"><button type="button" class="btn btn-default pull-right"  style="margin-bottom: 20px;">Retour</button></a>
 				</div>
-				
 			</div>
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

@@ -17,7 +17,5 @@
 			<div class="logout col-lg-2">
 				<a class="glyphicon glyphicon-off" href="Deconnexion"></a>
 			</div>
-
-
 		</div>
 	</div>

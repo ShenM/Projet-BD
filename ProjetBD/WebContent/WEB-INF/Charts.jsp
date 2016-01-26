@@ -11,9 +11,7 @@
 	<div class="panel-heading"> Vos 5 derniers remboursements </div>
 	<div class="panel-body"> <div id="pie_chart"></div></div>
 </div>
-
 <script type="text/javascript">
-
 var donut = Morris.Donut({
 	element : 'pie_chart',
 	data : [ {

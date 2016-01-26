@@ -7,8 +7,7 @@
 <head>
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Statistiques</title>
 <link rel="stylesheet" href="styles/Header.css">
@@ -23,7 +22,6 @@
 
 </head>
 <body>
-
 	<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="row">
@@ -32,7 +30,6 @@
 			</div>
 			<div class="col-lg-8">
 				<div class="container">
-
 					<div class="col-lg-6">
 						<div class="panel panel-info contrat-pannel ">
 							<div class="panel-heading">
@@ -82,13 +79,11 @@
 											c : "${f.aCharge}"
 										};
 										dataTab.push(objet);
-										/*  dataTab = dataTab + "{ y: '${f.date}', a: ${f.rembMut}, b: ${f.rembSecu}, c: ${f.aCharge} },";*/
 									</script>
 								</c:forEach>
 							</div>
 						</div>
 					</div>
-
 					<div class="col-lg-6">
 						<div class="panel panel-info contrat-pannel">
 							<div class="panel-heading">
@@ -104,7 +99,6 @@
 						<a  href="Accueil"><button type="button" class="btn btn-default pull-right"  style="margin-bottom: 20px;">Retour</button></a>
 					</div>
 				</div>
-
 			</div>
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />
@@ -127,7 +121,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </body>
 <script type="text/javascript">

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
+	
 <div class="panel panel-primary">
 	<div class="panel-heading">Mes informations : </div>
 	<div class="panel-content">

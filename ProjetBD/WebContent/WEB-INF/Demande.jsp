@@ -19,8 +19,6 @@
     <script type="text/javascript" src="js/chosen.jquery.js"></script>
     <link rel="stylesheet" href="styles/chosen.css">
 </head>
-
-
 <body>
 
 	<jsp:include page="Header.jsp" />
@@ -30,18 +28,12 @@
 				<jsp:include page="Menu.jsp" />
 			</div>
 			<div class="col-lg-8">
-			
-			
-				
 				<div class="container">
 				    <h1>Demande de remboursement</h1>
 				  	<hr>
 					<div class="row">
-				      
-				      <!-- edit form column -->
 				      <div class="col-md-9">
 				        <h3>Bénéficiaire</h3>
-				        
 				        <form class="form-horizontal" method="post" action="DemandeRemboursement" enctype="multipart/form-data">
 				          <div class="form-group">
 				            <label class="col-lg-4 control-label">Bénéficiaire :</label>
@@ -50,14 +42,10 @@
 				            		<c:forEach items="${lBenef}" var="entry">
 				            			<option value="${entry.num}"> ${entry.prenom} ${entry.nom}</option> 
 				            		</c:forEach>
-
 				            	</select>
 							</div>
-							
-							
 						</div>
 							<hr><h3>Acte</h3>
-							
 				          <div class="form-group">
 				            <label class="col-lg-4 control-label">Acte :</label>
 				            <div class="col-lg-8">
@@ -126,9 +114,7 @@
 				<jsp:include page="Info1.jsp" />
 			</div>
 		</div>
-		
 	</div>
-
 </body>
 
 <script type="text/javascript">

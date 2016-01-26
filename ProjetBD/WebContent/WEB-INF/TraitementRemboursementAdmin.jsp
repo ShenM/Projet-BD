@@ -13,10 +13,7 @@
 	<link rel="stylesheet" href="styles/Menu.css">
 	<link rel="stylesheet" href="styles/Demande.css">
 </head>
-
-
 <body>
-
 	<jsp:include page="HeaderAdmin.jsp" />
 	<div class="container">
 		<div class="row">
@@ -24,11 +21,9 @@
 				<jsp:include page="MenuAdmin.jsp" />
 			</div>
 			<div class="col-lg-10">
-				
 				<div class="container">
 				    <h1>Traitement de remboursement</h1>
 				  	<hr>
-				  	
 				  	<c:choose>
 				  		<c:when test="${error != ''}">
 				        	<div class="form-group" >
@@ -36,8 +31,6 @@
 				          	</div>
 			  			</c:when>
 			  			<c:otherwise>
-
-				  	
 				  	<form method="post" action="TraitementRemboursementAdmin">
 						<div class="col-lg-8">
 							<div class="row">
@@ -56,7 +49,6 @@
 					                        Informations de la demande
 					                    </h3>
 					                </div>
-					                
 					                
 					                <div class="panel-body">
 					                	<table class="table table-contrat-information">
@@ -89,12 +81,10 @@
 					                		</tbody>
 					                	</table>	
 					                </div>
-		       		 				<div class="panel-footer"></div>
-					                
+		       		 				<div class="panel-footer"></div> 
 				 				</div>
 							</div>
 						</div>
-				
 				        <div class="col-lg-4">    
 							<div class="panel panel-info contrat-pannel ">				
 								<div class="panel-heading">
@@ -102,8 +92,6 @@
 				                        <span class="glyphicon glyphicon-user"></span>${benef.nom}   ${benef.prenom}
 				                    </h3>
 				                </div>
-				                
-				                
 				                <div class="panel-body">
 				                	<table class="table table-contrat-information">
 				                		<tbody>
@@ -115,12 +103,9 @@
 				                		</tbody>
 				                	</table>	
 				                </div>
-	       		 				<div class="panel-footer"></div>
-				                
+	       		 				<div class="panel-footer"></div>			                
 			 				</div>
-			 				
-						</div>
-						
+						</div>	
 						<div class="form-group">
 					    	<div class="col-lg-8">
 						  		<label class="col-lg-4 control-label">Motif :</label>
@@ -128,7 +113,6 @@
 						    	<input class="form-control" maxlength="255" placeholder="Motif du rejet EX: Facture invalide" type="text" name="motifRejet">
 						    </div>
 						</div>
-						
 						<div class="form-group">
 						 	<input type="hidden" name="id" value="${ benef.num }">
 						 	<input type="hidden" name="email" value="${benef.email}">
@@ -137,18 +121,14 @@
 						  	<div class="col-md-8">
 						  		<input type="submit" name="action" class="btn btn-default" value="Valider">
 						    	<input type="submit" name="action" class="btn btn-default" value="Rejeter">
-						    	
 						    	<a href="AccueilAdmin"><button type="button" class="btn btn-default" value="Annuler"> Annuler</button></a>
 						  </div>
 						</div>
 		 			</form>
-		 			
 	 					</c:otherwise>
 	 				</c:choose>
 			  	</div>
 			</div>
 	 	</div>				                			
-
 </body>
-
 </html>

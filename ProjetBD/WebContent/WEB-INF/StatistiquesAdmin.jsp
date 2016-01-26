@@ -73,8 +73,7 @@
 							<button type="button" class="btn btn-info btn-sm" onclick="triTab(3)">3 mois</button>
 							<button type="button" class="btn btn-info btn-sm" onclick="triTab(1)">1 mois</button>
 						</div>
-					</div>
-						
+					</div>	
    				</div>
 			</div>
 			<div class="col-lg-2">
@@ -312,7 +311,5 @@ $('.bouton').on('click', function() {
       $('.chart').hide();
       $('.Remboursements').toggle();
       
-      
-
 </script>
 </html>

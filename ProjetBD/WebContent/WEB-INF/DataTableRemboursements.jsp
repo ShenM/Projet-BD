@@ -12,8 +12,6 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.3.0/css/colReorder.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.0/css/buttons.dataTables.min.css">
 
-  
-
  <div class="dropdown" style="margin-bottom:5px">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Nombre de lignes
   <span class="caret"></span></button>
@@ -24,8 +22,7 @@
     <li><a id="_50">50</a></li>
   </ul>
 </div>
-  
-  
+ 
 <table id="table_id" class="display">  
     <thead>
         <tr>
@@ -51,8 +48,7 @@
 		    	<td><c:out value="${presta.montantSecu}"/></td>
 		    	<td><c:out value="${presta.montantRembourse} €"/></td>
 			</tr>
-		</c:forEach>
-		   
+		</c:forEach>	   
     </tbody>
 </table>
     
@@ -87,7 +83,4 @@ $(document).ready(function() {
     } ); 
     
 } );
-
-
-
 </script>

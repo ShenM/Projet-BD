@@ -8,8 +8,7 @@
 
 <div class="col-lg-4" id="graphSexe" style="height: 300px; text-align:center;">
 	<div class="col-sm-6 text-center chart Remboursements">
-		<h3><label class="label label-success">Nombre moyen de soins partiqués par sexe</label></h3>
-			
+		<h3><label class="label label-success">Nombre moyen de soins partiqués par sexe</label></h3>		
 	</div>
 </div>
 	<div class="col-sm-6 text-center chart Remboursements">
@@ -18,8 +17,6 @@
 
 	</div>
 </div>
-
-
 <script>
 	Morris.Donut({
 	  element: 'graphSexe',
@@ -35,9 +32,7 @@
 	}).on('click', function(i, row){
 	  console.log(i, row);
 	});
-</script>
 
-<script>
 	Morris.Bar({
 		  element: 'graphRegionTTT',
 		  data: [
