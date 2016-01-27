@@ -1,5 +1,6 @@
 package com.sdzee.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,5 +58,5 @@ public interface PrestationsSanteDAO {
 	 * @return
 	 * @throws DAOException
 	 */
-	HashMap<String, PrestationsSante> getMapTrierParCodeProf() throws DAOException;
+	HashMap<String, ArrayList<String>> getMapTrierParCodeProf() throws DAOException;
 }

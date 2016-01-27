@@ -381,6 +381,16 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         return presta;
     }
     
+    private static PrestationsSante mapTresSimple( ResultSet resultSet ) throws SQLException {
+    	PrestationsSante presta = new PrestationsSante();
+        
+    	presta.setNumSinistre(resultSet.getInt("NUM_SINISTRE"));
+    	presta.setActe(resultSet.getString("ACTE"));
+    	presta.setDesignationActe(resultSet.getString("DESIGNATION_ACTE"));
+    	
+        return presta;
+    }
+    
     /*=====================================================================================*/
     
 	@Override
@@ -420,12 +430,12 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	/*=====================================================================================*/
 
 	@Override
-	public HashMap<String, PrestationsSante> getMapTrierParCodeProf() throws DAOException {
+	public HashMap<String, ArrayList<String>> getMapTrierParCodeProf() throws DAOException {
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         
-        HashMap<String, PrestationsSante> mapCodeProfPresta = new HashMap<String, PrestationsSante>();
+        HashMap<String, ArrayList<String>> mapCodeProfPresta = new HashMap<String, ArrayList<String>>();
         
         try {
             connexion = daoFactory.getConnection();
@@ -435,12 +445,15 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             resultSet = preparedStatement.executeQuery();
             
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
-            if ( resultSet.next() ) {
-            	PrestationsSante bean = new PrestationsSante();
-            	
-            	bean = mapSimple(resultSet);
-            	
-            	mapCodeProfPresta.put(resultSet.getString("CODE_PROFESSION"), bean);
+            while ( resultSet.next() ) {
+            	//PrestationsSante bean = new PrestationsSante();
+            	//bean = mapSimple(resultSet);
+
+            	if(mapCodeProfPresta.get(resultSet.getString("CODE_PROFESSION")) == null){
+                	
+            		mapCodeProfPresta.put(resultSet.getString("CODE_PROFESSION"), new ArrayList<String>());            	
+            	}
+        		mapCodeProfPresta.get(resultSet.getString("CODE_PROFESSION")).add(resultSet.getString("ACTE"));
             }
             
     		return mapCodeProfPresta;
