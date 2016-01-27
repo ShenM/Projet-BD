@@ -28,7 +28,7 @@
 				<div class="row" style="margin-bottom:10px">
 					<button type="button" class="btn btn-warning bouton">Remboursements</button>
 					<button type="button" class="btn btn-warning bouton">Bénéficiaires</button>
-					<button type="button" class="btn btn-warning bouton">Contrats</button>
+					<button type="button" class="btn btn-warning bouton">Autres</button>
 				</div>
 				<div class="chart Bénéficiaires">
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
@@ -42,9 +42,9 @@
 				    	<div id="graphSexe" ></div>
 	   				</div>
 	   			</div>
-			    <div class="chart Contrats">
+			    <div class="chart Autres">
 					<div class="col-sm-10 text-center" style="margin-bottom:10px">
-				    	<h3><label class="label label-success">Les actes les plus pratiqués par région</label></h3>
+				    	<h3><label class="label label-success">Les régions avec le plus de remboursements</label></h3>
 				    	<div id="graphRegionTTT" ></div>
 	   				</div>
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
