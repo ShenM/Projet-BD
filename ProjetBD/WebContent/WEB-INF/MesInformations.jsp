@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="styles/Menu.css">
 </head>
 
-
 <body>
 	<jsp:include page="Header.jsp" />
 	<div class="container">
@@ -26,7 +25,6 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
 

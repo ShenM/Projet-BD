@@ -7,13 +7,14 @@ vertical-align:middle;
 }
 
 #menu .panel-content{
-padding:10px;
-background-color:#F5F5F5;
-height:40px;
+ padding:10px;
+background-color:#F5F5F5; 
 }
 
 #menu a:hover{
 text-decoration:none;
+ 	opacity: 0.9;
+ 
 }
 #menu a:active{
 text-decoration:none;

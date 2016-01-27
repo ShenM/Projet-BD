@@ -11,10 +11,7 @@
 <link rel="stylesheet" href="styles/Header.css">
 <link rel="stylesheet" href="styles/Menu.css">
 </head>
-
-
 <body>
-
 	<jsp:include page="HeaderAdmin.jsp" />
 	<div class="container">
 		<div class="row">
@@ -26,8 +23,6 @@
 				<a href="Accueil"><button type="button" class="btn btn-default pull-right">Retour</button></a>
 			</div>
 		</div>
-		
 	</div>
-
 </body>
 </html>

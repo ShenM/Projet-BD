@@ -28,7 +28,7 @@
 				<div class="row" style="margin-bottom:10px">
 					<button type="button" class="btn btn-warning bouton">Remboursements</button>
 					<button type="button" class="btn btn-warning bouton">Bénéficiaires</button>
-					<button type="button" class="btn btn-warning bouton">Contrats</button>
+					<button type="button" class="btn btn-warning bouton">Autres</button>
 				</div>
 				<div class="chart Bénéficiaires">
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
@@ -42,9 +42,9 @@
 				    	<div id="graphSexe" ></div>
 	   				</div>
 	   			</div>
-			    <div class="chart Contrats">
+			    <div class="chart Autres">
 					<div class="col-sm-10 text-center" style="margin-bottom:10px">
-				    	<h3><label class="label label-success">Les actes les plus pratiqués par région</label></h3>
+				    	<h3><label class="label label-success">Les régions avec le plus de remboursements</label></h3>
 				    	<div id="graphRegionTTT" ></div>
 	   				</div>
 					<div class="col-sm-6 text-center" style="margin-bottom:10px">
@@ -73,13 +73,16 @@
 							<button type="button" class="btn btn-info btn-sm" onclick="triTab(3)">3 mois</button>
 							<button type="button" class="btn btn-info btn-sm" onclick="triTab(1)">1 mois</button>
 						</div>
-					</div>
-						
+					</div>	
    				</div>
 			</div>
 			<div class="col-lg-2">
-				<div class="panel panel-primary">
-					<div class="panel-heading text-center"><b>Astuces</b></div>
+				<div class="panel panel-info">
+					<div class="panel-heading text-center">
+						<h3 class="panel-title">
+			            	<span class="glyphicon glyphicon-info-sign" style="font-size:1.5em;padding-right: 10px;"></span><b>Astuces</b>
+			        	</h3>
+			        </div>
 					<div class="panel-content" style="padding:10px;">
 					<p>
 						<ul>
@@ -308,7 +311,5 @@ $('.bouton').on('click', function() {
       $('.chart').hide();
       $('.Remboursements').toggle();
       
-      
-
 </script>
 </html>

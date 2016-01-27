@@ -1,18 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	
-	
-	
-	
-	
 
 <div class="container">
     <h1>Editer le profile</h1>
   	<hr>
 	<div class="row">
-      
-      	<!-- edit form column -->
       	<div class="col-md-9 personal-info">
 			<c:choose>
   				<c:when test="${success != ''}">
@@ -25,9 +18,7 @@
  				<c:otherwise>
  				</c:otherwise>
  			</c:choose>
-
-        <h3>Informations Personelles</h3>
-        
+        <h3>Informations Personelles</h3> 
         <form class="form-horizontal" method="post" action="EditerProfile">
           <div class="form-group">
             <label class="col-lg-3 control-label">Prénom:</label>

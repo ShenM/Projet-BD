@@ -6,7 +6,6 @@
 	<link rel="stylesheet" href="styles/Remboursements.css">
 	</head>
 
-
 <div class="panel panel-default">
 <div class = "panel-heading"> Vos dernières transactions</div>
 
@@ -18,7 +17,6 @@
 				<th>Remboursement</th>
 			</tr>
 		</thead>
-
 		<tbody>
 			<c:forEach items="${lpresta}" var="presta">
 			    <tr class="rowTable">
@@ -33,11 +31,9 @@
 				</tr>					
 			</c:forEach>
 		</tbody>
-	</table>
-	
+	</table>	
 <div class = "panel-footer"><a href="TousRemboursements"><button type="button" class="btn btn-default pull-right">Voir plus...</button></a>
 <div class="clearfix"></div></div>
-
 </div>
 <script>
 $(document).ready(function() {

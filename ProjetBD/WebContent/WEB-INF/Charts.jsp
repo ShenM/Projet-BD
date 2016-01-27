@@ -8,12 +8,10 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 	
 <div class="panel panel-default"> 
-	<div class="panel-heading"> Graphique des 5 derniers remboursements </div>
+	<div class="panel-heading"> Vos 5 derniers remboursements </div>
 	<div class="panel-body"> <div id="pie_chart"></div></div>
 </div>
-
 <script type="text/javascript">
-
 var donut = Morris.Donut({
 	element : 'pie_chart',
 	data : [ {
@@ -32,4 +30,3 @@ var donut = Morris.Donut({
 	colors : [ '#0B62A4', '#4DA74D', '#FF4040' ]
 });
 </script>
-

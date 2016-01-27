@@ -36,7 +36,7 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
 		}
 	}
 	
-	
+	/*=====================================================================================*/
 	@Override
 	public Beneficiaire trouver(int id) throws DAOException{
 		Connection connexion = null;
@@ -65,8 +65,9 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
 		return(benef);
 	}
 	
+	/*=====================================================================================*/
 	
-	
+	// Récupération du numéros de contrat d'un bénéficiaire selon l'année
 	public int getNumContrat(int numBeneficiareUnique, int annee) throws Exception{
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -96,6 +97,9 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
         }
 	}
 	
+	/*=====================================================================================*/
+	
+	// Mise à jour d'un bénéficiare en base
 	public void modifier(Beneficiaire benef){
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -114,7 +118,8 @@ public class BeneficiaireDAOImpl implements BeneficiaireDAO {
 	}
 	
 	
-	
+	/*=====================================================================================*/
+	// Mapping Modèle/BD
     private static Beneficiaire map( ResultSet resultSet ) throws SQLException {
         Beneficiaire benef = new Beneficiaire();
         

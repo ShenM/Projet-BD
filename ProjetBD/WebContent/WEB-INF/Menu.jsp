@@ -1,4 +1,3 @@
-
 <div id="menu">
 	<a href="Accueil ">
 		<div class="panel panel-primary">
@@ -35,7 +34,6 @@
 			<div class="panel-content"> Mes Statistiques 
 				<span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></div>
 		</div>
-
 	<a href="Demande">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -45,5 +43,4 @@
 				<span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></div>
 		</div>
 	</a>
-
 </div>

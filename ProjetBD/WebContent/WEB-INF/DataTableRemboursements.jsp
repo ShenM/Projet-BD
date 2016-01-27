@@ -6,24 +6,24 @@
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.1.0/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/fixedcolumns/3.2.0/js/dataTables.fixedColumns.min.js"></script>
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.1.0/js/buttons.colVis.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
 
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.3.0/css/colReorder.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.0/css/buttons.dataTables.min.css">
 
-
-
-<table id="table_id" class="display">
-	<FORM>
-		<label for="listeShow">Afficher </label> 
-	    <SELECT name="listeShow" size="1">
-		    <OPTION id="all">All
-		    <OPTION id="_10">10
-		    <OPTION id="_20">20
-		    <OPTION id="_50">50
-	    </SELECT>
-    </FORM>
-    
+ <div class="dropdown" style="margin-bottom:5px">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Nombre de lignes
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a id="all">All</a></li>
+    <li><a id="_10">10</a></li>
+    <li><a id="_20">20</a></li>
+    <li><a id="_50">50</a></li>
+  </ul>
+</div>
+ 
+<table id="table_id" class="display">  
     <thead>
         <tr>
             <th>Nom/Prénom bénéficiare</th>
@@ -48,8 +48,7 @@
 		    	<td><c:out value="${presta.montantSecu}"/></td>
 		    	<td><c:out value="${presta.montantRembourse} €"/></td>
 			</tr>
-		</c:forEach>
-		   
+		</c:forEach>	   
     </tbody>
 </table>
     
@@ -67,20 +66,21 @@ $(document).ready(function() {
     } );
     $('#all').on( 'click', function () {
         table.page.len( -1 ).draw();
+        $(".dropdown-toggle").text("Tout afficher");
     } );
      
     $('#_10').on( 'click', function () {
         table.page.len( 10 ).draw();
+        $(".dropdown-toggle").text("10 lignes affichées");
     } );
     $('#_20').on( 'click', function () {
         table.page.len( 20 ).draw();
+        $(".dropdown-toggle").text("20 lignes affichées");
     } ); 
     $('#_50').on( 'click', function () {
         table.page.len( 50 ).draw();
+        $(".dropdown-toggle").text("50 lignes affichées");
     } ); 
     
 } );
-
-
-
 </script>

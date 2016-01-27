@@ -32,6 +32,8 @@ public class RegionsDAOImpl implements RegionsDAO{
 		this.daoFactory = daoFactory;
 	}
 	
+	/*=====================================================================================*/
+	
 	public Map<Long, Regions> getTopThree() throws DAOException{		
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -68,6 +70,8 @@ public class RegionsDAOImpl implements RegionsDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }   		
 	}
+	
+	/*=====================================================================================*/
 	
 	private static Regions map(ResultSet resultSet) throws SQLException {
 		Regions bean = new Regions();

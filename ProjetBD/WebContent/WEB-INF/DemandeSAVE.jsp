@@ -19,10 +19,7 @@
     <script type="text/javascript" src="js/chosen.jquery.js"></script>
     <link rel="stylesheet" href="styles/chosen.css">
 </head>
-
-
 <body>
-
 	<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="row">
@@ -30,9 +27,6 @@
 				<jsp:include page="Menu.jsp" />
 			</div>
 			<div class="col-lg-8">
-			
-			
-				
 				<div class="container">
 				    <h1>Demande de remboursement</h1>
 				  	<hr>
@@ -52,12 +46,9 @@
 				            		<option value="1846">Jean dugal</option>
 				            		<option value="1847">Madi dugal</option>
 				            	</select>
-							</div>
-							
-							
+							</div>	
 						</div>
-							<hr><h3>Acte</h3>
-							
+							<hr><h3>Acte</h3>	
 				          <div class="form-group">
 				            <label class="col-lg-4 control-label">Acte :</label>
 				            <div class="col-lg-8">
@@ -127,39 +118,12 @@
 				      </div>
 				  </div>
 				</div>
-
-
-
-				<!-- 
-				
-	N			num_sinistre				Numéro du sinistre
-	N			num_adhesion				Numéro de contrat lié au sinistre
-	N			num_beneficiaire_sinistre	Numéro de bénéficiaire unique sinistré
-	N			num_beneficiaire			Numéro de bénéficiaire sinistré sur le contrat (1, 2, 3, etc.)
-	O			acte						Acte médical pratiqué
-	O			designation_acte			Désignation de l'acte médical pratiqué
-	O			libelle_bareme				Libellé bareme
-	O			jour_debut_soins			**
-	O			mois_debut_soins			**
-	O			annee_debut_soins			**
-	O			jour_paiement				**
-	O			mois_paiement				**
-	O			annee_paiement				**
-	O			frais_reel_assure			Frais réel dépensé par l'assuré
-	O			montant_secu				Montant remboursé par la sécu
-	O			montant_rembourse			Montant remboursé par l'organisme		
-				
-				Faire en premier lieu une liste box avec les benef sous le meme contrat que la personne connecté afin de savoir a qui est destiné la demande
-				
-				-->
 			</div>
 			<div class="col-lg-2">
 				<jsp:include page="Info1.jsp" />
 			</div>
 		</div>
-		
 	</div>
-
 </body>
 
 <script type="text/javascript">

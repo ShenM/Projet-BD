@@ -68,11 +68,15 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 		this.daoFactory = daoFactory;
 	}
 	
+	/*=====================================================================================*/
+	
 	public ArrayList<PrestationsSante> trouverParNumBeneficiaire(int numBeneficiaire) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
 		
 		return prestaListe;
 	}
+	
+	/*=====================================================================================*/
 	
 	public HashMap<String, ChartFraisByBenef> trouverFraisParNumBeneficiaire(int numBeneficiaire) throws DAOException {
 		Connection connexion = null;
@@ -111,6 +115,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }   
 	}
+	
+	/*=====================================================================================*/
 		
 	public ArrayList<ChartFraisByDate> trouverFraisParNumBeneficiaireDate(int numBeneficiaire) throws DAOException {
 		Connection connexion = null;
@@ -149,6 +155,7 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         }   
 	}
 	
+	/*=====================================================================================*/
 	
 	public ArrayList<ChartAdminBenef> trouverAdminChartBenef() throws DAOException {
 		Connection connexion = null;
@@ -183,6 +190,7 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         }   
 	}
 	
+	/*=====================================================================================*/
 	
 	public ArrayList<AdminChartRemboursement> trouverRemboursementsAdmin() throws DAOException {
 		Connection connexion = null;
@@ -220,7 +228,7 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
 	}
 	
 	
-	
+	/*=====================================================================================*/
 	
 	public ArrayList<PrestationsSante> trouverParNumBeneficiaireSinistre(int numBeneficiaireSinistre) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
@@ -251,6 +259,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         }	
 	}
 	
+	/*=====================================================================================*/
+	
 	public ArrayList<PrestationsSante> trouverParNumAdhesion(int numBeneficiaireSinistre) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
 		
@@ -279,6 +289,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }	
 	}
+	
+	/*=====================================================================================*/
 	
 	public ArrayList<PrestationsSante> trouverParNumAdhesionLimite(int numBeneficiaireSinistre) throws DAOException{
 		ArrayList<PrestationsSante> prestaListe = new ArrayList<PrestationsSante>();
@@ -309,11 +321,15 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
         }	
 	}
 	
+	/*=====================================================================================*/
+	
 	public PrestationsSante trouver() throws DAOException{
 		PrestationsSante presta = new PrestationsSante();
 		
 		return presta;
 	}
+	
+	/*=====================================================================================*/
 	
     private static PrestationsSante map( ResultSet resultSet ) throws SQLException {
     	PrestationsSante presta = new PrestationsSante();
@@ -339,6 +355,8 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
     	
         return presta;
     }
+    
+    /*=====================================================================================*/
 
     private static PrestationsSante mapSimple( ResultSet resultSet ) throws SQLException {
     	PrestationsSante presta = new PrestationsSante();
@@ -362,6 +380,18 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
     	
         return presta;
     }
+    
+    private static PrestationsSante mapTresSimple( ResultSet resultSet ) throws SQLException {
+    	PrestationsSante presta = new PrestationsSante();
+        
+    	presta.setNumSinistre(resultSet.getInt("NUM_SINISTRE"));
+    	presta.setActe(resultSet.getString("ACTE"));
+    	presta.setDesignationActe(resultSet.getString("DESIGNATION_ACTE"));
+    	
+        return presta;
+    }
+    
+    /*=====================================================================================*/
     
 	@Override
 	public Map<String, Float> moyenneParSexe() throws DAOException {
@@ -396,14 +426,16 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }   
 	}
+	
+	/*=====================================================================================*/
 
 	@Override
-	public HashMap<String, PrestationsSante> getMapTrierParCodeProf() throws DAOException {
+	public HashMap<String, ArrayList<String>> getMapTrierParCodeProf() throws DAOException {
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         
-        HashMap<String, PrestationsSante> mapCodeProfPresta = new HashMap<String, PrestationsSante>();
+        HashMap<String, ArrayList<String>> mapCodeProfPresta = new HashMap<String, ArrayList<String>>();
         
         try {
             connexion = daoFactory.getConnection();
@@ -413,12 +445,15 @@ public class PrestationsSanteDAOImpl implements PrestationsSanteDAO{
             resultSet = preparedStatement.executeQuery();
             
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
-            if ( resultSet.next() ) {
-            	PrestationsSante bean = new PrestationsSante();
-            	
-            	bean = mapSimple(resultSet);
-            	
-            	mapCodeProfPresta.put(resultSet.getString("CODE_PROFESSION"), bean);
+            while ( resultSet.next() ) {
+            	//PrestationsSante bean = new PrestationsSante();
+            	//bean = mapSimple(resultSet);
+
+            	if(mapCodeProfPresta.get(resultSet.getString("CODE_PROFESSION")) == null){
+                	
+            		mapCodeProfPresta.put(resultSet.getString("CODE_PROFESSION"), new ArrayList<String>());            	
+            	}
+        		mapCodeProfPresta.get(resultSet.getString("CODE_PROFESSION")).add(resultSet.getString("ACTE"));
             }
             
     		return mapCodeProfPresta;
