@@ -16,7 +16,7 @@ import com.sdzee.dao.BeneficiaireDAOImpl;
 import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.PrestationsSanteDAOImpl;
 import com.sdzee.dao.UtilisateurDAOImpl;
-import com.sdzee.utilitaires.Md5;
+import com.sdzee.utilitaires.Sha;
 
 
 /**
@@ -87,9 +87,9 @@ public class EditerProfile extends HttpServlet {
             
             
             valeur = request.getParameter("password1");
-            Md5 pass = new Md5();
+            Sha pass = new Sha();
             if(valeur != null && (valeur.trim().length() >= 8)) {
-            		utilisdao.modifier(pass.encode(valeur), benef.getNum());
+            		utilisdao.modifier(pass.encode(valeur,"pass"), benef.getNum());
             }
             else{
             	if(valeur.trim().length()!=0)

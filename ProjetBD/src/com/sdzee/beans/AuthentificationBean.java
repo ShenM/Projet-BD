@@ -9,7 +9,7 @@ import com.sdzee.dao.DAOFactory;
 import com.sdzee.dao.AdministrateurDAOImpl;
 import com.sdzee.dao.BeneficiaireDAOImpl;
 import com.sdzee.dao.UtilisateurDAOImpl;
-import com.sdzee.utilitaires.Md5;
+import com.sdzee.utilitaires.Sha;
 
 
 public class AuthentificationBean {
@@ -146,8 +146,8 @@ public class AuthentificationBean {
     }
     
     private void validationPairMdp( String motDePasse, String motDePasseBD) throws Exception {
-    	Md5 hash = new Md5();
-    	String MdpHashed = hash.encode(motDePasse);
+    	Sha hash = new Sha();
+    	String MdpHashed = hash.encode(motDePasse,"pass");
     	if ( MdpHashed.compareTo(motDePasseBD) != 0 ){
     		throw new Exception( "Mot de passe incorrect !" );
     	}
